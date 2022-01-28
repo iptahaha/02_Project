@@ -1,1 +1,1 @@
-console.log('register')
+import './style.scss'

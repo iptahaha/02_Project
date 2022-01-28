@@ -1,1 +1,2 @@
-console.log('main')
+import './style.scss'
+
