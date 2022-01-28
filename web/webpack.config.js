@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(process.cwd(), 'dist'),
-    filename: '[name]-[fullhash:8].js'
+    filename: '[name]-[hash:8].js'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.json', 'js']
@@ -51,7 +51,7 @@ module.exports = {
     ]
   },
   plugins: [new CleanWebpackPlugin({verbose: true}),
-    new CopyPlugin({patterns: [{ from: "public", to: "public" }]}),
+    // new CopyPlugin({patterns: [{ from: "public", to: "public" }]}),
     !isDevMode && new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       filename: "login.html",
