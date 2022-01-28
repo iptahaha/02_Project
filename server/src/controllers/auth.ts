@@ -1,10 +1,11 @@
+import { Request, Response } from 'express';
 const mysql = require("mysql");
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const mySQL = require('../database/mySQL')
 
-exports.register = (req,res) => {
+exports.register = (req:Request ,res:Response) => {
     // let data = ''
     // req.on('data', chunk => {
     //     data += chunk;
