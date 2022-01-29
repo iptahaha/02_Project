@@ -3,7 +3,17 @@ import pagesRoutes from './routes/pages';
 import authRoutes from './routes/auth';
 
 import mongoDB from './database/mongoDB';
-// mongoDB()//.then(r => console.log(r));
+import mongoose from "mongoose";
+
+mongoDB()//.then(r => console.log(r));
+
+// const Schema = mongoose.Schema;
+// const mySchema = new Schema({
+//   first_name: String,
+//   last_name: String
+// });
+// console.log(mySchema);
+
 class Application {
   app: express.Application;
 

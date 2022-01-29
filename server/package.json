@@ -37,6 +37,5 @@
     "ts-node": "^10.4.0",
     "typescript": "^4.5.5"
   },
-  "repository": "https://github.com/Vayts/JabaScript.git",
-  "author": "JabaScript team"
+  "repository": "https://github.com/iptahaha/02_Project.git"
 }

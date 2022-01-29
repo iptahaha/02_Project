@@ -1,14 +1,16 @@
 import mongoose from 'mongoose';
 
 async function connect() {
-  // try {
-  //   // @ts-ignore
-  //   mongoose.connect('mongodb://localhost/ts-app-tutorial', {useNewUrlParser: true});
-  //   console.log("mongoodb")
-  // } catch {
-  //   console.log('Error');
-  // }
-  console.log('dddd')
+  await mongoose.connect('mongodb://localhost/ts-app')
+    .then(() => {
+        console.log("Connected");
+      },
+      err => {
+        console.log(err);
+      }
+    );
 }
 
 export default connect;
+
+
