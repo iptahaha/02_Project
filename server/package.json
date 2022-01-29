@@ -20,8 +20,8 @@
     "rimraf": "^3.0.2"
   },
   "scripts": {
-    "dev": "ts-node src/app.ts",
-    "start": "node dist/app.js",
+    "dev": "ts-node src/server.ts",
+    "start": "node dist/server.ts",
     "build": "npx tsc",
     "clean": "rimraf ./dist",
     "test": "jest"

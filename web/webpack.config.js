@@ -8,7 +8,7 @@ function resolve(filepath, fileName) {
   return path.resolve(process.cwd(), 'src', 'pages', filepath, fileName)
 }
 
-const isDevMode = process.env.DEV_STAGE !== "production";
+const isDevMode = /*process.env.DEV_STAGE !== "production"*/ false;
 
 module.exports = {
   mode: isDevMode ? 'development' : 'production',

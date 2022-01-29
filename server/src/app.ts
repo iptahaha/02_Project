@@ -1,21 +1,26 @@
 import express from 'express'; //const express = require('express');
-import pagesRoutes from './routes/pages';
-import authRoutes from './routes/auth';
+import dotenv from 'dotenv'
+dotenv.config()
 
 import mongoDB from './database/mongoDB';
+import AuthenticationController from "./controllers/auth";
+import PagesController from "./controllers/pages";
 // mongoDB()//.then(r => console.log(r));
+
+
 class Application {
   app: express.Application;
 
-  constructor() {
+  constructor(controllers: any) {
     this.app = express();//const app = express();
     this.settings();
    // this.middlewares();
     this.routes();
+    this.controllers(controllers)
   }
 
   settings() {
-    this.app.set('port', 3000);
+    this.app.set('port', process.env.PORT || 3000);
   }
 
   //middlewares() {
@@ -24,9 +29,13 @@ class Application {
   //}
 
   routes() {
-    this.app.use('/', pagesRoutes);
-    this.app.use('/auth', authRoutes);
     this.app.use(express.static('../web/dist/'));
+  }
+
+  controllers(controllers: any) {
+    controllers.forEach((el: any) => {
+      this.app.use(el.path, el.router)
+    })
   }
 
   start() {
@@ -36,5 +45,4 @@ class Application {
   }
 }
 
-const app = new  Application();
-app.start();
+export default Application;

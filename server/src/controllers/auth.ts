@@ -1,29 +1,34 @@
-import { Request, Response } from 'express';
-const mysql = require("mysql");
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
-const mySQL = require('../database/mySQL')
+import {Request, Response, Router} from 'express';
+import Controller from "../interfaces/controller.interface";
 
-//Под копотом
-//module.exports = {
-//   register: function () {
-//     console.log('a')
-//   }
-// }
-exports.register = (req:Request ,res:Response) => {
+class AuthenticationController implements Controller {
+  path = '/auth';
+  router = Router();
+
+  constructor() {
+    this.checkRoutes()
+  }
+
+  checkRoutes() {
+    this.router.post('/register', this.register)
+    this.router.post('/login', this.login)
+  }
+
+  register(req: Request, res: Response) {
     let data = ''
     req.on('data', chunk => {
-        data += chunk;
+      data += chunk;
     })
     req.on('end', () => {
-        if (data) {
-            console.log(data)
-        }
+      console.log(data)
     })
-    // const test = new mySQL()
-    // test.takeAll()
-    res.end();
-    // console.log('a')
+    res.end()
+  }
+
+  login(req: Request, res: Response) {
+    console.log('login')
+  }
 }
 
-export default exports;
+
+export default AuthenticationController;
