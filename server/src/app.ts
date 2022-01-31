@@ -4,18 +4,6 @@ import cookieParser from 'cookie-parser'
 dotenv.config()
 
 import mongoDB from './database/mongoDB';
-import AuthenticationController from "./controllers/auth";
-import PagesController from "./controllers/pages";
-// mongoDB()//.then(r => console.log(r));
-
-declare module 'express-serve-static-core' {
-  interface Request {
-    user?: any
-  }
-  interface Response {
-    user?: any
-  }
-}
 
 class Application {
   app: express.Application;

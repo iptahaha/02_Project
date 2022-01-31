@@ -59,11 +59,19 @@ class AuthenticationController implements Controller {
   login(req: Request, res: Response) {
     const userData = req.body;
     const user = new MySQLUser();
+
+    console.log(userData)
+
+    if (!userData.login || !userData.password) {
+      console.log('aaaaaaaaaaaa')
+      res.status(401).end()
+    }
+
     user.loginIn(userData.login, userData.password)
       .then((value: any) => {
 
-        if (value === 302) {
-          const token = jwt.sign({id: value.id}, <string>process.env.JWT_SECRET, {
+        if (value.code === 302) {
+          const token = jwt.sign({id: value.id, login: value.login}, <string>process.env.JWT_SECRET, {
             expiresIn: Number(process.env.JWT_EXPIRES) * 24 * 60 * 60 * 1000
           })
 
@@ -76,8 +84,9 @@ class AuthenticationController implements Controller {
 
           user.endConnection()
 
+
           res.cookie('jwt', token, cookieOptions)
-          res.writeHead(value, {Location: '/main'}).end()
+          res.writeHead(value.code, {Location: '/main'}).end()
 
         } else {
           user.endConnection()

@@ -17,12 +17,14 @@ function initRegister() {
 
 
 function registerForm(state) {
+  event.preventDefault()
+
   const login = getInputValue('sign-up-login');
   const password = getInputValue('sign-up-password');
   const repeatPassword = getInputValue('sign-up-repeat-password');
 
   if (login === undefined || password === undefined || repeatPassword === undefined) {
-    setTextValue('error-register-text', 'Invalid input data')
+    setTextValue('error-register-text', 'You need login and password')
     return false;
   }
 

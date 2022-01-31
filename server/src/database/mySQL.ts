@@ -1,10 +1,6 @@
-// import mysql from "mysql"
 import {Database} from "../interfaces/database.interface";
-
 const mysql = require('mysql')
-import {Request, Response} from "express";
 import bcrypt from "bcrypt";
-import {resolveUser} from "../interfaces/controller.interface";
 
 class MySQLUser implements Database {
   private db: any;
@@ -73,7 +69,11 @@ class MySQLUser implements Database {
             if (!await bcrypt.compare(password, result[0].password)) {
               resolve(403)
             } else {
-              resolve(302)
+              resolve({
+                code: 302,
+                id: result[0].user_id,
+                login: result[0].login
+              })
             }
 
           } else {

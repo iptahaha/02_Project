@@ -33,6 +33,10 @@ function loginForm(state) {
         setTextValue('error-register-text', 'Try again later')
       }
 
+      if (response.status === 401) {
+        setTextValue('error-register-text', 'You need login and password')
+      }
+
       if (response.status === 403) {
         setTextValue('error-register-text', 'Wrong login or password')
       }

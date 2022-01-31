@@ -10,4 +10,9 @@ export interface resolveUser {
   id: number,
 }
 
+export interface user {
+  login: string,
+  id: number,
+}
+
 export default Controller

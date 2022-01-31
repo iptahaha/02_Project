@@ -22,7 +22,7 @@
   },
   "scripts": {
     "dev": "ts-node src/server.ts",
-    "start": "node dist/server.ts",
+    "start": "node dist/server.js",
     "build": "npx tsc",
     "clean": "rimraf ./dist",
     "test": "jest"
