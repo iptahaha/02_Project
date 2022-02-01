@@ -1,5 +1,5 @@
-import "../../components/styles/styles.scss"
-import {addListener, getForm, getInputValue, setTextValue} from "../../components/ts/utilts";
+import "../../utils/styles/styles.scss"
+import {addListener, getForm, getInputValue, setTextValue} from "../../utils/ts/utilts";
 
 document.addEventListener('DOMContentLoaded', function(){
   initRegister()
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
 function initRegister() {
 
   const state = {
-    urlRegister: 'http://localhost:3000/auth/register'
+    urlRegister: '/auth/register'
   }
 
   addListener('button-create-account', 'click', registerForm.bind(null, state))

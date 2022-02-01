@@ -1,6 +1,6 @@
-import "../../components/styles/styles.scss"
-import '../../components/ts/utilts.ts'
-import {addListener, getForm, getInputValue, setTextValue} from "../../components/ts/utilts";
+import "../../utils/styles/styles.scss"
+import '../../utils/ts/utilts.ts'
+import {addListener, getForm, getInputValue, setTextValue} from "../../utils/ts/utilts";
 
 document.addEventListener('DOMContentLoaded', function(){
   initRegister()
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
 function initRegister() {
 
   const state = {
-    urlLoginIn: 'http://localhost:3000/auth/login'
+    urlLoginIn: '/auth/login'
   }
 
   addListener('button-sign-in', 'click', loginForm.bind(null, state))

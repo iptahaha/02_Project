@@ -1,6 +1,7 @@
 import express from 'express'; //const express = require('express');
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 dotenv.config()
 
 import mongoDB from './database/mongoDB';
@@ -24,10 +25,11 @@ class Application {
     this.app.use(express.urlencoded({extended: true}));
     this.app.use(express.json());
     this.app.use(cookieParser())
+    this.app.use(cors())
   }
 
   routes() {
-    this.app.use(express.static('../web/dist/'));
+    this.app.use(express.static('./../web/dist/'));
   }
 
   controllers(controllers: any) {

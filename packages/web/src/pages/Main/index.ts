@@ -1,5 +1,5 @@
-import "../../components/styles/styles.scss"
-import {addListener} from "../../components/ts/utilts";
+import "../../utils/styles/styles.scss"
+import {addListener} from "../../utils/ts/utilts";
 
 function fetchPost() {
   fetch('http://localhost:3000/auth/register', {

@@ -16,7 +16,7 @@ class PagesController implements Controller{
     this.router.get('/', this.redirect)
     this.router.get('/login', this.login)
     this.router.get('/register', this.register)
-    this.router.get('/main', authMiddleware, this.main)
+    this.router.get('/main', this.main)
   }
 
   redirect(req:Request, res:Response) {
@@ -24,15 +24,15 @@ class PagesController implements Controller{
   }
 
   main(req:Request, res:Response) {
-    res.sendfile(path.resolve(path.resolve(), '../web', 'dist/main.html'))
+    res.sendfile(path.resolve(path.resolve(), './../web', 'dist/main.html'))
   }
 
   login(req:Request, res:Response) {
-    res.sendfile(path.resolve(path.resolve(), '../web', 'dist/login.html'))
+    res.sendfile(path.resolve(path.resolve(), './../web', 'dist/login.html'))
   }
 
   register(req:Request, res:Response) {
-    res.sendfile(path.resolve(path.resolve(), '../web', 'dist/register.html'))
+    res.sendfile(path.resolve(path.resolve(), './../web', 'dist/register.html'))
   }
 
 }
