@@ -6,3 +6,7 @@ export function addListener(id, eventType, callback) {
   }
   return false;
 }
+
+export function getAppendChild(id, value) {
+  id.appendChild(value);
+}

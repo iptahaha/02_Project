@@ -19,7 +19,7 @@ class PagesController implements Controller{
   }
 
   main(req:Request, res:Response) {
-    res.sendfile(path.resolve(path.resolve(), '../web', 'dist/main.html'))
+    res.sendfile(path.resolve(path.resolve(), '../web', 'dist/main.html'));
   }
 
   login(req:Request, res:Response) {
@@ -29,8 +29,6 @@ class PagesController implements Controller{
   register(req:Request, res:Response) {
     res.sendfile(path.resolve(path.resolve(), '../web', 'dist/register.html'))
   }
-
-
 }
 
 export default PagesController;
