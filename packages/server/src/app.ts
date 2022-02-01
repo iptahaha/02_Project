@@ -1,10 +1,9 @@
 import express from 'express'; //const express = require('express');
+import dotenv from 'dotenv';
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 dotenv.config()
-
-import mongoDB from './database/mongoDB';
 
 class Application {
   app: express.Application;
