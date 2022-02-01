@@ -1,0 +1,137 @@
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+body {
+  background-color: #DBEEDB;
+
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 1220px;
+  margin: 0 auto;
+  padding: 0 10px;
+
+}
+
+.form-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-holder__title {
+  text-align: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 75px;
+  align-items: center;
+  letter-spacing: 0.065em;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+}
+
+.form-holder__main {
+  background-color: #5EAA87;
+  padding: 50px 50px 30px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 31px;
+  width: 600px;
+  height: 350px;
+  position: relative;
+}
+
+.form-holder__main-register {
+  height: 435px;
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.form-inputs__label {
+  margin-bottom: 30px;
+}
+.form-inputs__label:last-child {
+  margin-bottom: 0;
+}
+
+
+.form-inputs__input {
+  width: 100%;
+  height: 50px;
+  background: #B7E4C7;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  font-family: inherit;
+  padding: 0 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form-errors {
+  height: 30px;
+  margin: 10px 0;
+}
+
+.form-control {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.form-control__button {
+  width: 218px;
+  height: 60px;
+  background: #21614B;
+  border: 2px solid #21614B;
+  border-radius: 17px;
+  font-size: 24px;
+  line-height: 20px;
+  justify-content: center;
+  align-items: center;
+  color: #ffffffff;
+  transition: all 0.3s;
+  cursor: pointer;
+  display: block;
+}
+
+.form-control__button:hover {
+  background-color: #233F35;
+  border: 2px solid #233F35;
+}
+
+.form-holder__links {
+  text-align: right;
+  font-size: 18px;
+}
+
+.form-holder__links-link {
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  margin-right: -20px;
+}
+
+.form-errors__message {
+  text-align: center;
+  font-size: 24px;
+  color: #93152c;
+  margin: 0;
+  text-transform: uppercase;
+}
