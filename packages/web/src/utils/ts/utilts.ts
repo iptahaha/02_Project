@@ -38,3 +38,7 @@ export function getForm(id): HTMLFormElement | boolean {
   return false;
 
 }
+
+export function getAppendChild(id, value) {
+  id.appendChild(value);
+}

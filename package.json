@@ -8,7 +8,6 @@
     "build": "yarn build:web && yarn build:server",
     "build:web": "cd ./packages/web && yarn start",
     "build:server": "cd ./packages/server && yarn build"
-
   },
   "workspaces": ["packages/*"],
   "engines": {

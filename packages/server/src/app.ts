@@ -1,9 +1,9 @@
 import express from 'express'; //const express = require('express');
 import dotenv from 'dotenv';
-import dotenv from 'dotenv'
-import cookieParser from 'cookie-parser'
-import cors from 'cors'
-dotenv.config()
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+
+dotenv.config();
 
 class Application {
   app: express.Application;

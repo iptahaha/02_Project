@@ -1,5 +1,4 @@
-import "../../components/styles/styles.scss"
-import {addListener, getAppendChild} from "../../components/ts/utilts";
+import {addListener, getAppendChild} from "../../utils/ts/utilts";
 import "../../utils/styles/styles.scss"
 
 function fetchPost() {

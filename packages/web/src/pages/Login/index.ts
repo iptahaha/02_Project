@@ -1,6 +1,5 @@
 import "../../utils/styles/styles.scss"
-import '../../utils/ts/utilts.ts'
-import {addListener, getForm, getInputValue, setTextValue} from "../../utils/ts/utilts";
+import {addListener, getForm, setTextValue} from "../../utils/ts/utilts";
 
 document.addEventListener('DOMContentLoaded', function(){
   initRegister()
