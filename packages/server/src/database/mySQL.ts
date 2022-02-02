@@ -67,7 +67,7 @@ class MySQLUser implements Database {
           if (result.length > 0) {
 
             if (!await bcrypt.compare(password, result[0].password)) {
-              resolve(403)
+              resolve(401)
             } else {
               resolve({
                 code: 302,
@@ -77,7 +77,7 @@ class MySQLUser implements Database {
             }
 
           } else {
-            resolve(403)
+            resolve(401)
           }
 
         }
@@ -92,8 +92,6 @@ class MySQLUser implements Database {
     this.db.end((err: Error) => {
       if(err) {
         console.log(err)
-      } else {
-        console.log('Closed')
       }
     })
   }
