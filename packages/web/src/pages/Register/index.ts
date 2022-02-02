@@ -1,5 +1,12 @@
 import "../../utils/styles/styles.scss"
-import {addListener, getForm, getInputValue, setTextValue} from "../../utils/ts/utilts";
+import {
+  addListener,
+  collectData,
+  getElement,
+  getInputValue,
+  setTextValue,
+  showOrHidePassword
+} from "../../utils/ts/utilts";
 
 document.addEventListener('DOMContentLoaded', function(){
   initRegister()
@@ -8,63 +15,151 @@ document.addEventListener('DOMContentLoaded', function(){
 function initRegister() {
 
   const state = {
-    urlRegister: '/auth/register'
+    urlRegister: '/auth/register',
+    validateStatus: [false,false,false]
   }
 
-  addListener('button-create-account', 'click', registerForm.bind(null, state))
+  addListener('sign-up-login', 'input', loginValidate.bind(null, state));
+  addListener('sign-up-password', 'input', passwordValidate.bind(null, state));
+  addListener('sign-up-password', 'input', confirmPasswordValidate.bind(null, state));
+  addListener('sign-up-confirm-password', 'input', confirmPasswordValidate.bind(null, state));
+  addListener('sign-up-login', 'input', validateStatusCheck.bind(null, state));
+  addListener('sign-up-password', 'input', validateStatusCheck.bind(null, state));
+  addListener('sign-up-confirm-password', 'input', validateStatusCheck.bind(null, state));
+
+  addListener('password-hide', 'click', showOrHidePassword.bind(null, 'password-hide', 'sign-up-password'));
+  addListener('confirm-password-hide', 'click', showOrHidePassword.bind(null, 'confirm-password-hide', 'sign-up-confirm-password'));
+
+  addListener('create-account', 'click',sendRegister.bind(null, state));
 }
 
+function loginValidate(state): boolean {
+  const loginRegex = /^[a-zA-Z0-9_]{6,20}$/
+  const value = <string>getInputValue('sign-up-login')
 
+    if (value === '') {
+      setTextValue('login-message', '*You need login')
+      state.validateStatus[0] = false;
+      return false;
+    }
 
-function registerForm(state) {
-  event.preventDefault()
+    if (!value.match(loginRegex)) {
+      setTextValue('login-message', '*Login must contain only letters, numbers, and underscores')
+      state.validateStatus[0] = false;
+      return false
+    }
 
-  const login = getInputValue('sign-up-login');
-  const password = getInputValue('sign-up-password');
-  const repeatPassword = getInputValue('sign-up-repeat-password');
+    if (value.length < 6) {
+      setTextValue('login-message', '*Login at least 6 characters')
+      state.validateStatus[0] = false;
+      return false;
+    }
 
-  if (login === undefined || password === undefined || repeatPassword === undefined) {
-    setTextValue('error-register-text', 'You need login and password')
+    if (value.length > 20) {
+      setTextValue('login-message', '*Login can`t be longer than 20 characters')
+      state.validateStatus[0] = false;
+      return false;
+    }
+
+    setTextValue('login-message', '')
+    state.validateStatus[0] = true;
+    return true;
+
+}
+
+function passwordValidate(state): boolean {
+  const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{8,}$/;
+  const value = <string>getInputValue('sign-up-password')
+
+    if (value === '') {
+      setTextValue('password-message', '*You need password')
+      state.validateStatus[1] = false;
+      return false;
+    }
+
+    if (value.length < 8) {
+      setTextValue('password-message', '*Password at least 8 characters')
+      state.validateStatus[1] = false;
+      return false;
+    }
+
+    if (!value.match(passwordRegex)) {
+      setTextValue('password-message', '*Password must contain letters, numbers, and special symbols')
+      state.validateStatus[1] = false;
+      return false
+    }
+
+    setTextValue('password-message', '')
+    state.validateStatus[1] = true;
+    return true;
+
+}
+
+function confirmPasswordValidate(state): boolean {
+  const valuePassword = <string>getInputValue('sign-up-password')
+  const valueConfirmPassword = <string>getInputValue('sign-up-confirm-password')
+
+  if (valueConfirmPassword !== valuePassword ) {
+    setTextValue('confirm-password-message', '*Password and confirm password does not match')
+    state.validateStatus[2] = false;
     return false;
   }
 
-  if (password !== repeatPassword) {
-    setTextValue('error-register-text', 'Passwords do not match')
+  setTextValue('confirm-password-message', '')
+  state.validateStatus[2] = true;
+  return true;
+}
+
+function validateStatusCheck(state): boolean {
+  const button = <HTMLElement>getElement('create-account');
+  if (state.validateStatus.includes(false)) {
+
+    if (!button.hasAttribute('disabled')) {
+        button.setAttribute('disabled','disabled');
+    }
+    return false;
+  } else {
+    button.removeAttribute('disabled');
+    return true;
+  }
+}
+
+function sendRegister(state) {
+  if (loginValidate(state) === false || passwordValidate(state) === false || confirmPasswordValidate(state) === false) {
     return false;
   }
 
-
-  const data = new URLSearchParams();
-  for (let values of new FormData(<HTMLFormElement>getForm('register-form'))) {
-    data.append(values[0], <string>values[1]);
-  }
+  const data = collectData('register-form')
 
   fetch(state.urlRegister, {
     method: 'POST',
     body: data
-  }).then(response => {
-
-    if (response.status === 401) {
-      setTextValue('error-register-text', 'Passwords do not match')
-    }
-
-    if (response.status === 409) {
-      setTextValue('error-register-text', 'Try again later')
-    }
-
-    if (response.status === 403) {
-      setTextValue('error-register-text', 'Login already in use')
-    }
-
-
-    if (response.redirected) {
-      console.log('test')
-      window.location.href = response.url;
-    }
-
-
   })
-    .catch((err) => {
-      console.log(err)
-    })
+    .then(response => {
+        if (response.status === 401) {
+          setTextValue('login-message', '*Login already in use')
+        }
+
+        if (response.status === 409) {
+          setTextValue('global-message', 'Try again later')
+        }
+
+        if (response.status === 403) {
+          setTextValue('confirm-password-message', '*Password and confirm password does not match')
+        }
+
+
+        if (response.redirected) {
+          window.location.href = response.url;
+        }
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 }
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+@import "variables";
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+
+body {
+  background-color: $main-color-light;
+  font-family: 'Roboto', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 1220px;
+  margin: 0 auto;
+  padding: 0 10px;
+}

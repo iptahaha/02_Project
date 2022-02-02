@@ -16,7 +16,7 @@ class PagesController implements Controller{
     this.router.get('/', this.redirect)
     this.router.get('/login', this.login)
     this.router.get('/register', this.register)
-    this.router.get('/main', this.main)
+    this.router.get('/main', authMiddleware, this.main)
   }
 
   redirect(req:Request, res:Response) {

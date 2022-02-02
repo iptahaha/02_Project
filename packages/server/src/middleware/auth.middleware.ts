@@ -14,14 +14,19 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
       const decoded: user = <user>jwt.verify(jwtCookie, <string>process.env.JWT_SECRET)
 
       const accessUser = new MySQLUser();
-      accessUser.checkLoginUniqueness(decoded.login).then((value: boolean) => {
+      accessUser.checkLoginUniqueness(decoded.login)
+        .then((value: boolean) => {
         if(!value) {
+
           accessUser.endConnection()
           next()
         } else {
+
           accessUser.endConnection()
           res.redirect('/login')
         }
+      }).catch(() => {
+        res.redirect('/login')
       })
     } else {
       res.redirect('/login')
