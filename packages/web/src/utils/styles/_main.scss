@@ -3,6 +3,14 @@
   margin: 0;
 }
 
+.light-theme {
+  background-color: $main-color-light;
+}
+
+.dark-theme {
+  background-color: gray;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
