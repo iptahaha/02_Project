@@ -1,3 +1,7 @@
+export function getSelector(selector) {
+  return document.querySelector(selector);
+}
+
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
   if (node) {
@@ -82,4 +86,17 @@ export function collectData(id) {
     data.append(values[0], <string>values[1]);
   }
   return data
+}
+
+export function checkLocalStorageValue(value) {
+  const page = getSelector('.page');
+  let storageElement = localStorage.getItem(`${value}`);
+  const selectElement = document.getElementById(`${value}`) as HTMLSelectElement;
+
+  if (storageElement && selectElement.value !== storageElement) {
+    page.classList.toggle('light-theme');
+    page.classList.toggle('dark-theme');
+    selectElement.value = storageElement;
+    return true;
+  }
 }
