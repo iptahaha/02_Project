@@ -14,7 +14,8 @@ function init() {
   checkLocalStorageValue('changeTheme');
   // checkLocalStorageValue('changeLanguage');
 
-  addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
+    addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
+    addListener('dropdownLanguage', 'change', (event) => changeLng(event));
 }
 
 function changeInterfaceState(event) {
@@ -104,3 +105,4 @@ function changeInterfaceState(event) {
 //     }
 //   }
 // }
+
