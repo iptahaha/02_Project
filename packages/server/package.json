@@ -12,6 +12,7 @@
     "@types/jest": "^27.4.0",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/mongoose": "^5.11.97",
+    "@types/mysql": "^2.15.20",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "browser-sync": "^2.27.7",
