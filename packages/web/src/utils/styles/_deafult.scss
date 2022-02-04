@@ -25,6 +25,21 @@ body {
   background-color: $main-color-light;
   color: $main-color-dark;
 
+  .form-holder {
+    background-color: $popup-bg-light;
+  }
+
+  &__input {
+    border: 1px solid $shade-border;
+    color: $main-color-dark;
+  }
+
+  .form-title {
+    &__text {
+      color: $main-color-dark;
+    }
+  }
+
   .login-header {
     background-color: transparent;
   }
@@ -33,6 +48,22 @@ body {
 .dark-theme {
   color: $main-color-light;
   background-color: $main-color-dark;
+
+  .form-holder {
+    background-color: $popup-bg-dark;
+  }
+
+  &__input {
+    border: 1px solid $shade-border;
+    color: $main-color-light;
+    background-color: $popup-bg-dark;
+  }
+
+  .form-title {
+    &__text {
+      color: $main-color-light;
+    }
+  }
 
   .login-header {
     background-color: transparent;
