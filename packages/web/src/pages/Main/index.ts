@@ -1,5 +1,6 @@
 import { getSelector, addListener, getAppendChild, checkLocalStorageValue } from "../../utils/ts/utilts";
 import "../../utils/styles/styles.scss"
+import { changeLng } from "../../utils/ts/localization";
 
 document.addEventListener('DOMContentLoaded', function(){
     init()
@@ -10,6 +11,7 @@ function init() {
     //checkLocalStorageValue('changeLanguage');
 
     addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
+    addListener('dropdownLanguage', 'change', (event) => changeLng(event));
 }
 
 function changeInterfaceState(event) {
@@ -99,4 +101,3 @@ function changeInterfaceState(event) {
 //     }
 //   }
 // }
-

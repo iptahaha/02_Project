@@ -7,19 +7,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Main</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <script src="loc-i18next.min.js" ></script>
 </head>
 <body class="page light-theme">
 <section>
   <header class="header">
     <div id="dropdownTheme">
-      <label for="changeTheme">Change theme|</label>
+      <label for="changeTheme" data-i18n="change_theme"></label>
       <select  id="changeTheme">
         <option value="light-theme">&#9788;</option>
         <option value="night-theme">&#9790;</option>
       </select>
     </div>
     <div id="dropdownLanguage">
-      <label for="changeLanguage">Language|</label>
+      <label for="changeLanguage" data-i18n="change_language"></label>
       <select  id="changeLanguage">
         <option value="eng">ENG</option>
         <option value="ru">RU</option>

@@ -1,12 +1,13 @@
 import "../../utils/styles/styles.scss"
 import {
-    addListener,
+    addListener, checkLocalStorageValue,
     collectData,
     getElement,
-    getInputValue,
+    getInputValue, getSelector,
     setTextValue,
     showOrHidePassword
 } from "../../utils/ts/utilts";
+import {changeLng} from "../../utils/ts/localization";
 
 document.addEventListener('DOMContentLoaded', function () {
     initRegister()
@@ -27,6 +28,18 @@ function initRegister() {
 
     addListener('password-hide', 'click', showOrHidePassword.bind(null, 'password-hide', 'login-in-password'))
     addListener('login-in', 'click', loginIn.bind(null, state))
+
+    checkLocalStorageValue('changeTheme');
+
+    addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
+    addListener('dropdownLanguage', 'change', (event) => changeLng(event));
+}
+function changeInterfaceState(event) {
+    const page = getSelector('.page');
+    page.classList.toggle('light-theme');
+    page.classList.toggle('dark-theme');
+    localStorage.setItem('changeTheme', event.target.value);
+    checkLocalStorageValue('changeTheme');
 }
 
 function loginValidate(state) {
