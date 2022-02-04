@@ -24,6 +24,8 @@
     "style-loader": "3.3.1",
     "typescript": "4.5.5",
     "webpack": "5.67.0",
-    "webpack-cli": "4.9.2"
+    "webpack-cli": "4.9.2",
+    "i18next": "19.8.3",
+    "loc-i18next": "0.1.4"
   }
 }

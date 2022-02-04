@@ -1,0 +1,11 @@
+{
+  "change_theme": "Change theme",
+  "change_language": "Change language",
+  "login_title": "Login In",
+  "login_field": "Login",
+  "password_field": "Password",
+  "confirm_password_field": "Confirm password",
+  "login_button": "Log in",
+  "sign-up_form_message": "Don't have an account yet?",
+  "sign-up_form_link": "Sign Up"
+}

@@ -4,7 +4,9 @@
         "target": "es2020",
         "sourceMap": true,
         "typeRoots": ["node_modules/@types"],
-        "types": ["@types/jest", "node"]
+        "types": ["@types/jest", "node"],
+        "resolveJsonModule": true,
+        "esModuleInterop": true
     },
     "noEmit": true,
     "lib": ["ES2019"],

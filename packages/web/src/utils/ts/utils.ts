@@ -1,7 +1,3 @@
-export function getSelector(selector) {
-  return document.querySelector(selector);
-}
-
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
   if (node) {
@@ -20,9 +16,8 @@ export function removeListener(id, eventType, callback) {
   return false;
 }
 
-export function getElement(id): HTMLElement | boolean
-  {
-  const node = document.getElementById(id)
+export function getElement(id): HTMLElement | boolean {
+  const node = document.getElementById(id);
 
   if (node) {
     return node;
@@ -37,7 +32,6 @@ export function getInputValue(id): boolean | string {
     return input.value;
   }
   return false;
-
 }
 
 export function setTextValue(id, value): boolean {
@@ -56,7 +50,6 @@ export function getForm(id): HTMLFormElement | boolean {
     return form;
   }
   return false;
-
 }
 
 export function getAppendChild(id, value) {
@@ -64,8 +57,8 @@ export function getAppendChild(id, value) {
 }
 
 export function showOrHidePassword(buttonID, inputID): boolean {
-  const input = <HTMLInputElement>getElement(inputID)
-  const button = <HTMLElement>getElement(buttonID)
+  const input = <HTMLInputElement>getElement(inputID);
+  const button = <HTMLElement>getElement(buttonID);
 
   if (input.type === 'password') {
     input.type = 'text';
@@ -82,15 +75,19 @@ export function showOrHidePassword(buttonID, inputID): boolean {
 
 export function collectData(id) {
   const data = new URLSearchParams();
-  for (let values of new FormData(<HTMLFormElement>getForm(id))) {
+  for (const values of new FormData(<HTMLFormElement>getForm(id))) {
     data.append(values[0], <string>values[1]);
   }
-  return data
+  return data;
+}
+
+export function getSelector(selector) {
+  return document.querySelector(selector);
 }
 
 export function checkLocalStorageValue(value) {
   const page = getSelector('.page');
-  let storageElement = localStorage.getItem(`${value}`);
+  const storageElement = localStorage.getItem(`${value}`);
   const selectElement = document.getElementById(`${value}`) as HTMLSelectElement;
 
   if (storageElement && selectElement.value !== storageElement) {
@@ -99,4 +96,12 @@ export function checkLocalStorageValue(value) {
     selectElement.value = storageElement;
     return true;
   }
+}
+
+export function changeInterfaceState(event) {
+  const page = getSelector('.page');
+  page.classList.toggle('light-theme');
+  page.classList.toggle('dark-theme');
+  localStorage.setItem('changeTheme', event.target.value);
+  checkLocalStorageValue('changeTheme');
 }

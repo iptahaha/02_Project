@@ -1,26 +1,31 @@
-import { getSelector, addListener, getAppendChild, checkLocalStorageValue } from "../../utils/ts/utilts";
-import "../../utils/styles/styles.scss"
+import {
+  getSelector,
+  addListener,
+  getAppendChild,
+  checkLocalStorageValue,
+} from '../../utils/ts/utils';
+import '../../utils/styles/styles.scss';
 
-document.addEventListener('DOMContentLoaded', function(){
-    init()
-})
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+});
 
 function init() {
-    checkLocalStorageValue('changeTheme');
-    //checkLocalStorageValue('changeLanguage');
+  checkLocalStorageValue('changeTheme');
+  // checkLocalStorageValue('changeLanguage');
 
-    addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
+  addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
 }
 
 function changeInterfaceState(event) {
-    const page = getSelector('.page');
-    page.classList.toggle('light-theme');
-    page.classList.toggle('dark-theme');
-    localStorage.setItem('changeTheme', event.target.value);
-    checkLocalStorageValue('changeTheme');
+  const page = getSelector('.page');
+  page.classList.toggle('light-theme');
+  page.classList.toggle('dark-theme');
+  localStorage.setItem('changeTheme', event.target.value);
+  checkLocalStorageValue('changeTheme');
 }
 
-//FETCH js and ts
+// FETCH js and ts
 // fetch('http://localhost:3000/main/mongo')
 //   .then(function(response:Response, req:void) {
 //     response.json().then(test)
@@ -99,4 +104,3 @@ function changeInterfaceState(event) {
 //     }
 //   }
 // }
-

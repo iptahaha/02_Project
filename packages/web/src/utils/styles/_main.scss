@@ -1,23 +1,4 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
 
-.light-theme {
-  background-color: $main-color-light;
-}
-
-.dark-theme {
-  background-color: gray;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  background-color: $header-color-light;
-  padding: 25px;
-  font-size: 22px;
-}
 
 .content {
   display: flex;

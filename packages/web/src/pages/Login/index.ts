@@ -1,6 +1,12 @@
 import '../../utils/styles/styles.scss';
-import { addListener, showOrHidePassword } from '../../utils/ts/utilts';
+import {
+  addListener,
+  changeInterfaceState,
+  checkLocalStorageValue,
+  showOrHidePassword,
+} from '../../utils/ts/utils';
 import { loginIn, loginValidate, passwordValidate, validateStatusCheck } from './logic';
+import { changeLng } from '../../utils/ts/localization';
 
 document.addEventListener('DOMContentLoaded', () => {
   initRegister();
@@ -12,11 +18,16 @@ function initRegister() {
     validateStatus: [false, false],
   };
 
-  addListener('login-in-login', 'input', loginValidate.bind(null, state));
-  addListener('login-in-password', 'input', passwordValidate.bind(null, state));
+  checkLocalStorageValue('changeTheme');
 
-  addListener('login-in-login', 'input', validateStatusCheck.bind(null, state));
-  addListener('login-in-password', 'input', validateStatusCheck.bind(null, state));
+  addListener('login-in-login', 'input', () => {
+    loginValidate.call(null, state);
+    validateStatusCheck.call(null, state);
+  });
+  addListener('login-in-password', 'input', () => {
+    passwordValidate.call(null, state);
+    validateStatusCheck.call(null, state);
+  });
 
   addListener(
     'password-hide',
@@ -24,4 +35,7 @@ function initRegister() {
     showOrHidePassword.bind(null, 'password-hide', 'login-in-password'),
   );
   addListener('login-in', 'click', loginIn.bind(null, state));
+
+  addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
+  addListener('dropdownLanguage', 'change', (event) => changeLng(event));
 }

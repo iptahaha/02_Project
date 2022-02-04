@@ -5,18 +5,91 @@ html {
   font-size: 14px;
 }
 
-
 body {
   background-color: $main-color-light;
   font-family: 'Roboto', sans-serif;
 }
 
-* {
+*, *:after, *:before{
   box-sizing: border-box;
+  margin: 0;
 }
 
 .container {
-  width: 1220px;
+  max-width: 1220px;
   margin: 0 auto;
   padding: 0 10px;
+}
+
+.light-theme {
+  background-color: $main-color-light;
+  color: $main-color-dark;
+
+  .form-holder {
+    background-color: $popup-bg-light;
+  }
+
+  &__input {
+    border: 1px solid $shade-border;
+    color: $main-color-dark;
+  }
+
+  .form-title {
+    &__text {
+      color: $main-color-dark;
+    }
+  }
+
+}
+
+.dark-theme {
+  color: $main-color-light;
+  background-color: $main-color-dark;
+
+  .form-holder {
+    background-color: $popup-bg-dark;
+  }
+
+  &__input {
+    border: 1px solid $shade-border;
+    color: $main-color-light;
+    background-color: $popup-bg-dark;
+  }
+
+  .form-title {
+    &__text {
+      color: $main-color-light;
+    }
+  }
+
+  .header {
+
+    &__select {
+      background-color: $popup-bg-dark;
+      color: $main-color-light;
+    }
+  }
+}
+
+.header {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  font-size: 22px;
+  width: 100%;
+
+  &__select {
+    margin-left: 10px;
+  }
+
+  &__drop-down {
+    vertical-align: bottom;
+    //display: flex;
+    //align-items: center;
+  }
+
+  &--transparent {
+    background-color: transparent;
+  }
 }

@@ -1,0 +1,11 @@
+{
+  "change_theme": "Сменить тему",
+  "change_language": "Язык",
+  "login_title": "Войти",
+  "login_field": "Ваш логин",
+  "password_field": "Ваш пароль",
+  "confirm_password_field": "Подтвердите пароль",
+  "login_button": "Войти",
+  "sign-up_form_message": "Всё ещё нет аккаунта?",
+  "sign-up_form_link": "Зарегистрируйся"
+}

@@ -6,7 +6,7 @@ import {
   getInputValue,
   setTextValue,
   showOrHidePassword,
-} from '../../utils/ts/utilts';
+} from '../../utils/ts/utils';
 
 document.addEventListener('DOMContentLoaded', () => {
   initRegister();
@@ -43,32 +43,33 @@ function initRegister() {
 function loginValidate(state): boolean {
   const loginRegex = /^[a-zA-Z0-9_]*$/;
   const value = <string>getInputValue('sign-up-login');
+  const loginErrorId = 'login-message';
 
   if (value === '') {
-    setTextValue('login-message', '*You need login');
+    setTextValue(loginErrorId, '*You need login');
     state.validateStatus[0] = false;
     return false;
   }
 
   if (!value.match(loginRegex)) {
-    setTextValue('login-message', '*Login must contain only letters, numbers, and underscores');
+    setTextValue(loginErrorId, '*Login must contain only letters, numbers, and underscores');
     state.validateStatus[0] = false;
     return false;
   }
 
   if (value.length < 6) {
-    setTextValue('login-message', '*Login at least 6 characters');
+    setTextValue(loginErrorId, '*Login at least 6 characters');
     state.validateStatus[0] = false;
     return false;
   }
 
   if (value.length > 20) {
-    setTextValue('login-message', '*Login can`t be longer than 20 characters');
+    setTextValue(loginErrorId, '*Login can`t be longer than 20 characters');
     state.validateStatus[0] = false;
     return false;
   }
 
-  setTextValue('login-message', '');
+  setTextValue(loginErrorId, '');
   state.validateStatus[0] = true;
   return true;
 }
@@ -76,15 +77,16 @@ function loginValidate(state): boolean {
 function passwordValidate(state): boolean {
   const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{8,}$/;
   const value = <string>getInputValue('sign-up-password');
+  const passwordErrorId = 'password-message'
 
   if (value === '') {
-    setTextValue('password-message', '*You need password');
+    setTextValue(passwordErrorId, '*You need password');
     state.validateStatus[1] = false;
     return false;
   }
 
   if (value.length < 8) {
-    setTextValue('password-message', '*Password at least 8 characters');
+    setTextValue(passwordErrorId, '*Password at least 8 characters');
     state.validateStatus[1] = false;
     return false;
   }
