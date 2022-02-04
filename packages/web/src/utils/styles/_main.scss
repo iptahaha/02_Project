@@ -3,18 +3,17 @@
   margin: 0;
 }
 
-.light-theme {
-  background-color: $main-color-light;
-}
-
-.dark-theme {
-  background-color: gray;
-}
-
 .header {
   display: flex;
   justify-content: space-between;
   background-color: $header-color-light;
+  padding: 25px;
+  font-size: 22px;
+}
+
+.login-header {
+  display: flex;
+  justify-content: space-between;
   padding: 25px;
   font-size: 22px;
 }

@@ -1,0 +1,15 @@
+{
+  "hello": "ПРИВЕЕЕЕТ!",
+  "key_1": "Русский контент 1",
+  "key_2": "Русский контент 2",
+  "key_3": "{{what}} ! {{how}}",
+
+  "change_theme": "Сменить тему|",
+  "change_language": "Язык|",
+  "login_title": "Войти",
+  "login_field": "Ваш логин",
+  "password_field": "Ваш пароль",
+  "login_button": "Войти",
+  "sign-up_form_message": "Всё ещё нет аккаунта?",
+  "sign-up_form_link": "Зарегистрируйся"
+}
