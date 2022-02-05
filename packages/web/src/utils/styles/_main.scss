@@ -30,7 +30,7 @@
       min-width: 160px;
       border-radius: 0 0 20px 20px;
       overflow: auto;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
       z-index: 1;
 
       &.show {
@@ -134,33 +134,28 @@
 }
 
 .table {
-  border-collapse: collapse;
+  border-collapse: separate;
   width: 100%;
-  border-spacing: 20px 20px;
-  thead {
-    border: 2px solid black;
+  border-spacing: 0 6px;
 
+  thead {
     th {
-      border-right: 1px solid #000000;
+      border: 2px solid #000000;
+      border-right: none;
       padding: 8px 0;
       background-color: #F3F3F3;
       font-weight: 600;
+
+      &:last-child {
+        border-right: 2px solid #000000;
+      }
     }
   }
   tbody {
-
-    .spacer {
-      border: none;
-      padding: 0;
-      margin: 0;
-      height: 8px;
-    }
-
     tr {
-      border: 1px solid #959595;
 
       td {
-        border-right: 1px solid #959595;
+        border: 1px solid #959595;
         padding: 8px 0;
         text-align: center;
       }
@@ -169,7 +164,7 @@
 }
 
 .modal {
-  display: block;
+  display: none;
   position: fixed;
   z-index: 100;
   left: 0;
@@ -230,3 +225,37 @@
   }
 }
 
+#deleteModal,
+#clearModal {
+  .modal {
+    &-container {
+      background: none;
+    }
+
+    &-content {
+      background-color: white;
+      padding: 40px;
+    }
+
+    &-button {
+      &--save {
+        display: block;
+        width: 100%;
+        background-color: $light-accent;
+        margin: 80px 0 20px;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+      }
+
+      &--cansel {
+        display: block;
+        width: 100%;
+        background-color: $error-accent;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+}

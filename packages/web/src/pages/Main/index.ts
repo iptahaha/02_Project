@@ -1,11 +1,9 @@
 import {
-  getSelector,
   addListener,
-  getAppendChild,
   checkLocalStorageValue,
   changeInterfaceState,
   appendChild,
-  collectData,
+  collectData, setDisplay,
 } from '../../utils/ts/utils';
 
 import '../../utils/styles/mainPage.scss';
@@ -44,7 +42,34 @@ function init() {
 
   addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
   addListener('dropdownLanguage', 'change', (event) => changeLng(event));
-  addListener('createButton', 'click', addNewPerson.bind(null, dataBaseState));
+ // addListener('createButton', 'click', addNewPerson.bind(null, dataBaseState));
+
+//update
+  addListener('buttonUpdate', 'click', openModal.bind(null, 'modalUpdate'));
+  addListener('closeUpdateModal', 'click', closedModal.bind(null, 'modalUpdate'));
+  addListener('updateButton', 'click', closedModal.bind(null, 'modalUpdate'));
+// create
+  addListener('buttonCreate', 'click', openModal.bind(null, 'modalCreate'));
+  addListener('closeCreateModal', 'click', closedModal.bind(null, 'modalCreate'));
+  addListener('createButton', 'click',() => {
+    addNewPerson.bind(null, dataBaseState)();
+    closedModal.bind(null, 'modalCreate')();
+  });
+//clear
+  addListener('buttonClear', 'click', openModal.bind(null, 'clearModal'));
+  addListener('closedClearModal', 'click', closedModal.bind(null, 'clearModal'));
+  addListener('canselClear', 'click', closedModal.bind(null, 'clearModal'));
+  addListener('saveClear', 'click', () => {
+    closedModal.bind(null, 'clearModal')();
+  });
+
+  //delete
+  addListener('buttonDelete', 'click', openModal.bind(null, 'deleteModal'));
+  addListener('closedDeleteModal', 'click', closedModal.bind(null, 'deleteModal'));
+  addListener('canselDelete', 'click', closedModal.bind(null, 'deleteModal'));
+  addListener('saveDelete', 'click', () => {
+    closedModal.bind(null, 'deleteModal')();
+  });
 }
 
 function getData(url) {
@@ -73,8 +98,6 @@ function addNewPerson(state) {
 }
 
 function createTableRow(obj: Person) {
-  const fakeRow = document.createElement('tr');
-  fakeRow.classList.add('spacer');
   const row = document.createElement('tr');
   row.id = obj.id.toString();
   row.innerHTML = `
@@ -87,6 +110,19 @@ function createTableRow(obj: Person) {
     <td>${obj.email}</td>
     <td>${obj.companyName}</td>`;
 
-  appendChild('tableBody', fakeRow);
   appendChild('tableBody', row);
+}
+
+function openModal(id:string):void {
+  setDisplay(id, 'block');
+}
+
+function closedModal(id:string):void {
+  setDisplay(id, 'none');
+  cleanForm();
+}
+
+function cleanForm() {
+  const input = document.querySelectorAll('input');
+  input.forEach(el => el.value = '');
 }
