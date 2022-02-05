@@ -1,11 +1,18 @@
 {
   "change_theme": "Сменить тему",
   "change_language": "Язык",
+
   "login_title": "Войти",
+  "login_button": "Войти",
+  "sign-up_form_message": "Всё ещё нет аккаунта? ",
+  "sign-up_form_link": "Зарегистрируйтесь",
+
+  "register_title": "Регистрация",
+  "register_button": "Регистрация",
+  "login-in_form_message": "Уже есть аккаунт? ",
+  "login-in_form_link": "Войти",
+
   "login_field": "Ваш логин",
   "password_field": "Ваш пароль",
-  "confirm_password_field": "Подтвердите пароль",
-  "login_button": "Войти",
-  "sign-up_form_message": "Всё ещё нет аккаунта?",
-  "sign-up_form_link": "Зарегистрируйся"
+  "confirm_password_field": "Подтвердите пароль"
 }

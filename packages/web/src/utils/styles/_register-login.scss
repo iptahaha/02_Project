@@ -57,7 +57,7 @@
     position: absolute;
     top: 50%;
     left: 95%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     cursor: pointer;
 
     &:hover {
@@ -108,5 +108,68 @@
   &__link {
     font-weight: 700;
     color: #000000;
+  }
+}
+
+@media screen and (max-width: 678px) {
+
+  .dark-theme {
+    .header--transparent {
+      background-color: $popup-bg-dark;
+    }
+  }
+
+  .light-theme {
+    .header--transparent {
+      background-color: $popup-bg-light;
+    }
+  }
+
+  .header--transparent {
+    position: relative;
+
+    .header__drop-down {
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+
+  .form-wrapper {
+    display: block;
+    height: auto;
+  }
+
+  .form-title {
+    &__text {
+      font-size: 24px;
+    }
+  }
+
+  .form-inputs {
+    &__message {
+      height: 30px;
+
+    }
+
+    &__button {
+      left: 94%;
+      font-size: 25px;
+    }
+  }
+
+  .form-holder {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .form-inputs {
+
+    &__button {
+      left: 93%;
+      font-size: 25px;
+    }
   }
 }
