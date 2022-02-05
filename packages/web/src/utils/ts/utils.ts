@@ -89,11 +89,8 @@ export function collectData(id): URLSearchParams {
   return data;
 }
 
-export function hasAttribute(node: HTMLElement, attribute: string): boolean {
-  if (node.hasAttribute(attribute)) {
-    return true;
-  }
-  return false;
+export function hasAttribute(node: HTMLElement, attribute: string):boolean {
+  return node.hasAttribute(attribute);
 }
 
 export function setDisabledAttribute(node: HTMLElement): boolean {
@@ -135,4 +132,13 @@ export function changeInterfaceState(event) {
   page.classList.toggle('dark-theme');
   localStorage.setItem('changeTheme', event.target.value);
   checkLocalStorageValue('changeTheme');
+}
+
+export function setDisplay(id:string, display:string){
+  const node = document.getElementById(id);
+  if (node){
+    node.style.display = display;
+    return true;
+  }
+  return false;
 }
