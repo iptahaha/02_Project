@@ -1,4 +1,4 @@
-import '../../utils/styles/styles.scss';
+import '../../utils/styles/authPage.scss';
 import { addListener, changeInterfaceState, showOrHidePassword } from '../../utils/ts/utils';
 import {
   confirmPasswordValidate,

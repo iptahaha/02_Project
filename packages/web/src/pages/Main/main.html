@@ -27,46 +27,78 @@
       </select>
     </div>
   </header>
-  <section class="content">
-    <aside class="aside">
-      <div class="dropdown">
-        <button id="dropdownBD" class="dropbtn">DATABASE</button>
-        <div id="myDropdownBD" class="dropdown-content">
-          <a href="#mySQL">MySQL</a>
-          <a href="#mongoDB">MongoDB</a>
+  <section class="container">
+      <aside class="aside">
+        <div class="dropdown">
+          <button id="dropdownBD" class="dropbtn">DATABASE</button>
+          <div id="myDropdownBD" class="dropdown-content">
+            <a href="#mySQL">MySQL</a>
+            <a href="#mongoDB">MongoDB</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button id="dropdownSort" class="dropbtn">SORT BY</button>
+          <div id="myDropdownSort" class="dropdown-content">
+            <a href="#firstName">First name</a>
+            <a href="#lastName">Last name</a>
+            <a href="#city">City</a>
+            <a href="#age">Age</a>
+            <a href="#phone">Phone number</a>
+            <a href="#mail">E-mail</a>
+            <a href="#company">Company</a>
+          </div>
+        </div>
+      </aside>
+      <main class="main">
+        <div class='control-panel'>
+            <div class='control-panel__buttons-holder'>
+              <button class='control-panel__button' id='buttonCreate'><span class='icon-add'></span>Create</button>
+              <button class='control-panel__button'><span class='icon-update'></span>Update</button>
+              <button class='control-panel__button'><span class='icon-close'></span>Delete</button>
+              <button class='control-panel__button'><span class='icon-clear-all'></span>Clear all</button>
+            </div>
+          <div class='control-panel__search-holder'>
+            <label>
+              <input name='search-input' id='search' class='control-panel__search'>
+              <span class='icon-search'></span>
+            </label>
+          </div>
+        </div>
+        <table id="table" class='table'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Age</th>
+              <th>City</th>
+              <th>Phone number</th>
+              <th>E-mail</th>
+              <th>Company</th>
+            </tr>
+          </thead>
+          <tbody id='tableBody'></tbody>
+        </table>
+      </main>
+  </section>
+  <section class='modal' id='modalCreate'>
+      <div class='modal-container'>
+        <div class='modal-content'>
+          <span class='icon-close modal-close' id='closeCreateModal'></span>
+          <p class='modal-title'>Add new person</p>
+          <form class='modal-form' id='create-form'>
+            <label class='modal-label'>First name<input type='text' name='fname' class='modal-form__input'></label>
+            <label class='modal-label'>Last name<input type='text' name='lname' class='modal-form__input'></label>
+            <label class='modal-label'>Age<input type='number' name='age' class='modal-form__input' min='0' max='120'></label>
+            <label class='modal-label'>Phone number<input type='text' name='phoneNumber' class='modal-form__input'></label>
+            <label class='modal-label'>City<input type='text' name='city' class='modal-form__input'></label>
+            <label class='modal-label'>E-mail<input type='text' name='email' class='modal-form__input'></label>
+            <label class='modal-label'>Company<input type='text' name='companyName' class='modal-form__input'></label>
+            <button type='button' class='modal-form__button' id='createButton'>Create</button>
+          </form>
         </div>
       </div>
-      <div class="dropdown">
-        <button id="dropdownSort" class="dropbtn">SORT BY</button>
-        <div id="myDropdownSort" class="dropdown-content">
-          <a href="#firstName">First name</a>
-          <a href="#lastName">Last name</a>
-          <a href="#city">City</a>
-          <a href="#age">Age</a>
-          <a href="#phone">Phone number</a>
-          <a href="#mail">E-mail</a>
-          <a href="#company">Company</a>
-        </div>
-      </div>
-    </aside>
-    <main class="main">
-      <div class="main__header">
-        <div>
-          <button type="button" id="create">create</button>
-          <button type="button" id="update">update</button>
-          <button type="button" id="delete">delete</button>
-          <button type="button" id="clear">clear all</button>
-        </div>
-        <div>
-          <input type="text" placeholder="last name">
-          <input type="text" placeholder="first name">
-        </div>
-      </div>
-      <table id="mongo"></table>
-    </main>
   </section>
 </section>
-
-</div>
 </body>
 </html>

@@ -3,7 +3,7 @@ import mysql from 'mysql';
 
 import { Database } from '../interfaces/database.interface';
 
-class MySQLUser implements Database {
+class MySQLUser {
   private db: any;
 
   constructor() {

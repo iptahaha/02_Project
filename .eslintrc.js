@@ -23,9 +23,9 @@ module.exports = {
   plugins: ['import', 'prettier', '@typescript-eslint'],
   settings: {
     'import/resolver': { node: { extensions: ['.js', '.ts', '.json'] } },
-    'import/extensions': ['.ts', '.json'],
+    'import/extensions': ['.js', '.ts', '.json'],
     'import/parsers': {
-      '@typescript-eslint/parser': ['.ts'],
+      '@typescript-eslint/parser': ['.js', '.ts'],
     },
     jest: { version: 'detect' },
   },

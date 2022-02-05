@@ -1,4 +1,12 @@
-import { collectData, getElement, getInputValue, setTextValue } from '../../utils/ts/utils';
+import {
+  collectData,
+  getElement,
+  getInputValue,
+  hasAttribute,
+  removeDisabledAttribute,
+  setDisabledAttribute,
+  setTextValue,
+} from '../../utils/ts/utils';
 
 export function loginValidate(state): boolean {
   const loginRegex = /^[a-zA-Z0-9_]*$/;
@@ -84,12 +92,12 @@ export function confirmPasswordValidate(state): boolean {
 export function validateStatusCheck(state): boolean {
   const button = <HTMLElement>getElement('create-account');
   if (state.validateStatus.includes(false)) {
-    if (!button.hasAttribute('disabled')) {
-      button.setAttribute('disabled', 'disabled');
+    if (!hasAttribute(button, 'disabled')) {
+      setDisabledAttribute(button);
     }
     return false;
   }
-  button.removeAttribute('disabled');
+  removeDisabledAttribute(button);
   return true;
 }
 

@@ -52,8 +52,14 @@ export function getForm(id): HTMLFormElement | boolean {
   return false;
 }
 
-export function getAppendChild(id, value) {
-  id.appendChild(value);
+export function appendChild(id, value) {
+  const node = document.getElementById(id);
+
+  if (node) {
+    node.appendChild(value);
+    return true;
+  }
+  return false;
 }
 
 export function showOrHidePassword(buttonID, inputID): boolean {
@@ -73,12 +79,37 @@ export function showOrHidePassword(buttonID, inputID): boolean {
   return false;
 }
 
-export function collectData(id) {
+export function collectData(id): URLSearchParams {
   const data = new URLSearchParams();
-  for (const values of new FormData(<HTMLFormElement>getForm(id))) {
+  const formData = new FormData(<HTMLFormElement>getForm(id));
+  console.log([...formData]);
+  for (const values of formData) {
     data.append(values[0], <string>values[1]);
   }
   return data;
+}
+
+export function hasAttribute(node: HTMLElement, attribute: string): boolean {
+  if (node.hasAttribute(attribute)) {
+    return true;
+  }
+  return false;
+}
+
+export function setDisabledAttribute(node: HTMLElement): boolean {
+  if (node) {
+    node.setAttribute('disabled', 'disabled');
+    return true;
+  }
+  return false;
+}
+
+export function removeDisabledAttribute(node: HTMLElement) {
+  if (node) {
+    node.removeAttribute('disabled');
+    return true;
+  }
+  return false;
 }
 
 export function getSelector(selector) {
