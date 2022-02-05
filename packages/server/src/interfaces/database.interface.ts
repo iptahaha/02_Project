@@ -1,5 +1,10 @@
 import { Request, Response } from 'express';
+import { Person } from './person.interface';
 
 export interface Database {
-  checkLoginUniqueness(loginValue: string, req: Request, res: Response): any;
+  get(): any;
+  delete(): any;
+  clear(): any;
+  update(): any;
+  create(obj: Person): any;
 }

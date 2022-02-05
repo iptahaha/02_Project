@@ -32,7 +32,7 @@ export function updateContent() {
 
 export function changeLng(evt) {
   const selectedLang = evt ? evt.target.value : 'en';
-  i18next.changeLanguage(selectedLang).then((t) => {
+  i18next.changeLanguage(selectedLang).then(() => {
     updateContent();
   });
 }

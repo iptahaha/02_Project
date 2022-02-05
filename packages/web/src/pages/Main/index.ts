@@ -3,106 +3,90 @@ import {
   addListener,
   getAppendChild,
   checkLocalStorageValue,
+  changeInterfaceState,
+  appendChild,
+  collectData,
 } from '../../utils/ts/utils';
-import '../../utils/styles/styles.scss';
+
+import '../../utils/styles/mainPage.scss';
+
+import { changeLng } from '../../utils/ts/localization';
+import { Person } from '../../utils/interfaces/person.interface';
 
 document.addEventListener('DOMContentLoaded', () => {
   init();
 });
 
 function init() {
+  // const state: {
+  //   mongoUrl: string;
+  //   mySQLUrl: string;
+  //   data: string;
+  //   create: string;
+  //   delete: string;
+  //   update: string;
+  // } = {
+  //   mongoUrl: '',
+  //   mySQLUrl: '/mysql',
+  //   data: '/data',
+  //   create: '/create',
+  //   delete: '/delete',
+  //   update: '/update',
+  // };
+
+  const dataBaseState: { currentDB: string } = {
+    currentDB: '/mysql',
+  };
+
   checkLocalStorageValue('changeTheme');
   // checkLocalStorageValue('changeLanguage');
+  getData(`${dataBaseState.currentDB}`);
 
-    addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
-    addListener('dropdownLanguage', 'change', (event) => changeLng(event));
+  addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
+  addListener('dropdownLanguage', 'change', (event) => changeLng(event));
+  addListener('createButton', 'click', addNewPerson.bind(null, dataBaseState));
 }
 
-function changeInterfaceState(event) {
-  const page = getSelector('.page');
-  page.classList.toggle('light-theme');
-  page.classList.toggle('dark-theme');
-  localStorage.setItem('changeTheme', event.target.value);
-  checkLocalStorageValue('changeTheme');
+function getData(url) {
+  const dataUrl = `${url}/data`;
+  fetch(dataUrl)
+    .then((response: Response) => response.json())
+    .then((data) => {
+      console.log(data);
+      data.forEach((el: Person) => {
+        createTableRow(el);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-// FETCH js and ts
-// fetch('http://localhost:3000/main/mongo')
-//   .then(function(response:Response, req:void) {
-//     response.json().then(test)
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   })
+function addNewPerson(state) {
+  const personData = collectData('create-form');
+  console.log(personData);
+  const addUrl = `${state.currentDB}/create`;
+  fetch(addUrl, {
+    method: 'POST',
+    body: personData,
+  });
+}
 
-// function api<T>(url: string): Promise<void | T> {
-//   return fetch(url)
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error(response.statusText)
-//       }
-//       return response.json()
-//     }).then(data => data)
-// }
-//
-// api('http://localhost:3000/main/mongo')
-//   .then((data) => {
-//     //console.log(data);
-//     tableMongo(data);
-//   })
-//   .catch(error => {
-//     console.log(error, 'err')
-//   })
+function createTableRow(obj: Person) {
+  const fakeRow = document.createElement('tr');
+  fakeRow.classList.add('spacer');
+  const row = document.createElement('tr');
+  row.id = obj.id.toString();
+  row.innerHTML = `
+    <td>${obj.id}</td>
+    <td>${obj.fname}</td>
+    <td>${obj.lname}</td>
+    <td>${obj.age}</td>
+    <td>${obj.city}</td>
+    <td>${obj.phoneNumber}</td>
+    <td>${obj.email}</td>
+    <td>${obj.companyName}</td>`;
 
-// function tableMongo(data) {
-//   const mongo = document.getElementById('mongo');
-//
-//   //console.log(data)
-//   let myTrHeader = document.createElement('tr');
-//   myTrHeader.innerHTML = `
-//           <td>Id</td>
-//           <td>First name</td>
-//           <td>Last name</td>
-//           <td>City</td>
-//           <td>Age</td>
-//           <td>Phone number</td>
-//           <td>E-mail</td>
-//           <td>Company</td>`
-//   getAppendChild(mongo, myTrHeader);
-//
-//   for (let i = 0; i < data.length; i++) {
-//     const item = data[i];
-//     let myTr = document.createElement('tr');
-//     myTr.id = `${item.id}`;
-//     myTr.innerHTML = `
-//      <td>${i+1}</td>
-//           <td>${item.firstname}</td>
-//           <td>${item.lastname}</td>
-//           <td>${item.city}</td>
-//           <td>${item.age}</td>
-//           <td>${item.phone}</td>
-//           <td>${item.email}</td>
-//           <td>${item.company}</td>`;
-//     getAppendChild(mongo, myTr);
-//   }
-// }
-
-// addListener('test', 'click', () => fetchPost())
-// addListener('dropdownBD', 'click', () => dropdown('myDropdownBD', event));
-// addListener('dropdownSort', 'click', () => dropdown('myDropdownSort', event));
-//
-// function dropdown(id, event) {
-//   const dropdownId = document.getElementById(id)
-//   dropdownId.classList.add("show");
-//   if (!event.target.matches('.dropbtn')) {
-//     const dropdowns = document.getElementsByClassName("dropdown-content");
-//     for (let i = 0; i < dropdowns.length; i++) {
-//       let openDropdown = dropdowns[i];
-//       if (openDropdown.classList.contains('show')) {
-//         //TODO: closet dropdowns
-//         openDropdown.classList.remove('show');
-//       }
-//     }
-//   }
-// }
-
+  appendChild('tableBody', fakeRow);
+  appendChild('tableBody', row);
+}
