@@ -89,8 +89,20 @@ export function collectData(id): URLSearchParams {
   return data;
 }
 
-export function hasAttribute(node: HTMLElement, attribute: string):boolean {
+export function hasAttribute(node: HTMLElement, attribute: string): boolean {
   return node.hasAttribute(attribute);
+}
+
+export function removeChild(id): boolean {
+  const node = document.getElementById(id);
+
+  if (node) {
+    while (node.firstChild) {
+      node.removeChild(node.firstChild);
+    }
+    return true;
+  }
+  return false;
 }
 
 export function setDisabledAttribute(node: HTMLElement): boolean {
@@ -134,11 +146,56 @@ export function changeInterfaceState(event) {
   checkLocalStorageValue('changeTheme');
 }
 
-export function setDisplay(id:string, display:string){
+export function setDisplay(id: string, display: string) {
   const node = document.getElementById(id);
-  if (node){
+  if (node) {
     node.style.display = display;
     return true;
   }
   return false;
+}
+
+export function getClassList(node: HTMLElement): boolean | string[] {
+  if (node) {
+    return [...node.classList];
+  }
+  return false;
+}
+
+export function removeClass(node: HTMLElement, className: string): boolean {
+  if (node) {
+    node.classList.remove(className);
+    return true;
+  }
+  return false;
+}
+
+export function addClass(id, className: string): boolean {
+  const node = document.getElementById(id);
+
+  if (node) {
+    node.classList.add(className);
+    return true;
+  }
+  return false;
+}
+
+export function removeClassById(id, className: string): boolean {
+  const node = document.getElementById(id);
+
+  if (node) {
+    node.classList.remove(className);
+    return true;
+  }
+  return false;
+}
+
+export function getNodeList(className): NodeList | boolean {
+  const NodeList = document.querySelectorAll(className);
+
+  if (NodeList.length > 0) {
+    return NodeList;
+  }
+  return false;
+
 }

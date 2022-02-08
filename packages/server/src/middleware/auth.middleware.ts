@@ -9,7 +9,6 @@ dotenv.config();
 async function authMiddleware(req: Request, res: Response, next: NextFunction) {
   try {
     const jwtCookie = req.cookies.jwt;
-
     if (jwtCookie) {
       const decoded: user = <user>jwt.verify(jwtCookie, <string>process.env.JWT_SECRET);
 
@@ -22,17 +21,17 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
             next();
           } else {
             accessUser.endConnection();
-            res.redirect('/login');
+            res.redirect(303, '/login');
           }
         })
         .catch(() => {
-          res.redirect('/login');
+          res.redirect(303, '/login');
         });
     } else {
-      res.redirect('/login');
+      res.redirect(303, '/login');
     }
   } catch {
-    res.redirect('/login');
+    res.redirect(303, '/login');
   }
 }
 

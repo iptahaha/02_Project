@@ -1,61 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset='UTF-8'>
+  <meta name='viewport'
+        content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
   <title>Main</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  <script src="loc-i18next.min.js" ></script>
+  <link href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' rel='stylesheet'>
+  <script src='loc-i18next.min.js' ></script>
 </head>
-<body class="page light-theme">
-<section>
-  <header class="header">
-    <div id="dropdownTheme">
-      <label for="changeTheme" data-i18n="change_theme"></label>
-      <select  id="changeTheme">
-        <option value="light-theme">&#9788;</option>
-        <option value="night-theme">&#9790;</option>
+<body class='page light-theme'>
+<section class='page__content'>
+  <div class='page__loader' id='loader'>
+    <img src='/photo/loader.gif' alt='Loader'>
+  </div>
+  <header class='header'>
+    <div id='dropdownTheme'>
+      <label for='changeTheme' data-i18n='change_theme'></label>
+      <select  id='changeTheme'>
+        <option value='light-theme'>&#9788;</option>
+        <option value='night-theme'>&#9790;</option>
       </select>
     </div>
-    <div id="dropdownLanguage">
-      <label for="changeLanguage" data-i18n="change_language"></label>
-      <select  id="changeLanguage">
-        <option value="eng">ENG</option>
-        <option value="ru">RU</option>
+    <div id='dropdownLanguage'>
+      <label for='changeLanguage' data-i18n='change_language'></label>
+      <select  id='changeLanguage'>
+        <option value='eng'>ENG</option>
+        <option value='ru'>RU</option>
       </select>
     </div>
   </header>
-  <section class="container">
-      <aside class="aside">
-        <div class="dropdown">
-          <button id="dropdownBD" class="dropbtn">DATABASE</button>
-          <div id="myDropdownBD" class="dropdown-content">
-            <a href="#mySQL">MySQL</a>
-            <a href="#mongoDB">MongoDB</a>
-          </div>
+  <section class='container'>
+      <aside class='aside'>
+        <div class='dropdown'>
+          <p class='dropdown__title'>Database</p>
+          <select class='dropdown__select' id='data-base-select'>
+            <option class='dropdown__select--option' value='mysql'>MySQL</option>
+            <option class='dropdown__select--option' value='mongodb'>MongoDB</option>
+          </select>
         </div>
-        <div class="dropdown">
-          <button id="dropdownSort" class="dropbtn">SORT BY</button>
-          <div id="myDropdownSort" class="dropdown-content">
-            <a href="#firstName">First name</a>
-            <a href="#lastName">Last name</a>
-            <a href="#city">City</a>
-            <a href="#age">Age</a>
-            <a href="#phone">Phone number</a>
-            <a href="#mail">E-mail</a>
-            <a href="#company">Company</a>
-          </div>
+        <div class='dropdown'>
+          <p class='dropdown__title'>Sort by</p>
+          <select class='dropdown__select' id='sort-by-select'>
+            <option class='dropdown__select--option' value='id'>ID</option>
+            <option class='dropdown__select--option' value='fname'>First name</option>
+            <option class='dropdown__select--option' value='lname'>Last name</option>
+            <option class='dropdown__select--option' value='age'>Age</option>
+            <option class='dropdown__select--option' value='city'>City</option>
+            <option class='dropdown__select--option' value='phoneNumber'>Phone number</option>
+            <option class='dropdown__select--option' value='email'>E-mail</option>
+            <option class='dropdown__select--option' value='companyName'>Company</option>
+          </select>
         </div>
       </aside>
-      <main class="main">
+      <main class='main'>
         <div class='control-panel'>
             <div class='control-panel__buttons-holder'>
               <button class='control-panel__button' id='buttonCreate'><span class='icon-add'></span>Create</button>
               <button class='control-panel__button' id='buttonUpdate'><span class='icon-update'></span>Update</button>
-              <button class='control-panel__button' id="buttonDelete"><span class='icon-close'></span>Delete</button>
-              <button class='control-panel__button' id="buttonClear"><span class='icon-clear-all'></span>Clear all</button>
+              <button class='control-panel__button' id='buttonDelete'><span class='icon-close'></span>Delete</button>
+              <button class='control-panel__button' id='buttonClear'><span class='icon-clear-all'></span>Clear all</button>
             </div>
           <div class='control-panel__search-holder'>
             <label>
@@ -64,7 +68,7 @@
             </label>
           </div>
         </div>
-        <table id="table" class='table'>
+        <table id='table' class='table'>
           <thead>
             <tr>
               <th>ID</th>
@@ -85,16 +89,26 @@
       <div class='modal-container'>
         <div class='modal-content'>
           <span class='icon-close modal-close' id='closeCreateModal'></span>
-          <p class='modal-title' id="titleCreate">create new person</p>
+          <p class='modal-title' id='titleCreate'>Create new person</p>
           <form class='modal-form' id='create-form'>
-            <label class='modal-label'>First name<input type='text' name='fname' class='modal-form__input'></label>
-            <label class='modal-label'>Last name<input type='text' name='lname' class='modal-form__input'></label>
-            <label class='modal-label'>Age<input type='number' name='age' class='modal-form__input' min='0' max='120'></label>
-            <label class='modal-label'>Phone number<input type='text' name='phoneNumber' class='modal-form__input'></label>
-            <label class='modal-label'>City<input type='text' name='city' class='modal-form__input'></label>
-            <label class='modal-label'>E-mail<input type='text' name='email' class='modal-form__input'></label>
-            <label class='modal-label'>Company<input type='text' name='companyName' class='modal-form__input'></label>
-            <button type='button' class='modal-form__button' id='createButton'>create</button>
+            <label class='modal-label' for='create-fname'>First name</label>
+              <input type='text' id='create-fname' name='fname' class='modal-form__input'>
+            <label class='modal-label' for='create-lname'>Last name</label>
+              <input type='text' name='lname' class='modal-form__input' id='create-lname'>
+            <label class='modal-label' for='create-age'>Age</label>
+              <input type='number' name='age' id='create-age' class='modal-form__input' min='0' max='120'>
+            <label class='modal-label' for='create-phoneNumber'>Phone number</label>
+              <input type='text' name='phoneNumber' class='modal-form__input' id='create-phoneNumber' placeholder='+38-XXX-XXX-XXXX'>
+            <label class='modal-label' for='create-city'>City</label>
+              <input type='text' name='city' class='modal-form__input' id='create-city'>
+            <label class='modal-label' for='create-email'>E-mail</label>
+              <input type='text' name='email' class='modal-form__input' id='create-email'>
+            <label class='modal-label' for='create-company'>Company</label>
+              <input type='text' name='companyName' class='modal-form__input' id='create-company'>
+            <div class='modal-form__error'>
+              <p id='create-form-error'></p>
+            </div>
+            <button type='button' class='modal-form__button' id='createButton'>Create</button>
           </form>
         </div>
       </div>
@@ -103,7 +117,7 @@
     <div class='modal-container'>
       <div class='modal-content'>
         <span class='icon-close modal-close' id='closeUpdateModal'></span>
-        <p class='modal-title' id="titleUpdate">Update person's data</p>
+        <p class='modal-title' id='titleUpdate'>Update person's data</p>
         <form class='modal-form' id='update-form'>
           <label class='modal-label'>First name<input type='text' name='fname' class='modal-form__input'></label>
           <label class='modal-label'>Last name<input type='text' name='lname' class='modal-form__input'></label>
@@ -112,31 +126,31 @@
           <label class='modal-label'>City<input type='text' name='city' class='modal-form__input'></label>
           <label class='modal-label'>E-mail<input type='text' name='email' class='modal-form__input'></label>
           <label class='modal-label'>Company<input type='text' name='companyName' class='modal-form__input'></label>
-          <button type='button' class='modal-form__button' id='updateButton'>update</button>
+          <button type='button' class='modal-form__button' id='updateButton'>Update</button>
         </form>
       </div>
     </div>
   </section>
-  <section class='modal' id="deleteModal">
+  <section class='modal' id='deleteModal'>
     <div class='modal-container'>
       <div class='modal-content'>
-        <span class='icon-close modal-close' id="closedDeleteModal"></span>
-        <p class='modal-title' id="delete-modal-title">Delete person?</p>
+        <span class='icon-close modal-close' id='closedDeleteModal'></span>
+        <p class='modal-title' id='delete-modal-title'>Delete person?</p>
         <div>
-          <button id="saveDelete" class="modal-button--save">DELETE</button>
-          <button id="canselDelete" class="modal-button--cansel">CANSEL</button>
+          <button id='saveDelete' class='modal-button--save'>DELETE</button>
+          <button id='canselDelete' class='modal-button--cansel'>CANCEL</button>
         </div>
       </div>
     </div>
   </section>
-  <section class='modal' id="clearModal">
+  <section class='modal' id='clearModal'>
     <div class='modal-container'>
       <div class='modal-content'>
-        <span class='icon-close modal-close' id="closedClearModal"></span>
-        <p class='modal-title' id="clear-modal-title">Clear all?</p>
+        <span class='icon-close modal-close' id='closedClearModal'></span>
+        <p class='modal-title' id='clear-modal-title'>Clear all?</p>
         <div>
-          <button id="saveClear" class="modal-button--save">CLEAR</button>
-          <button id="canselClear" class="modal-button--cansel">CANSEL</button>
+          <button id='saveClear' class='modal-button--save'>CLEAR</button>
+          <button id='canselClear' class='modal-button--cansel'>CANCEL</button>
         </div>
       </div>
     </div>
