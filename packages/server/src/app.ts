@@ -29,6 +29,7 @@ class Application {
 
   routes() {
     this.app.use(express.static('./../web/dist/'));
+    this.app.use('/photo', express.static('./../web/public/img'));
   }
 
   controllers(controllers: any) {

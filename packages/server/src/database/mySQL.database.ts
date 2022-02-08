@@ -1,4 +1,5 @@
 import mysql from 'mysql';
+import { resolve } from 'eslint-import-resolver-typescript';
 import { Database } from '../interfaces/database.interface';
 import { Person } from '../interfaces/person.interface';
 
@@ -19,8 +20,19 @@ export class MySQL implements Database {
     this.db.connect();
   }
 
-  delete(): any {
-    console.log(this.db);
+  delete(id: string): any {
+    return new Promise((resolve, reject) => {
+      const deleteQuery = `DELETE FROM person_table WHERE id = ${id}`;
+      this.db.query(deleteQuery, (err: Error) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          console.log('UDACHA');
+          resolve('Super');
+        }
+      });
+    });
   }
 
   get(): any {
@@ -58,7 +70,15 @@ export class MySQL implements Database {
   }
 
   clear(): any {
-    console.log(this.db);
+    return new Promise((resolve, reject) => {
+      this.db.query('TRUNCATE TABLE person_table', (err: Error) => {
+        if (err) {
+          reject();
+        } else {
+          resolve(200);
+        }
+      });
+    });
   }
 
   endConnection(): void {

@@ -3,7 +3,7 @@
 .container {
   padding: 80px 30px 30px;
   background-color: #ffffff;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: space-around;
 
@@ -11,6 +11,24 @@
     width: 1400px;
   }
 
+
+}
+
+.page {
+
+  &__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+
+    &--active {
+      opacity: 1;
+    }
+  }
 
 }
 
@@ -23,31 +41,33 @@
     display: inline-block;
     margin-bottom: 25px;
 
-    &-content {
-      display: none;
-      position: absolute;
-      background-color: #E0F9E9;
-      min-width: 160px;
-      border-radius: 0 0 20px 20px;
-      overflow: auto;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      z-index: 1;
 
-      &.show {
-        display: block;
-      }
+    &__title {
+      font-size: 1.15em;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
 
-      a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
+    &__select {
+      background: #CDEBBF;
+      width: 150px;
+      height: 40px;
+      border: none;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      font-size: 1.1em;
+
+      &--option {
+        background-color: #ffffff;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        padding: 10px 0;
 
         &:hover {
-          background-color: #ddd;
+          background: #b9d2b0;
         }
       }
     }
+
   }
 
   .dropbtn {
@@ -152,7 +172,19 @@
     }
   }
   tbody {
-    tr {
+    .table__row {
+
+      &:hover {
+        background-color: rgb(227, 227, 227);
+      }
+
+      &--active {
+        background-color: rgb(211, 211, 211);
+
+        &:hover {
+          background-color: rgb(211, 211, 211);
+        }
+      }
 
       td {
         border: 1px solid #959595;
@@ -194,16 +226,34 @@
 
   &-title {
     text-align: center;
+    text-transform: uppercase;
+    font-size: 1.6em;
+    margin-bottom: 20px;
   }
 
   &-close {
     position: absolute;
     right: 10px;
     top: 10px;
+    cursor: pointer;
+
+    &:before {
+      font-size: 35px;
+      color: #B4B4B4;
+
+
+    }
+
+    &:hover {
+      &:before {
+        color: #0D1117;
+      }
+    }
   }
 
   &-label {
     margin-bottom: 10px;
+    color: #565656;
   }
 
   &-form {
@@ -213,14 +263,22 @@
     &__input {
       width: 100%;
       height: 36px;
+      margin-bottom: 10px;
+      border: 1px solid #B4B4B4;
+      padding-left: 10px;
+      font-size: 1.1em;
     }
 
     &__button {
-      width: 100%;
-      height: 45px;
-      background-color: #CDEBBF;
-      border: none;
-      margin-top: 90px;
+      @include button;
+      margin-top: 30px;
+    }
+
+    &__error {
+      font-size: 1.1em;
+      height: 50px;
+      margin-top: 20px;
+      color: $error-color;
     }
   }
 }
