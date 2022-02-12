@@ -187,6 +187,7 @@ export function filterByName(dataState, sortedData) {
 
 function selectRow(event) {
   const target = event.target.closest('tr');
+  console.log(target);
   const tableList = <NodeList>getNodeList('.table__row');
   tableList.forEach((el: HTMLElement) => {
     const elClassList = <string[]>getClassList(el);
