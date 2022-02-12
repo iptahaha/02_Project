@@ -2,7 +2,6 @@ import {
   addListener,
   checkLocalStorageValue,
   changeInterfaceState,
-  getElement,
 } from '../../utils/ts/utils';
 
 import '../../utils/styles/mainPage.scss';

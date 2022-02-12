@@ -9,6 +9,7 @@ body {
   background-color: $main-color-light;
   font-family: 'Roboto', sans-serif;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 *, *:after, *:before{

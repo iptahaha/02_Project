@@ -4,15 +4,16 @@ import {
   addClass,
   appendChild,
   collectData,
-  getClassList, getElement,
+  getClassList,
+  getElement,
   getInputValue,
   getNodeList,
-  removeChild, removeClassById,
+  removeChild,
+  removeClassById,
   setTextValue,
 } from '../../utils/ts/utils';
 import { closedModal } from './modal';
 import { validatePersonForm } from './validation';
-import { loginIn } from '../Login/logic';
 
 export function createTableRow(obj: Person) {
   const row = document.createElement('tr');
@@ -28,7 +29,6 @@ export function createTableRow(obj: Person) {
     <td>${obj.email}</td>
     <td>${obj.companyName}</td>`;
 
-  appendChild('tableBody', row);
   return row;
 }
 
@@ -44,10 +44,12 @@ export function getData(url, state) {
       });
       const dataToSort = state.currentData;
       const sortByValue = <string>getInputValue('sort-by-select');
+      const dataFragment = document.createDocumentFragment();
       dataToSort.sort((a: Person, b: Person) => (a[sortByValue] > b[sortByValue] ? 1 : -1));
       dataToSort.forEach((el: Person) => {
-        createTableRow(el);
+        dataFragment.append(createTableRow(el));
       });
+      appendChild('tableBody', dataFragment);
       removeClassById('loader', 'page__loader--active');
     })
     .catch((err) => {
@@ -131,20 +133,20 @@ export function clearAll(dbState, dataState) {
 
 export function sortData(dataState, sortedData) {
   let dataCopy;
-  console.log(sortedData);
   if (sortedData.currentData !== null) {
     dataCopy = sortedData.currentData.slice();
   } else {
     dataCopy = dataState.currentData.slice();
   }
-  console.log(dataCopy);
-
   const sortByValue = <string>getInputValue('sort-by-select');
   dataCopy.sort((a: Person, b: Person) => (a[sortByValue] > b[sortByValue] ? 1 : -1));
   removeChild('tableBody');
+  const dataFragment = document.createDocumentFragment();
   dataCopy.forEach((el: Person) => {
-    createTableRow(el);
+    dataFragment.append(createTableRow(el));
   });
+  appendChild('tableBody', dataFragment);
+  return dataCopy;
 }
 
 export function filterByName(dataState, sortedData) {
@@ -153,8 +155,14 @@ export function filterByName(dataState, sortedData) {
   const sortByValue = <string>getInputValue('sort-by-select');
   const sortByName = searchValue.trim().toLowerCase();
 
-  if (sortByName === '') {
+  if (sortByName.length === 0) {
     sortedData.currentData = null;
+    const dataFragment = document.createDocumentFragment();
+    dataState.currentData.forEach((el: Person) => {
+      dataFragment.append(createTableRow(el));
+    });
+    appendChild('tableBody', dataFragment);
+    return;
   }
 
   const filtered = dataCopy.filter((el: Person) => {
@@ -170,9 +178,11 @@ export function filterByName(dataState, sortedData) {
   filtered.sort((a: Person, b: Person) => (a[sortByValue] > b[sortByValue] ? 1 : -1));
   sortedData.currentData = filtered;
   removeChild('tableBody');
+  const dataFragment = document.createDocumentFragment();
   filtered.forEach((el: Person) => {
-    createTableRow(el);
+    dataFragment.append(createTableRow(el));
   });
+  appendChild('tableBody', dataFragment);
 }
 
 function selectRow(event) {
