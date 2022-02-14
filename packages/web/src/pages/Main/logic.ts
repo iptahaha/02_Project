@@ -1,18 +1,14 @@
-import { stat } from 'copy-webpack-plugin/types/utils';
 import { Person } from '../../utils/interfaces/person.interface';
 import {
   addClass,
   appendChild,
   collectData,
-  getClassList,
-  getElement,
   getInputValue,
-  getNodeList,
   removeChild,
   removeClassById,
   setTextValue,
 } from '../../utils/ts/utils';
-import { closedModal } from './modal';
+import { closedModal, openModal } from './modal';
 import { validatePersonForm } from './validation';
 
 export function createTableRow(obj: Person) {
@@ -89,15 +85,36 @@ export function addNewPerson(dbState, dataState): boolean {
     removeChild('tableBody');
     getData(dbState.currentDB, dataState);
     closedModal('modalCreate');
+    setTextValue('create-form-error', '');
     return true;
   });
   return true;
 }
 
-export function deleteRow(dbState, dataState, controlState): boolean {
-  const deleteUrl = `${dbState.currentDB}/delete:${controlState.currentSelect}`;
-  fetch(deleteUrl, {
-    method: 'DELETE',
+export function updatePerson(dbState, dataState, controlState) {
+  const obj: Person = {
+    age: Number(getInputValue('update-age')),
+    city: <string>getInputValue('update-city'),
+    companyName: <string>getInputValue('update-company'),
+    email: <string>getInputValue('update-email'),
+    fname: <string>getInputValue('update-fname'),
+    lname: <string>getInputValue('update-lname'),
+    phoneNumber: <string>getInputValue('update-phoneNumber'),
+  };
+
+  const validateResult = validatePersonForm(obj);
+
+  if (validateResult.length > 0) {
+    setTextValue('update-form-error', `Incorrect data in field(s): ${validateResult.join(', ')}.`);
+    return false;
+  }
+
+
+  const personData = collectData('update-form');
+  const updateUrl = `${dbState.currentDB}/update:${controlState.currentSelectedId}`;
+  fetch(updateUrl, {
+    method: 'POST',
+    body: personData,
   }).then((response) => {
     if (response.redirected) {
       window.location.href = response.url;
@@ -106,13 +123,48 @@ export function deleteRow(dbState, dataState, controlState): boolean {
 
     removeChild('tableBody');
     getData(dbState.currentDB, dataState);
+    closedModal('modalUpdate');
+    setTextValue('update-form-error', '');
+    return true;
+  });
+  return true;
+
+}
+
+export function deleteRow(dbState, dataState, sortedData, controlState): boolean {
+  const deleteUrl = `${dbState.currentDB}/delete:${controlState.currentSelectedId}`;
+  fetch(deleteUrl, {
+    method: 'DELETE',
+  }).then((response) => {
+    if (response.redirected) {
+      window.location.href = response.url;
+      return false;
+    }
+    const delEl = controlState.currentSelectedNode;
+    dataState.currentData = dataState.currentData.filter((el) => {
+      if (el.id !== Number(delEl.id)) {
+        return el;
+      }
+    });
+
+    if (sortedData.currentData !== null) {
+      sortedData.currentData = sortedData.currentData.filter((el) => {
+        if (el.id !== Number(delEl.id)) {
+          return el;
+        }
+      });
+    }
+
+    delEl.parentNode.removeChild(delEl);
+    controlState.currentSelectedNode = null;
+    controlState.currentSelectedId = null;
     closedModal('deleteModal');
     return true;
   });
   return true;
 }
 
-export function clearAll(dbState, dataState) {
+export function clearAll(dbState, dataState, sortedData) {
   const clearUrl = `${dbState.currentDB}/clear`;
   fetch(clearUrl, {
     method: 'DELETE',
@@ -123,12 +175,24 @@ export function clearAll(dbState, dataState) {
     }
 
     dataState.currentData = [];
+    sortedData.currentData = null;
     removeChild('tableBody');
     // getData(dbState.currentDB, dataState);
     closedModal('clearModal');
     return true;
   });
   return true;
+}
+
+export function changeCurrentDB(dataBaseState, dataState, sortedData, controlState) {
+  dataBaseState.currentDB = <string>getInputValue('data-base-select');
+  dataState.currentData = [];
+  sortedData.currentData = null;
+  controlState.currentSelectedId = null;
+  controlState.currentSelectedNode = null;
+  controlState.currentSelectedObj = null;
+  removeChild('tableBody');
+  getData(dataBaseState.currentDB, dataState);
 }
 
 export function sortData(dataState, sortedData) {
@@ -157,6 +221,7 @@ export function filterByName(dataState, sortedData) {
 
   if (sortByName.length === 0) {
     sortedData.currentData = null;
+    removeChild('tableBody');
     const dataFragment = document.createDocumentFragment();
     dataState.currentData.forEach((el: Person) => {
       dataFragment.append(createTableRow(el));
@@ -185,22 +250,39 @@ export function filterByName(dataState, sortedData) {
   appendChild('tableBody', dataFragment);
 }
 
-function selectRow(event) {
+function selectRow(event, controlState, dataState) {
   const target = event.target.closest('tr');
-  console.log(target);
-  const tableList = <NodeList>getNodeList('.table__row');
-  tableList.forEach((el: HTMLElement) => {
-    const elClassList = <string[]>getClassList(el);
-    if (elClassList.includes('table__row--active')) {
-      el.classList.remove('table__row--active');
+  const previousRow = controlState.currentSelectedNode;
+
+  if (target) {
+    target.classList.add('table__row--active');
+  }
+
+  if (previousRow) {
+    previousRow.classList.remove('table__row--active');
+  }
+
+  if (target === previousRow) {
+    controlState.currentSelectedNode = null;
+    controlState.currentSelectedId = null;
+    controlState.currentSelectedObj = null;
+    return target.id;
+  }
+
+  dataState.currentData.forEach((el: Person) => {
+    if (el.id === Number(target.id)) {
+      controlState.currentSelectedObj = el;
     }
   });
 
-  target.classList.add('table__row--active');
+  controlState.currentSelectedId = target.id;
+  controlState.currentSelectedNode = target;
+  console.log(controlState);
   return target.id;
 }
 
-export function getClick(controlState) {
-  controlState.currentSelect = selectRow(event);
+
+export function getClick(controlState, dataState) {
+  selectRow(event, controlState, dataState);
   return controlState;
 }
