@@ -5,6 +5,6 @@ export interface Database {
   get(): any;
   delete(id: string): any;
   clear(): any;
-  update(): any;
+  update(obj: Person, id: number): any;
   create(obj: Person): any;
 }

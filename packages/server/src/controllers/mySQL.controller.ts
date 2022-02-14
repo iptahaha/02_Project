@@ -16,6 +16,7 @@ export class MySQLController implements DatabaseController {
   checkRoutes() {
     this.router.get('/data', authMiddleware, this.getData);
     this.router.post('/create', authMiddleware, this.createData);
+    this.router.post('/update:*', authMiddleware, this.updateData);
     this.router.delete('/delete:*', authMiddleware, this.deleteData);
     this.router.delete('/clear', authMiddleware, this.clearData);
   }
@@ -24,6 +25,21 @@ export class MySQLController implements DatabaseController {
     const dbRequest = new MySQL();
     dbRequest
       .clear()
+      .then(() => {
+        dbRequest.endConnection();
+        res.status(200).end();
+      })
+      .catch(() => {
+        dbRequest.endConnection();
+        res.status(409).end();
+      });
+  }
+
+  updateData(req: Request, res: Response): void {
+    const id = Number(req.url.split(':')[1]);
+    const dbRequest = new MySQL();
+    dbRequest
+      .update(req.body, id)
       .then(() => {
         dbRequest.endConnection();
         res.status(200).end();
@@ -67,7 +83,7 @@ export class MySQLController implements DatabaseController {
     const dbRequest = new MySQL();
     dbRequest
       .get()
-      .then((value: Person) => {
+      .then((value: Person[]) => {
         dbRequest.endConnection();
         res.send(value);
       })

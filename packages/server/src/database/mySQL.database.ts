@@ -28,7 +28,6 @@ export class MySQL implements Database {
           console.log(err);
           reject(err);
         } else {
-          console.log('UDACHA');
           resolve('Super');
         }
       });
@@ -65,8 +64,29 @@ export class MySQL implements Database {
     });
   }
 
-  update(): any {
-    console.log(this.db);
+  update(obj: Person, id: number): any {
+    const { fname, lname, age, city, phoneNumber, email, companyName } = obj;
+    return new Promise((resolve, reject) => {
+      this.db.query(
+        `UPDATE person_table SET ? WHERE id=${id}`,
+        {
+          fname,
+          lname,
+          age,
+          city,
+          phoneNumber,
+          email,
+          companyName,
+        },
+        (err: Error) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(302);
+          }
+        },
+      );
+    });
   }
 
   clear(): any {

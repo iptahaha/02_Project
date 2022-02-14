@@ -182,6 +182,7 @@
 
       &:hover {
         background-color: rgb(227, 227, 227);
+        transition: all 0.2s;
       }
 
       &--active {
@@ -189,6 +190,7 @@
 
         &:hover {
           background-color: rgb(211, 211, 211);
+          transition: all 0.2s;
         }
       }
 

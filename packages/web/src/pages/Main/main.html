@@ -34,8 +34,8 @@
         <div class='dropdown'>
           <p class='dropdown__title'>Database</p>
           <select class='dropdown__select' id='data-base-select'>
-            <option class='dropdown__select--option' value='mysql'>MySQL</option>
-            <option class='dropdown__select--option' value='mongodb'>MongoDB</option>
+            <option class='dropdown__select--option' value='/mysql'>MySQL</option>
+            <option class='dropdown__select--option' value='/mongo'>MongoDB</option>
           </select>
         </div>
         <div class='dropdown'>
@@ -118,13 +118,23 @@
         <span class='icon-close modal-close' id='closeUpdateModal'></span>
         <p class='modal-title' id='titleUpdate'>Update person's data</p>
         <form class='modal-form' id='update-form'>
-          <label class='modal-label'>First name<input type='text' name='fname' class='modal-form__input'></label>
-          <label class='modal-label'>Last name<input type='text' name='lname' class='modal-form__input'></label>
-          <label class='modal-label'>Age<input type='number' name='age' class='modal-form__input' min='0' max='120'></label>
-          <label class='modal-label'>Phone number<input type='text' name='phoneNumber' class='modal-form__input'></label>
-          <label class='modal-label'>City<input type='text' name='city' class='modal-form__input'></label>
-          <label class='modal-label'>E-mail<input type='text' name='email' class='modal-form__input'></label>
-          <label class='modal-label'>Company<input type='text' name='companyName' class='modal-form__input'></label>
+          <label class='modal-label' for='update-fname'>First name</label>
+          <input type='text' id='update-fname' name='fname' class='modal-form__input'>
+          <label class='modal-label' for='update-lname'>Last name</label>
+          <input type='text' name='lname' class='modal-form__input' id='update-lname'>
+          <label class='modal-label' for='update-age'>Age</label>
+          <input type='number' name='age' id='update-age' class='modal-form__input' min='0' max='120'>
+          <label class='modal-label' for='update-phoneNumber'>Phone number</label>
+          <input type='text' name='phoneNumber' class='modal-form__input' id='update-phoneNumber' placeholder='+38-XXX-XXX-XXXX'>
+          <label class='modal-label' for='update-city'>City</label>
+          <input type='text' name='city' class='modal-form__input' id='update-city'>
+          <label class='modal-label' for='update-email'>E-mail</label>
+          <input type='text' name='email' class='modal-form__input' id='update-email'>
+          <label class='modal-label' for='update-company'>Company</label>
+          <input type='text' name='companyName' class='modal-form__input' id='update-company'>
+          <div class='modal-form__error'>
+            <p id='update-form-error'></p>
+          </div>
           <button type='button' class='modal-form__button' id='updateButton'>Update</button>
         </form>
       </div>

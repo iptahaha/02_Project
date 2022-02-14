@@ -1,7 +1,21 @@
-import { setDisplay } from '../../utils/ts/utils';
+import { setDisplay, setInputValue } from '../../utils/ts/utils';
+import { Person } from '../../utils/interfaces/person.interface';
 
 export function openModal(id: string): void {
   setDisplay(id, 'block');
+}
+
+export function fillUpdateModal(controlState) {
+  const currentObj: Person = controlState.currentSelectedObj;
+  setInputValue('update-fname', currentObj.fname);
+  setInputValue('update-lname', currentObj.lname);
+  setInputValue('update-age', currentObj.age);
+  setInputValue('update-phoneNumber', currentObj.phoneNumber);
+  setInputValue('update-city', currentObj.city);
+  setInputValue('update-email', currentObj.email);
+  setInputValue('update-company', currentObj.companyName);
+
+  openModal('modalUpdate');
 }
 
 export function cleanForm() {

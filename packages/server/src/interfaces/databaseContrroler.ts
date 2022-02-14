@@ -12,4 +12,6 @@ export interface DatabaseController extends Controller {
   deleteData(req: Request, res: Response): void;
 
   clearData(req: Request, res: Response): void;
+
+  updateData(req: Request, res: Response): void;
 }

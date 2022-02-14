@@ -34,6 +34,16 @@ export function getInputValue(id): boolean | string {
   return false;
 }
 
+export function setInputValue(id, value): boolean | string {
+  const input = <HTMLInputElement>document.getElementById(id);
+
+  if (input) {
+    input.value = value;
+    return true;
+  }
+  return false;
+}
+
 export function setTextValue(id, value): boolean {
   const node = <HTMLInputElement>document.getElementById(id);
   if (node) {
