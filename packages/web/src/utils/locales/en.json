@@ -1,6 +1,6 @@
 {
-  "change_theme": "Change theme",
-  "change_language": "Change language",
+  "change_theme": "theme:",
+  "change_language": "language:",
 
   "login_title": "Login In",
   "login_button": "Log in",

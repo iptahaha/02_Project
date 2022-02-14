@@ -10,7 +10,7 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-*, *:after, *:before{
+*, *:after, *:before {
   box-sizing: border-box;
   margin: 0;
 }
@@ -25,19 +25,30 @@ body {
   position: absolute;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   padding: 10px 25px;
   font-size: 22px;
 
 
   &__select {
+    width: 100px;
+    background-color: $green-header;
     margin-left: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
   }
 
   &__drop-down {
-    vertical-align: bottom;
-    //display: flex;
-    //align-items: center;
+    margin-right: 20px;
+    display: flex;
+    text-transform: uppercase;
+    align-items: center;
+    font-size: 15px;
+
+    label {
+      text-transform: uppercase;
+    }
   }
 
   &--transparent {
@@ -88,34 +99,106 @@ body {
     &--transparent {
       background-color: transparent;
     }
-  }
 
-  .form-holder {
-    background-color: $popup-bg-dark;
-  }
-
-  .form-title {
-    &__text {
-      color: $main-color-light;
+    &__select {
+      background-color: $green-header;
+      color: $main-color-dark;
     }
   }
 
-  .header {
+  .form {
+    &-inputs {
+      &__input {
+        background-color: $popup-bg-dark;
+        color: $popup-bg-light;
+        border: 1px solid;
+      }
+    }
 
-    &__select {
+    &-links__link {
+      color: $popup-bg-light;
+    }
+
+    &-buttons__button {
+      background-color: $dark-accent;
+    }
+
+    &-holder {
       background-color: $popup-bg-dark;
-      color: $main-color-light;
+    }
+
+    &-title {
+      &__text {
+        color: $main-color-light;
+      }
     }
   }
 
   .control-panel {
+    background-color: $popup-bg-dark;
 
-    &__button {
-      background-color: #7B9C6B;
-      color: #ffffff;
+    &__search {
+      background-color: $popup-bg-dark;
+      color: $popup-bg-light;
     }
 
+    &__button {
+      background-color: $dark-accent;
+      color: $popup-bg-light;
+    }
+  }
+
+  .container {
+    background-color: $popup-bg-dark;
+  }
+
+  .aside {
+    .dropdown__select {
+      background-color: $dark-accent;
+      color: $popup-bg-light;
+
+      &--option {
+        background-color: $green-header;
+      }
+    }
+  }
+
+  .aside .dropdown__select--option {
+    option:hover {
+      background-color:  red!important;
+    }
+  }
+
+  .table thead th {
+    background-color: $dark_table-accent;
+    color: $popup-bg-light;
+    border: 2px solid;
+
+    &:last-child {
+      border-right: 2px solid;
+    }
+  }
+
+  table tbody .table__row {
+    &--active {
+      color: $popup-bg-dark;
+    }
+    &:hover {
+      color: $popup-bg-dark;
+    }
+  }
+
+  #deleteModal .modal-content, #clearModal .modal-content,
+  .modal-container,
+  .modal-form__input {
+    background-color: $popup-bg-dark;
+  }
+
+  .modal-form__input {
+    color: $popup-bg-light;
+  }
+
+  .modal-form__button {
+    background-color: $dark-accent;
   }
 }
-
-

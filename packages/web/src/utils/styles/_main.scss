@@ -56,14 +56,17 @@
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
       text-align: center;
       font-size: 1.1em;
+      cursor: pointer;
 
       &--option {
         background-color: #ffffff;
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         padding: 10px 0;
+        cursor: pointer;
 
         &:hover {
-          background: #b9d2b0;
+          background: $dark-accent;
+          cursor: pointer;
         }
       }
     }
@@ -97,7 +100,7 @@
   justify-content: space-between;
   align-items: center;
   position: sticky;
-  top: 0px;
+  top: 0;
   background-color: white;
   padding: 12px 0 25px;
 
@@ -109,7 +112,7 @@
   &__button {
     width: 120px;
     height: 40px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 2px;
     border: none;
     margin-right: 10px;
@@ -183,6 +186,7 @@
       &:hover {
         background-color: rgb(227, 227, 227);
         transition: all 0.2s;
+        cursor: pointer;
       }
 
       &--active {
@@ -284,7 +288,6 @@
 
     &__error {
       font-size: 1.1em;
-      height: 50px;
       margin-top: 20px;
       color: $error-color;
     }
