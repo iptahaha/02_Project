@@ -1,7 +1,6 @@
 
 
 .container {
-  padding: 60px 30px 30px;
   background-color: #ffffff;
   min-height: 100vh;
   display: flex;
@@ -10,8 +9,22 @@
   @media(min-width: 1440px) {
     width: 1400px;
   }
+}
 
+.header{
+  display: flex;
+  justify-content: space-between;
 
+  &__drop {
+    display: flex;
+  }
+
+  &__change {
+    span {
+      padding: 0 10px;
+      cursor: pointer;
+    }
+  }
 }
 
 .page {
@@ -35,6 +48,7 @@
 .aside {
   display: flex;
   flex-direction: column;
+  padding: 60px 0 0 30px;
 
   .dropdown {
     position: relative;
@@ -92,7 +106,7 @@
 
 .main {
   width: 100%;
-  margin-left: 35px;
+  padding: 60px 30px 0 35px;
 }
 
 .control-panel {
@@ -288,7 +302,7 @@
 
     &__error {
       font-size: 1.1em;
-      margin-top: 20px;
+      height: 20px;
       color: $error-color;
     }
   }
