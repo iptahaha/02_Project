@@ -67,6 +67,12 @@ body {
     }
   }
 
+  .form {
+    &-buttons__button {
+      background-color: $light-accent;
+    }
+  }
+
   .form-holder {
     background-color: $popup-bg-light;
   }
@@ -80,6 +86,7 @@ body {
   .control-panel {
 
     &__button {
+      @include button;
       background-color: #CDEBBF;
       color: #000000;
     }
@@ -142,6 +149,7 @@ body {
     }
 
     &__button {
+      @include button;
       background-color: $dark-accent;
       color: $popup-bg-light;
     }

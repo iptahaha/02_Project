@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import MySQLUser from '../database/userDataBase';
 import Controller from '../interfaces/controller.interface';
-import { generateJWT } from '../middleware/jwtGenerate.middlewate';
+import { generateJWT } from '../middleware/jwtGenerate.middleware';
 
 dotenv.config();
 

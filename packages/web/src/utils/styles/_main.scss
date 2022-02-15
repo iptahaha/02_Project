@@ -321,7 +321,9 @@
     }
 
     &-button {
+
       &--save {
+        @include button;
         display: block;
         width: 100%;
         background-color: $light-accent;

@@ -1,16 +1,14 @@
-import { Person } from '../../utils/interfaces/person.interface';
-
-export function validatePersonForm(obj: Person): string[] {
+export function validatePersonForm(obj): string[] {
   const errorField: string[] = [];
   const phoneReg = /([+]?\d{1,2}[.-\s]?)?(\d{3}[.-]?){2}\d{4}/g;
   const emailReg =
     /^([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$/;
 
-  if (obj.fname.length < 3 || obj.fname.length > 30 || !obj.fname) {
+  if (obj.fname.length < 2 || obj.fname.length > 30 || !obj.fname) {
     errorField.push('first name');
   }
 
-  if (obj.lname.length < 3 || obj.lname.length > 30) {
+  if (obj.lname.length < 2 || obj.lname.length > 30) {
     errorField.push('last name');
   }
 
@@ -18,7 +16,7 @@ export function validatePersonForm(obj: Person): string[] {
     errorField.push('age');
   }
 
-  if (obj.city.length < 3 || obj.city.length > 30) {
+  if (obj.city.length < 2 || obj.city.length > 30) {
     errorField.push('city');
   }
 

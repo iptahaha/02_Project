@@ -53,6 +53,14 @@ export function setTextValue(id, value): boolean {
   return false;
 }
 
+export function setHTMLValue(node, value): boolean {
+  if (node) {
+    node.innerHTML = value;
+    return true;
+  }
+  return false;
+}
+
 export function getForm(id): HTMLFormElement | boolean {
   const form = <HTMLFormElement>document.getElementById(id);
 
@@ -123,7 +131,25 @@ export function setDisabledAttribute(node: HTMLElement): boolean {
   return false;
 }
 
-export function removeDisabledAttribute(node: HTMLElement) {
+export function setDisabledAttributeByID(id: string): boolean {
+  const node = document.getElementById(id);
+  if (node) {
+    node.setAttribute('disabled', 'disabled');
+    return true;
+  }
+  return false;
+}
+
+export function removeDisabledAttribute(node: HTMLElement): boolean {
+  if (node) {
+    node.removeAttribute('disabled');
+    return true;
+  }
+  return false;
+}
+
+export function removeDisabledAttributeByID(id: string): boolean {
+  const node = document.getElementById(id);
   if (node) {
     node.removeAttribute('disabled');
     return true;
@@ -208,4 +234,13 @@ export function getNodeList(className): NodeList | boolean {
   }
   return false;
 
+}
+
+export function setAttribute(id, attribute, value): boolean {
+  const node = <HTMLInputElement>document.getElementById(id);
+  if (node) {
+    node.setAttribute(attribute, value);
+    return true;
+  }
+  return false;
 }

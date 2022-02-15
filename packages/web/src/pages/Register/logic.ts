@@ -4,9 +4,11 @@ import {
   getInputValue,
   hasAttribute,
   removeDisabledAttribute,
+  setAttribute,
   setDisabledAttribute,
   setTextValue,
 } from '../../utils/ts/utils';
+import { updateContent } from '../../utils/ts/localization';
 
 export function loginValidate(state): boolean {
   const loginRegex = /^[a-zA-Z0-9_]*$/;
@@ -118,7 +120,7 @@ export function sendRegister(state): boolean {
   })
     .then((response) => {
       if (response.status === 401) {
-        setTextValue('login-message', '*Login already in use');
+        setAttribute('login-message', 'data-i18n', 'login_already_in_use');
       }
 
       if (response.status === 409) {
@@ -132,6 +134,7 @@ export function sendRegister(state): boolean {
       if (response.redirected) {
         window.location.href = response.url;
       }
+      updateContent();
       return true;
     })
     .catch((err) => {
