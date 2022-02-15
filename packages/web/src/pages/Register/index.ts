@@ -1,5 +1,10 @@
 import '../../utils/styles/authPage.scss';
-import { addListener, changeInterfaceState, showOrHidePassword } from '../../utils/ts/utils';
+import {
+  addListener,
+  changeInterfaceState,
+  checkLocalStorageValue,
+  showOrHidePassword,
+} from '../../utils/ts/utils';
 import {
   confirmPasswordValidate,
   loginValidate,
@@ -18,6 +23,8 @@ function initRegister() {
     urlRegister: '/auth/register',
     validateStatus: [false, false, false],
   };
+
+  checkLocalStorageValue('changeTheme');
 
   addListener('sign-up-login', 'input', () => {
     loginValidate.call(null, state);
