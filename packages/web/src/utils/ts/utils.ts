@@ -53,6 +53,14 @@ export function setTextValue(id, value): boolean {
   return false;
 }
 
+export function setHTMLValue(node, value): boolean {
+  if (node) {
+    node.innerHTML = value;
+    return true;
+  }
+  return false;
+}
+
 export function getForm(id): HTMLFormElement | boolean {
   const form = <HTMLFormElement>document.getElementById(id);
 

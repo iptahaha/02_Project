@@ -150,6 +150,7 @@ body {
     }
 
     &__button {
+      @include button;
       background-color: $dark-accent;
       color: $popup-bg-light;
     }

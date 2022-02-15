@@ -116,6 +116,7 @@ export function loginIn(state) {
     })
     .catch(() => {
       setTextValue(globalErrorId, 'Try again later');
+      return false;
     });
   return true;
 }
