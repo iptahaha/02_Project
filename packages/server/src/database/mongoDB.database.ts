@@ -23,22 +23,112 @@ export class MongoDB implements Database {
           reject(409);
         }
         const persons = await this.db.db('userdatabase').collection('person_collection');
-        // persons.find().sort({ id: -1 }).limit(1).toArray().then((docs: any) => {
-        //   console.log(docs);
-        // })
-        persons.find().toArray()
-          .then((docs: any) => {
-            resolve(docs)
-          })
+        persons
+          .find()
+          .toArray()
+          .then((value: Person[]) => {
+            resolve(value);
+          });
       });
     });
   }
 
-  clear(): any {}
+  clear(): any {
+    return new Promise((resolve, reject) => {
+      this.db.connect(async (err: MongoError) => {
+        if (err) {
+          reject(409);
+        }
+        const result = await this.db
+          .db('userdatabase')
+          .collection('person_collection')
+          .deleteMany({});
 
-  create(obj: Person): any {}
+        if (result) {
+          resolve(202);
+        } else {
+          reject(409);
+        }
+      });
+    });
+  }
 
-  delete(id: string): any {}
+  create(obj: Person): any {
+    return new Promise((resolve, reject) => {
+      this.db.connect(async (err: MongoError) => {
+        if (err) {
+          reject(409);
+        }
+        const persons = await this.db.db('userdatabase').collection('person_collection');
+        persons
+          .find()
+          .sort({ id: -1 })
+          .limit(1)
+          .toArray()
+          .then(async (value: Person[]) => {
+            let id;
+            if (value.length === 0) {
+              id = 1;
+            } else if (value.length === 1 && value[0].id) {
+              id = 1 + value[0].id;
+            }
+            const user: Person = obj;
+            user.id = id;
+            const result = await this.db
+              .db('userdatabase')
+              .collection('person_collection')
+              .insertOne(user);
 
-  update(obj: Person, id: number): any {}
+            if (result) {
+              resolve(200);
+            } else {
+              reject(409);
+            }
+          });
+      });
+    });
+  }
+
+  delete(id: string): any {
+    return new Promise((resolve, reject) => {
+      this.db.connect(async (err: MongoError) => {
+        if (err) {
+          reject(409);
+        }
+
+        const result = await this.db
+          .db('userdatabase')
+          .collection('person_collection')
+          .deleteOne({ id: Number(id) });
+
+        if (result) {
+          resolve(202);
+        } else {
+          reject(409);
+        }
+      });
+    });
+  }
+
+  update(obj: Person, id: number): any {
+    return new Promise((resolve, reject) => {
+      this.db.connect(async (err: MongoError) => {
+        if (err) {
+          reject(409);
+        }
+
+        const query = { id };
+        const result = await this.db
+          .db('userdatabase')
+          .collection('person_collection')
+          .updateOne(query, { $set: obj });
+
+        if (result) {
+          resolve(202);
+        } else {
+          reject(409);
+        }
+      });
+    });
+  }
 }

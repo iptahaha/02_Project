@@ -21,13 +21,48 @@ class MongoController implements DatabaseController {
     this.router.delete('/clear', authMiddleware, this.clearData);
   }
 
-  clearData(req: Request, res: Response): void {}
-
-  createData(req: Request, res: Response): void {
-
+  clearData(req: Request, res: Response): void {
+    const dbRequest = new MongoDB();
+    dbRequest
+      .clear()
+      .then((code: number) => {
+        console.log(code);
+        res.status(code).end();
+      })
+      .catch((code: number) => {
+        console.log(code);
+        res.status(code).end();
+      });
   }
 
-  deleteData(req: Request, res: Response): void {}
+  createData(req: Request, res: Response): void {
+    const dbRequest = new MongoDB();
+    dbRequest
+      .create(req.body)
+      .then((code: number) => {
+        console.log(code);
+        res.status(code).end();
+      })
+      .catch((code: number) => {
+        console.log(code);
+        res.status(code).end();
+      });
+  }
+
+  deleteData(req: Request, res: Response): void {
+    const deleteId = req.url.split(':')[1];
+    const dbRequest = new MongoDB();
+    dbRequest
+      .delete(deleteId)
+      .then((data: any) => {
+        console.log('Udachnoe udalenie');
+        res.send(data);
+      })
+      .catch(() => {
+        console.log('Neudachnoe udalenie');
+        res.status(409).send('Jopa');
+      });
+  }
 
   getData(req: Request, res: Response): void {
     const dbRequest = new MongoDB();
@@ -43,7 +78,20 @@ class MongoController implements DatabaseController {
       });
   }
 
-  updateData(req: Request, res: Response): void {}
+  updateData(req: Request, res: Response): void {
+    const updateId = req.url.split(':')[1];
+    const dbRequest = new MongoDB();
+    dbRequest
+      .update(req.body, Number(updateId))
+      .then((data: any) => {
+        console.log('Udachnoe obnovlenie');
+        res.send(data);
+      })
+      .catch(() => {
+        console.log('Neudachnoe obnovlenie');
+        res.status(409).send('Jopa');
+      });
+  }
 }
 
 export default MongoController;
