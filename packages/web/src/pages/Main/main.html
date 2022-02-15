@@ -5,7 +5,8 @@
   <meta name='viewport'
         content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-  <title>Main</title>
+  <title>Frogers - Dashboard</title>
+  <link rel='icon' href='/photo/favicon.ico' type='image/x-icon'>
   <link href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' rel='stylesheet'>
 </head>
 <body class='page light-theme'>
@@ -14,16 +15,16 @@
     <img src='/photo/loader.gif' alt='Loader'>
   </div>
   <header class='header'>
-    <div id='dropdownTheme'>
+    <div id='dropdownTheme' class='header__drop-down'>
       <label for='changeTheme' data-i18n='change_theme'></label>
-      <select  id='changeTheme'>
-        <option value='light-theme'>&#9788;</option>
-        <option value='night-theme'>&#9790;</option>
+      <select  id='changeTheme' class='header__select'>
+        <option value='light-theme'>Light</option>
+        <option value='night-theme'>Dark</option>
       </select>
     </div>
-    <div id='dropdownLanguage'>
+    <div id='dropdownLanguage' class='header__drop-down'>
       <label for='changeLanguage' data-i18n='change_language'></label>
-      <select  id='changeLanguage'>
+      <select id='changeLanguage' class='header__select'>
         <option value='eng'>ENG</option>
         <option value='ru'>RU</option>
       </select>
@@ -56,8 +57,8 @@
         <div class='control-panel'>
             <div class='control-panel__buttons-holder'>
               <button class='control-panel__button' id='buttonCreate'><span class='icon-add'></span>Create</button>
-              <button class='control-panel__button' id='buttonUpdate'><span class='icon-update'></span>Update</button>
-              <button class='control-panel__button' id='buttonDelete'><span class='icon-close'></span>Delete</button>
+              <button class='control-panel__button' id='buttonUpdate' disabled><span class='icon-update'></span>Update</button>
+              <button class='control-panel__button' id='buttonDelete' disabled><span class='icon-close'></span>Delete</button>
               <button class='control-panel__button' id='buttonClear'><span class='icon-clear-all'></span>Clear all</button>
             </div>
           <div class='control-panel__search-holder'>

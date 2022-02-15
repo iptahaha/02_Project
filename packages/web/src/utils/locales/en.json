@@ -1,6 +1,6 @@
 {
-  "change_theme": "Change theme",
-  "change_language": "Change language",
+  "change_theme": "theme:",
+  "change_language": "language:",
 
   "login_title": "Login In",
   "login_button": "Log in",
@@ -11,6 +11,7 @@
   "register_button": "Sign up",
   "login-in_form_message": "Already have an account? ",
   "login-in_form_link": "Login here",
+  "login_already_in_use": "*Login already in use",
 
   "login_field": "Login",
   "password_field": "Password",

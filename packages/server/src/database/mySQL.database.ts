@@ -1,5 +1,4 @@
 import mysql from 'mysql';
-import { resolve } from 'eslint-import-resolver-typescript';
 import { Database } from '../interfaces/database.interface';
 import { Person } from '../interfaces/person.interface';
 
@@ -104,8 +103,10 @@ export class MySQL implements Database {
   endConnection(): void {
     this.db.end((err: Error) => {
       if (err) {
+        console.log(err);
         return err;
       }
+      console.log('Zakrito');
       return true;
     });
   }

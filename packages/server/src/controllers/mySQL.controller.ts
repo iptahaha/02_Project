@@ -21,7 +21,7 @@ export class MySQLController implements DatabaseController {
     this.router.delete('/clear', authMiddleware, this.clearData);
   }
 
-  clearData(req: Request, res: Response): void {
+  clearData(req: Request, res: Response) {
     const dbRequest = new MySQL();
     dbRequest
       .clear()
@@ -35,11 +35,16 @@ export class MySQLController implements DatabaseController {
       });
   }
 
-  updateData(req: Request, res: Response): void {
-    const id = Number(req.url.split(':')[1]);
+  updateData(req: Request, res: Response) {
+    const id = req.url.split(':')[1];
+
+    if (id === 'null') {
+      return res.status(409).end();
+    }
+    console.log('update');
     const dbRequest = new MySQL();
     dbRequest
-      .update(req.body, id)
+      .update(req.body, Number(id))
       .then(() => {
         dbRequest.endConnection();
         res.status(200).end();
@@ -50,7 +55,7 @@ export class MySQLController implements DatabaseController {
       });
   }
 
-  createData(req: Request, res: Response): void {
+  createData(req: Request, res: Response) {
     const dbRequest = new MySQL();
     dbRequest
       .create(req.body)
@@ -64,16 +69,23 @@ export class MySQLController implements DatabaseController {
       });
   }
 
-  deleteData(req: Request, res: Response): void {
+  deleteData(req: Request, res: Response) {
     const deleteId = req.url.split(':')[1];
+
+    if (deleteId === 'null') {
+      return res.status(409).end();
+    }
+    console.log('delete');
     const dbRequest = new MySQL();
     dbRequest
       .delete(deleteId)
       .then(() => {
+        console.log('delete then');
         dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
+        console.log('delete catch');
         dbRequest.endConnection();
         res.status(409).end();
       });

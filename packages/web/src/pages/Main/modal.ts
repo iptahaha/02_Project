@@ -5,8 +5,8 @@ export function openModal(id: string): void {
   setDisplay(id, 'block');
 }
 
-export function fillUpdateModal(controlState) {
-  const currentObj: Person = controlState.currentSelectedObj;
+export function fillUpdateModal(state) {
+  const currentObj: Person = state.currentSelectedObj;
   setInputValue('update-fname', currentObj.fname);
   setInputValue('update-lname', currentObj.lname);
   setInputValue('update-age', currentObj.age);

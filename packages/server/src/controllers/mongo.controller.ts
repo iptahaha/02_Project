@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express';
-import { MongoClient, ObjectId } from 'mongodb';
 import { DatabaseController } from '../interfaces/databaseContrroler';
 import authMiddleware from '../middleware/auth.middleware';
 import { MongoDB } from '../database/mongoDB.database';
+import { Person } from '../interfaces/person.interface';
 
 class MongoController implements DatabaseController {
   path = '/mongo';
@@ -21,29 +21,76 @@ class MongoController implements DatabaseController {
     this.router.delete('/clear', authMiddleware, this.clearData);
   }
 
-  clearData(req: Request, res: Response): void {}
-
-  createData(req: Request, res: Response): void {
-
+  clearData(req: Request, res: Response): void {
+    const dbRequest = new MongoDB();
+    dbRequest
+      .clear()
+      .then((code: number) => {
+        res.status(code).end();
+      })
+      .catch((code: number) => {
+        res.status(code).end();
+      });
   }
 
-  deleteData(req: Request, res: Response): void {}
+  createData(req: Request, res: Response): void {
+    const dbRequest = new MongoDB();
+    dbRequest
+      .create(req.body)
+      .then((code: number) => {
+        res.status(code).end();
+      })
+      .catch((code: number) => {
+        res.status(code).end();
+      });
+  }
+
+  deleteData(req: Request, res: Response) {
+    const deleteId = req.url.split(':')[1];
+
+    if (deleteId === 'null') {
+      return res.status(409).end();
+    }
+
+    const dbRequest = new MongoDB();
+    dbRequest
+      .delete(deleteId)
+      .then((code: number) => {
+        res.status(code).end();
+      })
+      .catch((code: number) => {
+        res.status(code).end();
+      });
+  }
 
   getData(req: Request, res: Response): void {
     const dbRequest = new MongoDB();
     dbRequest
       .get()
-      .then((data: any) => {
-        console.log('Udacha');
-        res.send(data);
+      .then((data: Person[]) => {
+        res.status(200).send(data);
       })
-      .catch(() => {
-        console.log('Neudacha');
-        res.status(409).send('Jopa');
+      .catch((code: number) => {
+        res.status(code).end();
       });
   }
 
-  updateData(req: Request, res: Response): void {}
+  updateData(req: Request, res: Response) {
+    const updateId = req.url.split(':')[1];
+
+    if (updateId === 'null') {
+      return res.status(409).end();
+    }
+    const dbRequest = new MongoDB();
+    dbRequest
+      .update(req.body, Number(updateId))
+      .then((code: number) => {
+        res.status(code).end();
+      })
+      .catch((code: number) => {
+        res.status(code).end();
+      });
+  }
 }
 
 export default MongoController;
