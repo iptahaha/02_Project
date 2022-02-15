@@ -1,4 +1,10 @@
-import { collectData, getElement, getInputValue, setTextValue } from '../../utils/ts/utils';
+import {
+  collectData,
+  getElement,
+  getInputValue,
+  setInputValue,
+  setTextValue,
+} from '../../utils/ts/utils';
 
 export function loginValidate(state) {
   const loginRegex = /^[a-zA-Z0-9_]{6,20}$/;
@@ -87,6 +93,12 @@ export function loginIn(state) {
     body: data,
   })
     .then((response) => {
+
+      if (response.redirected) {
+        setInputValue('login-in-login', '');
+        window.location.href = response.url;
+      }
+
       if (response.status === 409) {
         setTextValue(globalErrorId, 'Try again later');
       }
@@ -100,9 +112,6 @@ export function loginIn(state) {
         setTextValue(globalErrorId, 'Wrong login or password');
       }
 
-      if (response.redirected) {
-        window.location.href = response.url;
-      }
       return true;
     })
     .catch(() => {

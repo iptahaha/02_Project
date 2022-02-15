@@ -19,7 +19,6 @@ export class MongoDB implements Database {
     return new Promise((resolve, reject) => {
       this.db.connect(async (err: MongoError) => {
         if (err) {
-          console.log(err);
           reject(409);
         }
         const persons = await this.db.db('userdatabase').collection('person_collection');
@@ -45,7 +44,7 @@ export class MongoDB implements Database {
           .deleteMany({});
 
         if (result) {
-          resolve(202);
+          resolve(200);
         } else {
           reject(409);
         }
@@ -102,7 +101,7 @@ export class MongoDB implements Database {
           .deleteOne({ id: Number(id) });
 
         if (result) {
-          resolve(202);
+          resolve(200);
         } else {
           reject(409);
         }
@@ -124,7 +123,7 @@ export class MongoDB implements Database {
           .updateOne(query, { $set: obj });
 
         if (result) {
-          resolve(202);
+          resolve(200);
         } else {
           reject(409);
         }

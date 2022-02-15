@@ -6,9 +6,11 @@ import {
   getInputValue,
   removeChild,
   removeClassById,
+  removeDisabledAttributeByID,
+  setDisabledAttributeByID,
   setTextValue,
 } from '../../utils/ts/utils';
-import { closedModal, openModal } from './modal';
+import { closedModal } from './modal';
 import { validatePersonForm } from './validation';
 
 export function createTableRow(obj: Person) {
@@ -109,7 +111,6 @@ export function updatePerson(dbState, dataState, controlState) {
     return false;
   }
 
-
   const personData = collectData('update-form');
   const updateUrl = `${dbState.currentDB}/update:${controlState.currentSelectedId}`;
   fetch(updateUrl, {
@@ -128,7 +129,6 @@ export function updatePerson(dbState, dataState, controlState) {
     return true;
   });
   return true;
-
 }
 
 export function deleteRow(dbState, dataState, sortedData, controlState): boolean {
@@ -140,26 +140,32 @@ export function deleteRow(dbState, dataState, sortedData, controlState): boolean
       window.location.href = response.url;
       return false;
     }
-    const delEl = controlState.currentSelectedNode;
-    dataState.currentData = dataState.currentData.filter((el) => {
-      if (el.id !== Number(delEl.id)) {
-        return el;
-      }
-    });
 
-    if (sortedData.currentData !== null) {
-      sortedData.currentData = sortedData.currentData.filter((el) => {
+    if (response.status === 200) {
+      const delEl = controlState.currentSelectedNode;
+      dataState.currentData = dataState.currentData.filter((el) => {
         if (el.id !== Number(delEl.id)) {
           return el;
         }
       });
+
+      if (sortedData.currentData !== null) {
+        sortedData.currentData = sortedData.currentData.filter((el) => {
+          if (el.id !== Number(delEl.id)) {
+            return el;
+          }
+        });
+      }
+
+      delEl.parentNode.removeChild(delEl);
+      setDisabledAttributeByID('buttonDelete');
+      setDisabledAttributeByID('buttonUpdate');
+      controlState.currentSelectedNode = null;
+      controlState.currentSelectedId = null;
+      closedModal('deleteModal');
+      return true;
     }
 
-    delEl.parentNode.removeChild(delEl);
-    controlState.currentSelectedNode = null;
-    controlState.currentSelectedId = null;
-    closedModal('deleteModal');
-    return true;
   });
   return true;
 }
@@ -191,8 +197,11 @@ export function changeCurrentDB(dataBaseState, dataState, sortedData, controlSta
   controlState.currentSelectedId = null;
   controlState.currentSelectedNode = null;
   controlState.currentSelectedObj = null;
+  setDisabledAttributeByID('buttonDelete');
+  setDisabledAttributeByID('buttonUpdate');
   removeChild('tableBody');
   getData(dataBaseState.currentDB, dataState);
+  // TODO пусть возвращает все state yopta
 }
 
 export function sortData(dataState, sortedData) {
@@ -266,6 +275,8 @@ function selectRow(event, controlState, dataState) {
     controlState.currentSelectedNode = null;
     controlState.currentSelectedId = null;
     controlState.currentSelectedObj = null;
+    setDisabledAttributeByID('buttonDelete');
+    setDisabledAttributeByID('buttonUpdate');
     return target.id;
   }
 
@@ -277,10 +288,10 @@ function selectRow(event, controlState, dataState) {
 
   controlState.currentSelectedId = target.id;
   controlState.currentSelectedNode = target;
-  console.log(controlState);
+  removeDisabledAttributeByID('buttonDelete');
+  removeDisabledAttributeByID('buttonUpdate');
   return target.id;
 }
-
 
 export function getClick(controlState, dataState) {
   selectRow(event, controlState, dataState);
