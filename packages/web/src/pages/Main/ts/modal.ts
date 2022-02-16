@@ -1,5 +1,5 @@
-import { setDisplay, setInputValue } from '../../utils/ts/utils';
-import { Person } from '../../utils/interfaces/person.interface';
+import { setDisplay, setInputValue } from '../../../utils/ts/utils';
+import { Person } from '../../../utils/interfaces/person.interface';
 
 export function openModal(id: string): void {
   setDisplay(id, 'block');

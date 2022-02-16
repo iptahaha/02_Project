@@ -4,7 +4,7 @@ import {
   setDisabledAttributeByID,
   setHTMLValue,
   setTextValue,
-} from '../../utils/ts/utils';
+} from '../../../utils/ts/utils';
 import { closedModal } from './modal';
 import { validatePersonForm } from './validation';
 
@@ -50,14 +50,11 @@ export function updatePersonRequest(state, data, personObj) {
       }
 
       if (response.status === 200) {
-        const node = state.currentSelectedNode;
-        const id = state.currentSelectedId;
-
-        setHTMLValue(node, generateNewRowContent(id, personObj));
-        updateObjInState(state.currentData, id, personObj);
+        setHTMLValue(state.currentSelectedNode, generateNewRowContent(state.currentSelectedId, personObj));
+        updateObjInState(state.currentData, state.currentSelectedId, personObj);
 
         if (state.currentSortedData !== null) {
-          updateObjInState(state.currentSortedData, id, personObj);
+          updateObjInState(state.currentSortedData, state.currentSelectedId, personObj);
         }
       }
       removeDisabledAttributeByID('updateButton');

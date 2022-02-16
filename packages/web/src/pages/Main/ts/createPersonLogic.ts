@@ -4,7 +4,7 @@ import {
   removeDisabledAttributeByID,
   setDisabledAttributeByID,
   setTextValue,
-} from '../../utils/ts/utils';
+} from '../../../utils/ts/utils';
 import { validatePersonForm } from './validation';
 import { closedModal } from './modal';
 import { getData } from './getPesonDataLogic';
@@ -23,7 +23,6 @@ export function addNewPersonRequest(state, personData) {
 
       removeChild('tableBody');
       getData(state);
-      setTextValue('create-form-error', '');
       removeDisabledAttributeByID('createButton');
       closedModal('modalCreate');
       return true;
