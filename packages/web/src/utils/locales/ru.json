@@ -54,7 +54,17 @@
     "login/pass-empty": "Требуется логин ии пароль",
     "login/pass-wrong": "Неправильный логин ии пароль",
     "pass-not_match": "*Password and confirm password does not match",
-    "login-in_use": "*Login already in use"
+    "login-in_use": "*Login already in use",
+    "modal": {
+      "message": "Некорректная информация в поле(ях): ",
+      "first_name": "имя",
+      "last_name": "фамилия",
+      "city": "город",
+      "age": "возраст",
+      "phone_number": "телефон",
+      "email": "e-mail",
+      "company": "компания"
+    }
   },
   "button": {
     "login": "Войти",

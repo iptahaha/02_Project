@@ -63,6 +63,14 @@ export function setHTMLValue(node, value): boolean {
   return false;
 }
 
+export function addHTMLValue(node, value): boolean {
+  if (node) {
+    node.innerHTML += value;
+    return true;
+  }
+  return false;
+}
+
 export function getForm(id): HTMLFormElement | boolean {
   const form = <HTMLFormElement>document.getElementById(id);
 
@@ -241,6 +249,15 @@ export function setAttribute(id, attribute, value): boolean {
   const node = <HTMLInputElement>document.getElementById(id);
   if (node) {
     node.setAttribute(attribute, value);
+    return true;
+  }
+  return false;
+}
+
+export function removeAttribute(id, attribute): boolean {
+  const node = <HTMLInputElement>document.getElementById(id);
+  if (node) {
+    node.removeAttribute(attribute);
     return true;
   }
   return false;
