@@ -70,7 +70,13 @@ function init() {
 
   addListener('changeUser', 'click', openModal.bind(null, 'modalUser'));
   addListener('closeUserModal', 'click', closedModal.bind(null, 'modalUser'));
-  addListener('createUserButton', 'click', closedModal.bind(null, 'modalUser'));
+  addListener('changeUserButton', 'click', closedModal.bind(null, 'modalUser'));
+
+  //exitModal
+  addListener('exitUser', 'click', openModal.bind(null, 'exitModal'));
+  addListener('closedExitModal', 'click', closedModal.bind(null, 'exitModal'));
+  addListener('canselExit', 'click', closedModal.bind(null, 'exitModal'));
+  addListener('saveExit', 'click', closedModal.bind(null, 'exitModal'));
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -15,6 +15,10 @@ body {
   margin: 0;
 }
 
+input {
+  cursor: pointer;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -202,6 +206,7 @@ body {
     }
   }
 
+  #exitModal .modal-content,
   #deleteModal .modal-content, #clearModal .modal-content,
   .modal-container,
   .modal-form__input {
