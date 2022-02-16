@@ -1,12 +1,14 @@
 import {
-  collectData,
-  removeDisabledAttributeByID,
+  addHTMLValue,
+  collectData, getElement,
+  removeDisabledAttributeByID, setAttribute,
   setDisabledAttributeByID,
   setHTMLValue,
   setTextValue,
 } from '../../../utils/ts/utils';
 import { closedModal } from './modal';
 import { validatePersonForm } from './validation';
+import {updateContent} from "../../../utils/ts/localization";
 
 export function generateNewRowContent(id, obj) {
   return `
@@ -72,9 +74,22 @@ export function updatePerson(state) {
   const personData = collectData('update-form');
   const obj = Object.fromEntries(personData);
   const validateResult = validatePersonForm(obj);
+  const formError = getElement('update-form-error');
 
   if (validateResult.length > 0) {
-    setTextValue('update-form-error', `Incorrect data in field(s): ${validateResult.join(', ')}.`);
+
+    addHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
+    console.log(validateResult);
+    validateResult.forEach((span, idx) => {
+
+      addHTMLValue(formError, span);
+      if (idx !== validateResult.length - 1) {
+        addHTMLValue(formError, ', ');
+      } else {
+        addHTMLValue(formError, '.')
+      }
+    })
+    updateContent();
     return false;
   }
   setDisabledAttributeByID('updateButton');

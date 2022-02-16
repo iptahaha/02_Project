@@ -30,44 +30,38 @@ function init() {
   addListener('dropdownLanguage', 'change', (event) => changeLng(event));
 
   // search
-
   addListener('search', 'input', filterByName.bind(null, mainState));
 
   // select row
-
   addListener('tableBody', 'click', getClick.bind(null, mainState));
 
   // selects
-
   addListener('sort-by-select', 'change', sortData.bind(null, mainState));
   addListener('data-base-select', 'change', changeCurrentDB.bind(null, mainState));
 
   // update
-
   addListener('buttonUpdate', 'click', fillUpdateModal.bind(null, mainState));
   addListener('closeUpdateModal', 'click', closedModal.bind(null, 'modalUpdate'));
   addListener('updateButton', 'click', updatePerson.bind(null, mainState));
-  // create
 
+  // create
   addListener('buttonCreate', 'click', openModal.bind(null, 'modalCreate'));
   addListener('closeCreateModal', 'click', closedModal.bind(null, 'modalCreate'));
   addListener('createButton', 'click', addNewPerson.bind(null, mainState));
-  // clear
 
+  // clear
   addListener('buttonClear', 'click', openModal.bind(null, 'clearModal'));
   addListener('closedClearModal', 'click', closedModal.bind(null, 'clearModal'));
   addListener('canselClear', 'click', closedModal.bind(null, 'clearModal'));
   addListener('saveClear', 'click', clearAll.bind(null, mainState));
 
   // delete
-
   addListener('buttonDelete', 'click', openModal.bind(null, 'deleteModal'));
   addListener('closedDeleteModal', 'click', closedModal.bind(null, 'deleteModal'));
   addListener('canselDelete', 'click', closedModal.bind(null, 'deleteModal'));
   addListener('saveDelete', 'click', deleteRow.bind(null, mainState));
 
   //userCreate
-
   addListener('changeUser', 'click', openModal.bind(null, 'modalUser'));
   addListener('closeUserModal', 'click', closedModal.bind(null, 'modalUser'));
   addListener('changeUserButton', 'click', closedModal.bind(null, 'modalUser'));

@@ -54,7 +54,17 @@
     "login/pass-empty": "You need login and password",
     "login/pass-wrong": "Wrong login or password",
     "pass-not_match": "*Password and confirm password does not match",
-    "login-in_use": "*Login already in use"
+    "login-in_use": "*Login already in use",
+    "modal": {
+      "message": "Incorrect data in field(s): ",
+      "first_name": "first name",
+      "last_name": "last name",
+      "city": "city",
+      "age": "age",
+      "phone_number": "phone number",
+      "email": "e-mail",
+      "company": "company"
+    }
   },
   "button": {
     "login": "Log in",

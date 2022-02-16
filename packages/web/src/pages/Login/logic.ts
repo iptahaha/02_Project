@@ -3,8 +3,10 @@ import {
   getElement,
   getInputValue,
   setInputValue,
-  setTextValue,
+  setAttribute,
+  removeAttribute
 } from '../../utils/ts/utils';
+import { updateContent } from "../../utils/ts/localization";
 
 export function loginValidate(state) {
   const loginRegex = /^[a-zA-Z0-9_]{6,20}$/;
@@ -12,31 +14,36 @@ export function loginValidate(state) {
   const loginId = 'login-message';
 
   if (value === '') {
-    setTextValue(loginId, '*You need login');
+    setAttribute(loginId, 'data-i18n', 'error.login-empty');
     state.validateStatus[0] = false;
+    updateContent();
     return false;
   }
 
   if (value.length < 6) {
-    setTextValue(loginId, '*Login at least 6 characters');
+    setAttribute(loginId, 'data-i18n', 'error.login-short');
     state.validateStatus[0] = false;
+    updateContent();
     return false;
   }
 
   if (value.length > 20) {
-    setTextValue(loginId, '*Login can`t be longer than 20 characters');
+    setAttribute(loginId, 'data-i18n', 'error.login-long');
     state.validateStatus[0] = false;
+    updateContent();
     return false;
   }
 
   if (!value.match(loginRegex)) {
-    setTextValue(loginId, '*Login must contain only letters, numbers, and underscores');
+    setAttribute(loginId, 'data-i18n', 'error.login-contains');
     state.validateStatus[0] = false;
+    updateContent();
     return false;
   }
 
-  setTextValue(loginId, '');
+  removeAttribute(loginId, 'data-i18n');
   state.validateStatus[0] = true;
+  updateContent();
   return true;
 }
 
@@ -46,25 +53,29 @@ export function passwordValidate(state) {
   const passwordId = 'password-message';
 
   if (value === '') {
-    setTextValue(passwordId, '*You need password');
+    setAttribute(passwordId, 'data-i18n', 'error.pass-empty');
     state.validateStatus[1] = false;
+    updateContent();
     return false;
   }
 
   if (value.length < 8) {
-    setTextValue(passwordId, '*Password at least 8 characters');
+    setAttribute(passwordId, 'data-i18n', 'error.pass-short');
     state.validateStatus[1] = false;
+    updateContent();
     return false;
   }
 
   if (!value.match(passwordRegex)) {
-    setTextValue(passwordId, '*Password must contain letters, numbers, and special symbols');
+    setAttribute(passwordId, 'data-i18n', 'error.pass-contains');
     state.validateStatus[1] = false;
+    updateContent();
     return false;
   }
 
-  setTextValue(passwordId, '');
+  removeAttribute(passwordId, 'data-i18n');
   state.validateStatus[1] = true;
+  updateContent();
   return true;
 }
 
@@ -100,22 +111,26 @@ export function loginIn(state) {
       }
 
       if (response.status === 409) {
-        setTextValue(globalErrorId, 'Try again later');
+        setAttribute(globalErrorId, 'data-i18n', 'error.try-later');
+        updateContent();
       }
 
       if (response.status === 403) {
-        setTextValue('login-message', 'You need login and password');
-        setTextValue('password-message', 'You need login and password');
+        setAttribute('login-message', 'data-i18n', 'error.login-empty');
+        setAttribute('password-message', 'data-i18n', 'error.pass-empty');
+        updateContent();
       }
 
       if (response.status === 401) {
-        setTextValue(globalErrorId, 'Wrong login or password');
+        setAttribute(globalErrorId, 'data-i18n', 'error.login/pass-wrong');
+        updateContent();
       }
 
       return true;
     })
     .catch(() => {
-      setTextValue(globalErrorId, 'Try again later');
+      setAttribute(globalErrorId, 'data-i18n', 'error.try-later');
+      updateContent();
       return false;
     });
   return true;
