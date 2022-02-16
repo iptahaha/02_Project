@@ -1,3 +1,5 @@
+import { Person } from '../interfaces/person.interface';
+
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
   if (node) {
@@ -233,7 +235,6 @@ export function getNodeList(className): NodeList | boolean {
     return NodeList;
   }
   return false;
-
 }
 
 export function setAttribute(id, attribute, value): boolean {
@@ -243,4 +244,30 @@ export function setAttribute(id, attribute, value): boolean {
     return true;
   }
   return false;
+}
+
+export function createTableRow(obj: Person) {
+  const row = document.createElement('tr');
+  row.id = obj.id.toString();
+  row.classList.add('table__row');
+  row.innerHTML = `
+    <td>${obj.id}</td>
+    <td>${obj.fname}</td>
+    <td>${obj.lname}</td>
+    <td>${obj.age}</td>
+    <td>${obj.city}</td>
+    <td>${obj.phoneNumber}</td>
+    <td>${obj.email}</td>
+    <td>${obj.companyName}</td>`;
+
+  return row;
+}
+
+export function createRowCollection(data, sortValue) {
+  const dataFragment = document.createDocumentFragment();
+  data.sort((a: Person, b: Person) => (a[sortValue] > b[sortValue] ? 1 : -1));
+  data.forEach((el: Person) => {
+    dataFragment.append(createTableRow(el));
+  });
+  return dataFragment;
 }

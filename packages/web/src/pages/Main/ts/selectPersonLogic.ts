@@ -1,5 +1,5 @@
-import { removeDisabledAttributeByID, setDisabledAttributeByID } from '../../utils/ts/utils';
-import { Person } from '../../utils/interfaces/person.interface';
+import { removeDisabledAttributeByID, setDisabledAttributeByID } from '../../../utils/ts/utils';
+import { Person } from '../../../utils/interfaces/person.interface';
 
 function selectRow(event, state) {
   const target = event.target.closest('tr');
