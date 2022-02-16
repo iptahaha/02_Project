@@ -1,7 +1,6 @@
 
 
 .container {
-  padding: 60px 30px 30px;
   background-color: #ffffff;
   min-height: 100vh;
   display: flex;
@@ -10,8 +9,22 @@
   @media(min-width: 1440px) {
     width: 1400px;
   }
+}
 
+.header{
+  display: flex;
+  justify-content: space-between;
 
+  &__drop {
+    display: flex;
+  }
+
+  &__change {
+    span {
+      padding: 0 10px;
+      cursor: pointer;
+    }
+  }
 }
 
 .page {
@@ -35,6 +48,7 @@
 .aside {
   display: flex;
   flex-direction: column;
+  padding: 60px 0 0 30px;
 
   .dropdown {
     position: relative;
@@ -92,7 +106,7 @@
 
 .main {
   width: 100%;
-  margin-left: 35px;
+  padding: 60px 30px 0 35px;
 }
 
 .control-panel {
@@ -110,12 +124,13 @@
   }
 
   &__button {
-    width: 120px;
-    height: 40px;
+    width: 134px;
+    height: 36px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 2px;
     border: none;
     margin-right: 10px;
+    padding: 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -185,7 +200,6 @@
 
       &:hover {
         background-color: rgb(227, 227, 227);
-        transition: all 0.2s;
         cursor: pointer;
       }
 
@@ -194,7 +208,6 @@
 
         &:hover {
           background-color: rgb(211, 211, 211);
-          transition: all 0.2s;
         }
       }
 
@@ -241,6 +254,10 @@
     text-transform: uppercase;
     font-size: 1.6em;
     margin-bottom: 20px;
+
+    &.margin {
+      margin-top: 60px;
+    }
   }
 
   &-close {
@@ -252,8 +269,6 @@
     &:before {
       font-size: 35px;
       color: #B4B4B4;
-
-
     }
 
     &:hover {
@@ -284,11 +299,12 @@
     &__button {
       @include button;
       margin-top: 30px;
+      background-color: $light-accent;
     }
 
     &__error {
       font-size: 1.1em;
-      margin-top: 20px;
+      height: 20px;
       color: $error-color;
     }
   }
@@ -320,6 +336,7 @@
       }
 
       &--cansel {
+        @include button;
         display: block;
         width: 100%;
         background-color: $error-accent;

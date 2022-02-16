@@ -1,7 +1,9 @@
 {
   "header": {
     "change-theme": "Сменить тему",
-    "change-language": "Сменить язык"
+    "change-language": "Сменить язык",
+    "theme-light": "Светлая",
+    "theme-dark": "Темная"
   },
   "title": {
     "db": "База данных",
@@ -56,7 +58,7 @@
     "create": "Создать",
     "delete": "Удалить",
     "clear": "Очистить",
-    "clear_all": "Очистить всё",
+    "clear_all": "Очистить",
     "change": "Изменить",
     "cancel": "Отмена"
   }

@@ -1,6 +1,6 @@
 import { addListener, checkLocalStorageValue, changeInterfaceState } from '../../../utils/ts/utils';
 
-import '../../../utils/styles/mainPage.scss';
+import './../../../utils/styles/mainPage.scss';
 import { changeLng } from '../../../utils/ts/localization';
 import { closedModal, fillUpdateModal, openModal } from './modal';
 import { updatePerson } from './updatePesonLogic';
@@ -65,6 +65,12 @@ function init() {
   addListener('closedDeleteModal', 'click', closedModal.bind(null, 'deleteModal'));
   addListener('canselDelete', 'click', closedModal.bind(null, 'deleteModal'));
   addListener('saveDelete', 'click', deleteRow.bind(null, mainState));
+
+  //userCreate
+
+  addListener('changeUser', 'click', openModal.bind(null, 'modalUser'));
+  addListener('closeUserModal', 'click', closedModal.bind(null, 'modalUser'));
+  addListener('createUserButton', 'click', closedModal.bind(null, 'modalUser'));
 }
 
 document.addEventListener('DOMContentLoaded', () => {

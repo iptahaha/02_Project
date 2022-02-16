@@ -1,4 +1,4 @@
-import { setDisplay, setInputValue } from '../../../utils/ts/utils';
+import {setDisplay, setInputValue, setTextValue} from '../../../utils/ts/utils';
 import { Person } from '../../../utils/interfaces/person.interface';
 
 export function openModal(id: string): void {
@@ -20,10 +20,16 @@ export function fillUpdateModal(state) {
 
 export function cleanForm() {
   const input = document.querySelectorAll('input');
-  input.forEach(( el) => (el.value = ''));
+  input.forEach(( el) => {
+    if(el.id !== 'search') {
+      el.value = '';
+    }
+  });
 }
 
 export function closedModal(id: string): void {
+  setTextValue('create-form-error', '');
+  setTextValue('update-form-error', '');
   setDisplay(id, 'none');
   cleanForm();
 }

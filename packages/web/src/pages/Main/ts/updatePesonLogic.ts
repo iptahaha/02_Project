@@ -59,7 +59,6 @@ export function updatePersonRequest(state, data, personObj) {
       }
       removeDisabledAttributeByID('updateButton');
       closedModal('modalUpdate');
-      setTextValue('update-form-error', '');
       return true;
     })
     .catch(() => {
