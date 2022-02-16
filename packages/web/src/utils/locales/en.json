@@ -1,19 +1,63 @@
 {
-  "change_theme": "theme:",
-  "change_language": "language:",
-
-  "login_title": "Login In",
-  "login_button": "Log in",
-  "sign-up_form_message": "Don't have an account yet? ",
-  "sign-up_form_link": "Sign Up",
-
-  "register_title": "Create account",
-  "register_button": "Sign up",
-  "login-in_form_message": "Already have an account? ",
-  "login-in_form_link": "Login here",
-  "login_already_in_use": "*Login already in use",
-
-  "login_field": "Login",
-  "password_field": "Password",
-  "confirm_password_field": "Confirm password"
+  "header": {
+    "change-theme": "Change theme",
+    "change-language": "Change language"
+  },
+  "title": {
+    "db": "Database",
+    "sort_by": "Sort by",
+    "login": "Login In",
+    "auth": "Create account",
+    "update": "Update person's data",
+    "create": "Create new person",
+    "clear_all": "Clear all?",
+    "delete": "Delete person?",
+    "user_settings": {
+      "login": "Change login",
+      "password": "Change password"
+    }
+  },
+  "field": {
+    "login": "Login",
+    "password": "Password",
+    "password-confirm": "Confirm password",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "age": "Age",
+    "phone": "Phone number",
+    "phone-sample": "Phone number (+38-XXX-XXX-XXX)",
+    "city": "City",
+    "company": "Company"
+  },
+  "link": {
+    "to_sign_up-message": "Don't have an account yet? ",
+    "to_sign_up": "Sign Up",
+    "to_login-message": "Already have an account? ",
+    "to_login": "Log in here"
+  },
+  "error": {
+    "login-empty": "*You need login",
+    "login-short": "*Login at least 6 characters",
+    "login-long": "*Login can`t be longer than 20 characters",
+    "login-contains": "*Login must contain only letters, numbers, and underscores",
+    "pass-empty": "*You need password",
+    "pass-short": "*Password at least 8 characters",
+    "pass-contains": "*Password must contain letters, numbers, and special symbols",
+    "try-later": "Try again later",
+    "login/pass-empty": "You need login and password",
+    "login/pass-wrong": "Wrong login or password",
+    "pass-not_match": "*Password and confirm password does not match",
+    "login-in_use": "*Login already in use"
+  },
+  "button": {
+    "login": "Log in",
+    "auth": "Sign up",
+    "update": "Update",
+    "create": "Create",
+    "delete": "Delete",
+    "clear": "Clear",
+    "clear_all": "Clear all",
+    "change": "Change",
+    "cancel": "Cancel"
+  }
 }
