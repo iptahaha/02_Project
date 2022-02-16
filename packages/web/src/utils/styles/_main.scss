@@ -124,12 +124,13 @@
   }
 
   &__button {
-    width: 147px;
-    height: 40px;
+    width: 134px;
+    height: 36px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 2px;
     border: none;
     margin-right: 10px;
+    padding: 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -268,8 +269,6 @@
     &:before {
       font-size: 35px;
       color: #B4B4B4;
-
-
     }
 
     &:hover {
@@ -337,6 +336,7 @@
       }
 
       &--cansel {
+        @include button;
         display: block;
         width: 100%;
         background-color: $error-accent;
