@@ -3,12 +3,12 @@ import {
   removeChild,
   removeDisabledAttributeByID, setAttribute,
   setDisabledAttributeByID,
-  addHTMLValue,
+  addHTMLValue, setHTMLValue, deleteCookie,
 
 } from '../../../utils/ts/utils';
 import { validatePersonForm } from './validation';
 import { closedModal } from './modal';
-import { getData } from './getPesonDataLogic';
+import { getData } from './getPersonDataLogic';
 import { updateContent } from "../../../utils/ts/localization";
 
 export function addNewPersonRequest(state, personData) {
@@ -20,6 +20,7 @@ export function addNewPersonRequest(state, personData) {
     .then((response) => {
       if (response.redirected) {
         window.location.href = response.url;
+        deleteCookie('jwt');
         return false;
       }
 
@@ -41,6 +42,7 @@ export function addNewPerson(state): boolean {
   const obj = Object.fromEntries(personData);
   const validateResult = validatePersonForm(obj);
   const formError = getElement('create-form-error');
+  setHTMLValue(formError, '');
 
   if (validateResult.length > 0) {
 

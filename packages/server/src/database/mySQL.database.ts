@@ -24,7 +24,6 @@ export class MySQL implements Database {
       const deleteQuery = `DELETE FROM person_table WHERE id = ${id}`;
       this.db.query(deleteQuery, (err: Error) => {
         if (err) {
-          console.log(err);
           reject(err);
         } else {
           resolve('Super');
@@ -53,7 +52,6 @@ export class MySQL implements Database {
         { fname, lname, age, city, phoneNumber, email, companyName },
         (err: Error) => {
           if (err) {
-            console.log(err);
             reject(err);
           } else {
             resolve(302);
@@ -103,10 +101,8 @@ export class MySQL implements Database {
   endConnection(): void {
     this.db.end((err: Error) => {
       if (err) {
-        console.log(err);
         return err;
       }
-      console.log('Zakrito');
       return true;
     });
   }
