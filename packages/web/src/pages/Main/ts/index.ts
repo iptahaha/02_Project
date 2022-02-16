@@ -1,6 +1,6 @@
 import { addListener, checkLocalStorageValue, changeInterfaceState } from '../../../utils/ts/utils';
 
-import '../../../utils/styles/mainPage.scss';
+import './../../../utils/styles/mainPage.scss';
 import { changeLng } from '../../../utils/ts/localization';
 import { closedModal, fillUpdateModal, openModal } from './modal';
 import { updatePerson } from './updatePesonLogic';

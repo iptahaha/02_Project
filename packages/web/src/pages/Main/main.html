@@ -17,32 +17,19 @@
   <header class='header'>
     <div class="header__drop">
       <div id='dropdownTheme' class='header__drop-down'>
-        <label for='changeTheme' data-i18n='change_theme'></label>
+        <label for='changeTheme' data-i18n='header.change-theme'></label>
         <select id='changeTheme' class='header__select'>
-          <option value='light-theme'>Light</option>
-          <option value='night-theme'>Dark</option>
+          <option value='light-theme' data-i18n="header.theme-light"></option>
+          <option value='night-theme' data-i18n="header.theme-dark"></option>
         </select>
       </div>
       <div id='dropdownLanguage' class='header__drop-down'>
-        <label for='changeLanguage' data-i18n='change_language'></label>
+        <label for='changeLanguage' data-i18n='header.change-language'></label>
         <select id='changeLanguage' class='header__select'>
           <option value='eng'>ENG</option>
           <option value='ru'>RU</option>
         </select>
       </div>
-    <div id='dropdownTheme' class='header__drop-down'>
-      <label for='changeTheme' data-i18n='header.change-theme'></label>
-      <select  id='changeTheme' class='header__select'>
-        <option value='light-theme'>Light</option>
-        <option value='night-theme'>Dark</option>
-      </select>
-    </div>
-    <div id='dropdownLanguage'>
-      <label for='changeLanguage' data-i18n='header.change-language'></label>
-      <select  id='changeLanguage'>
-        <option value='eng'>ENG</option>
-        <option value='ru'>RU</option>
-      </select>
     </div>
     <div class="header__change"><span id="changeUser" class='icon-user'></span><span class="icon-exit"></span></div>
   </header>
@@ -74,7 +61,7 @@
         <div class='control-panel__buttons-holder'>
           <button class='control-panel__button' id='buttonCreate'><span class='icon-add'></span><span data-i18n='button.create'></span></button>
           <button class='control-panel__button' id='buttonUpdate' disabled><span class='icon-update'></span><span data-i18n='button.update'></span></button>
-          <button class='control-panel__button' id='buttonDelete' dusabled><span class='icon-close'></span><span data-i18n='button.delete'></span></button>
+          <button class='control-panel__button' id='buttonDelete' disabled><span class='icon-close'></span><span data-i18n='button.delete'></span></button>
           <button class='control-panel__button' id='buttonClear'><span class='icon-clear-all'></span><span data-i18n='button.clear_all'></span></button>
         </div>
         <div class='control-panel__search-holder'>
@@ -188,18 +175,18 @@
         <form class='modal-form' id='loginForm'>
           <p class='modal-title' >Change login</p>
           <label class='modal-label' for='create-login'>Login</label>
-          <input type='text' id='create-login' class='modal-form__input' min='6' max="20">
+          <input type='text' id='create-login' class='modal-form__input' min='6' max="20"/>
           <label class='modal-label' for='create-login-new'>New login</label>
-          <input type='text' name='login' class='modal-form__input' id='create-login-new'  min='6' min='20'>
+          <input type='text' name='login' class='modal-form__input' id='create-login-new' min='6' max='20'/>
         </form>
         <form class='modal-form' id="passwordForm">
           <p class='modal-title margin'>Change password</p>
-          <label class='modal-label' for='create-age'>Password</label>
-          <input type='tetx' name='password' id='password' class='modal-form__input' min='8' max='255'>
-          <label class='modal-label' for='create-age'>New password</label>
-          <input type='text' name='password' id='passwordNew' class='modal-form__input' min='8' max='255'>
-          <label class='modal-label' for='create-age'>New password</label>
-          <input type='text' name='password' id='passwordNewDuplicate' class='modal-form__input' min='8' max='255'>
+          <label class='modal-label' for='password'>Password</label>
+          <input type='text' name='password' id='password' class='modal-form__input' min='8' max='255'/>
+          <label class='modal-label' for='passwordNew'>New password</label>
+          <input type='text' name='password' id='passwordNew' class='modal-form__input' min='8' max='255'/>
+          <label class='modal-label' for='passwordNewDuplicate'>New password</label>
+          <input type='text' name='password' id='passwordNewDuplicate' class='modal-form__input' min='8' max='255'/>
 
           <div class='modal-form__error'>
             <div id='user-form-error'></div>

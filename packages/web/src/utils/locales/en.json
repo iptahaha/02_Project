@@ -1,7 +1,9 @@
 {
   "header": {
     "change-theme": "Change theme",
-    "change-language": "Change language"
+    "change-language": "Change language",
+    "theme-light": "Light",
+    "theme-dark": "Dark"
   },
   "title": {
     "db": "Database",
