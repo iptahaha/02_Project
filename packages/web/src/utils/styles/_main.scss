@@ -311,6 +311,28 @@
   }
 }
 
+#modalUser {
+  .modal {
+    &-form {
+      margin-top: -18px;
+
+      &__button {
+        margin-top: 10px;
+      }
+    }
+
+    &-title {
+      margin-bottom: 0;
+    }
+
+    &-error {
+      height: 20px;
+      line-height: 9px;
+      color: $error-color;
+    }
+  }
+}
+
 #exitModal,
 #deleteModal,
 #clearModal {

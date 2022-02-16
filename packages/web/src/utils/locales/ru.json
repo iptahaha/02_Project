@@ -66,6 +66,8 @@
     "clear_all": "Очистить",
     "change": "Изменить",
     "cancel": "Отмена",
-    "confirm": "подтвердить"
+    "confirm": "подтвердить",
+    "update_login": "Обновить логин",
+    "update_password": "Обновить пароль"
   }
 }

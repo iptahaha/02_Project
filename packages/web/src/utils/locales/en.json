@@ -66,6 +66,8 @@
     "clear_all": "Clear all",
     "change": "Change",
     "cancel": "Cancel",
-    "confirm": "confirm"
+    "confirm": "confirm",
+    "update_login": "Update login",
+    "update_password": "Update password"
   }
 }
