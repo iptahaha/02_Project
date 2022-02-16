@@ -1,4 +1,9 @@
-import { addListener, checkLocalStorageValue, changeInterfaceState } from '../../../utils/ts/utils';
+import {
+  addListener,
+  checkLocalStorageValue,
+  changeInterfaceState,
+  validateStatusCheck,
+} from '../../../utils/ts/utils';
 
 import './../../../utils/styles/mainPage.scss';
 import { changeLng } from '../../../utils/ts/localization';
@@ -7,10 +12,12 @@ import { updatePerson } from './updatePesonLogic';
 import { getClick } from './selectPersonLogic';
 import { addNewPerson } from './createPersonLogic';
 import { clearAll } from './clearAllLogic';
-import { getData } from './getPesonDataLogic';
+import { getData } from './getPersonDataLogic';
 import { deleteRow } from './deletePersonLogic';
 import { filterByName } from './searchByNameLogic';
 import { changeCurrentDB, sortData } from './selectsLogic';
+import { changeUserLogin } from './changeUserLogic';
+import { loginValidate, passwordValidate } from '../../../utils/validation/baseValidation';
 
 function init() {
   const mainState = {
@@ -21,6 +28,9 @@ function init() {
     currentSelectedId: null,
     currentSelectedObj: null,
   };
+
+  const validateLoginChange = [false, false];
+  const validatePasswordChange = [false, false, false];
 
   checkLocalStorageValue('changeTheme');
   // checkLocalStorageValue('changeLanguage');
@@ -61,12 +71,22 @@ function init() {
   addListener('canselDelete', 'click', closedModal.bind(null, 'deleteModal'));
   addListener('saveDelete', 'click', deleteRow.bind(null, mainState));
 
-  //userCreate
+  // changeUser
   addListener('changeUser', 'click', openModal.bind(null, 'modalUser'));
   addListener('closeUserModal', 'click', closedModal.bind(null, 'modalUser'));
-  addListener('changeUserButton', 'click', closedModal.bind(null, 'modalUser'));
 
-  //exitModal
+  addListener('update-login', 'input', () => {
+    loginValidate.call(null, validateLoginChange, 'change-login-message', 'update-login');
+    validateStatusCheck.call(null, validateLoginChange, 'changeLoginButton');
+  });
+  addListener('update-login-password', 'input', () => {
+    passwordValidate.call(null, validateLoginChange, 'change-login-password-message', 'update-login-password');
+    validateStatusCheck.call(null, validateLoginChange, 'changeLoginButton');
+  });
+
+  addListener('changeLoginButton', 'click', changeUserLogin);
+
+  // exitModal
   addListener('exitUser', 'click', openModal.bind(null, 'exitModal'));
   addListener('closedExitModal', 'click', closedModal.bind(null, 'exitModal'));
   addListener('canselExit', 'click', closedModal.bind(null, 'exitModal'));

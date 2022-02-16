@@ -1,10 +1,6 @@
 import {
   collectData,
-  getElement,
   getInputValue,
-  hasAttribute,
-  removeDisabledAttribute,
-  setDisabledAttribute,
   setAttribute,
   removeAttribute
 } from '../../utils/ts/utils';
@@ -96,18 +92,6 @@ export function confirmPasswordValidate(state): boolean {
   removeAttribute(confirmPasswordErrorId, 'data-i18n');
   state.validateStatus[2] = true;
   updateContent();
-  return true;
-}
-
-export function validateStatusCheck(state): boolean {
-  const button = <HTMLElement>getElement('create-account');
-  if (state.validateStatus.includes(false)) {
-    if (!hasAttribute(button, 'disabled')) {
-      setDisabledAttribute(button);
-    }
-    return false;
-  }
-  removeDisabledAttribute(button);
   return true;
 }
 

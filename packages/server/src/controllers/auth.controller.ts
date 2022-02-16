@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import MySQLUser from '../database/userDataBase';
 import Controller from '../interfaces/controller.interface';
 import { generateJWT } from '../middleware/jwtGenerate.middleware';
+import authMiddleware from '../middleware/auth.middleware';
 
 dotenv.config();
 
@@ -19,38 +20,39 @@ export class AuthenticationController implements Controller {
   checkRoutes() {
     this.router.post('/register', AuthenticationController.register);
     this.router.post('/login', AuthenticationController.login);
+    this.router.post('/change-login', authMiddleware, AuthenticationController.changeLogin);
   }
 
   static async register(req: Request, res: Response) {
     const userData = req.body;
-    const newUser = new MySQLUser();
+    const dbRequest = new MySQLUser();
 
     if (req.body.password !== req.body.confirmPassword) {
       return res.status(403).end();
     }
 
-    newUser
+    dbRequest
       .checkLoginUniqueness(userData.login)
       .then(async (value: boolean) => {
         if (!value) {
-          newUser.endConnection();
+          dbRequest.endConnection();
           res.status(401).end();
         } else {
           const hashedPassword = await bcrypt.hash(userData.password, 8);
-          await newUser
+          await dbRequest
             .createNewUser(userData.login, hashedPassword)
             .then(() => {
-              newUser.endConnection();
-              res.writeHead(302, { Location: '/login' }).end();
+              dbRequest.endConnection();
+              res.redirect(302, '/login');
             })
             .catch(() => {
-              newUser.endConnection();
+              dbRequest.endConnection();
               res.status(409).end();
             });
         }
       })
       .catch(() => {
-        newUser.endConnection();
+        dbRequest.endConnection();
         res.status(409).end();
       });
     return userData;
@@ -58,30 +60,62 @@ export class AuthenticationController implements Controller {
 
   static login(req: Request, res: Response) {
     const userData = req.body;
-    const user = new MySQLUser();
+    const dbRequest = new MySQLUser();
 
     if (!userData.login || !userData.password) {
       res.status(403).end();
     }
 
-    user
+    dbRequest
       .loginIn(userData.login, userData.password)
       .then((value: any) => {
-        user.endConnection();
+        dbRequest.endConnection();
 
         if (value.code === 302) {
           generateJWT(res, value.id, value.login);
-          res.writeHead(value.code, { Location: '/main' }).end();
+          res.redirect(302, '/main');
           return userData;
         }
         res.status(value).end();
         return userData;
       })
       .catch((err) => {
-        user.endConnection();
+        dbRequest.endConnection();
         res.status(409).end();
       });
 
     return userData;
+  }
+
+  static changeLogin(req: Request, res: Response) {
+    const { login, id } = req.user;
+    const { password } = req.body;
+    const newLogin = req.body.login;
+    const dbRequest = new MySQLUser();
+
+    dbRequest
+      .loginIn(login, password)
+      .then((value: any) => {
+        if (value.code) {
+          dbRequest.checkLoginUniqueness(newLogin).then((resolve: boolean) => {
+            if (resolve) {
+              dbRequest.changeLogin(Number(id), newLogin).then((code: any) => {
+                dbRequest.endConnection();
+                res.clearCookie('jwt').redirect(302, '/login');
+              });
+            } else {
+              dbRequest.endConnection();
+              res.status(403).end();
+            }
+          });
+        } else {
+          dbRequest.endConnection();
+          res.status(401).end();
+        }
+      })
+      .catch((err) => {
+        dbRequest.endConnection();
+        res.status(409).end();
+      });
   }
 }
