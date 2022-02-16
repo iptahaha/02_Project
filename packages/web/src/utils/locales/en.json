@@ -8,11 +8,14 @@
   "title": {
     "db": "Database",
     "sort_by": "Sort by",
-    "login": "Login In",
+    "login": "Log In",
+    "change_login": "Change login",
+    "change_password": "Change password",
     "auth": "Create account",
     "update": "Update person's data",
     "create": "Create new person",
     "clear_all": "Clear all?",
+    "exit": "Do you really want to exit?",
     "delete": "Delete person?",
     "user_settings": {
       "login": "Change login",
@@ -21,8 +24,10 @@
   },
   "field": {
     "login": "Login",
+    "new_login": "New login",
     "password": "Password",
     "password-confirm": "Confirm password",
+    "new_password": "New password",
     "first_name": "First name",
     "last_name": "Last name",
     "age": "Age",
@@ -60,6 +65,7 @@
     "clear": "Clear",
     "clear_all": "Clear all",
     "change": "Change",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "confirm": "confirm"
   }
 }

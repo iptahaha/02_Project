@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/core": "7.16.12",

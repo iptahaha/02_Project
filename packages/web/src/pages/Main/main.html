@@ -7,7 +7,9 @@
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
   <title>Frogers - Dashboard</title>
   <link rel='icon' href='/photo/favicon.ico' type='image/x-icon'>
-  <link href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' rel='stylesheet'>
+  <link
+    href='https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'
+    rel='stylesheet'>
 </head>
 <body class='page light-theme'>
 <section class='page__content'>
@@ -31,7 +33,10 @@
         </select>
       </div>
     </div>
-    <div class="header__change"><span id="changeUser" class='icon-user'></span><span class="icon-exit"></span></div>
+    <div class="header__change">
+      <span title="settings" id="changeUser" class='icon-user'></span>
+      <span title="log out" id="exitUser" class="icon-exit"></span>
+    </div>
   </header>
   <section class='container'>
     <aside class='aside'>
@@ -59,10 +64,14 @@
     <main class='main'>
       <div class='control-panel'>
         <div class='control-panel__buttons-holder'>
-          <button class='control-panel__button' id='buttonCreate'><span class='icon-add'></span><span data-i18n='button.create'></span></button>
-          <button class='control-panel__button' id='buttonUpdate' disabled><span class='icon-update'></span><span data-i18n='button.update'></span></button>
-          <button class='control-panel__button' id='buttonDelete' disabled><span class='icon-close'></span><span data-i18n='button.delete'></span></button>
-          <button class='control-panel__button' id='buttonClear'><span class='icon-clear-all'></span><span data-i18n='button.clear_all'></span></button>
+          <button class='control-panel__button' id='buttonCreate'><span class='icon-add'></span><span
+            data-i18n='button.create'></span></button>
+          <button class='control-panel__button' id='buttonUpdate' disabled><span class='icon-update'></span><span
+            data-i18n='button.update'></span></button>
+          <button class='control-panel__button' id='buttonDelete' disabled><span class='icon-close'></span><span
+            data-i18n='button.delete'></span></button>
+          <button class='control-panel__button' id='buttonClear'><span class='icon-clear-all'></span><span
+            data-i18n='button.clear_all'></span></button>
         </div>
         <div class='control-panel__search-holder'>
           <label>
@@ -101,7 +110,7 @@
           <label class='modal-label' for='create-age' data-i18n='field.age'></label>
           <input type='number' name='age' id='create-age' class='modal-form__input' min='0' max='120'>
           <label class='modal-label' for='create-phoneNumber' data-i18n='field.phone-sample'></label>
-          <input type='text' name='phoneNumber' class='modal-form__input' id='create-phoneNumber' placeholder='+38-XXX-XXX-XXXX'>
+          <input type='text' name='phoneNumber' class='modal-form__input' id='create-phoneNumber'>
           <label class='modal-label' for='create-city' data-i18n='field.city'></label>
           <input type='text' name='city' class='modal-form__input' id='create-city'>
           <label class='modal-label' for='create-email'>E-mail</label>
@@ -129,7 +138,8 @@
           <label class='modal-label' for='update-age' data-i18n='field.age'></label>
           <input type='number' name='age' id='update-age' class='modal-form__input' min='0' max='120'>
           <label class='modal-label' for='update-phoneNumber' data-i18n='field.phone-sample'></label>
-          <input type='text' name='phoneNumber' class='modal-form__input' id='update-phoneNumber' placeholder='+38-XXX-XXX-XXXX'>
+          <input type='text' name='phoneNumber' class='modal-form__input' id='update-phoneNumber'
+                 placeholder='+38-XXX-XXX-XXXX'>
           <label class='modal-label' for='update-city' data-i18n='field.city'></label>
           <input type='text' name='city' class='modal-form__input' id='update-city'>
           <label class='modal-label' for='update-email'>E-mail</label>
@@ -137,7 +147,8 @@
           <label class='modal-label' for='update-company' data-i18n='field.company'></label>
           <input type='text' name='companyName' class='modal-form__input' id='update-company'>
           <div class='modal-form__error'>
-            <p id='update-form-error__text'></p><p id='update-form-error'></p>
+            <p id='update-form-error__text'></p>
+            <p id='update-form-error'></p>
           </div>
           <button type='button' class='modal-form__button' id='updateButton' data-i18n='button.update'></button>
         </form>
@@ -168,30 +179,42 @@
       </div>
     </div>
   </section>
+  <section class='modal' id='exitModal'>
+    <div class='modal-container'>
+      <div class='modal-content'>
+        <span class='icon-close modal-close' id='closedExitModal'></span>
+        <p class='modal-title' id='exit-modal-title' data-i18n='title.exit'></p>
+        <div>
+          <button id='saveExit' class='modal-button--save' data-i18n='button.confirm'></button>
+          <button id='canselExit' class='modal-button--cansel' data-i18n='button.cancel'></button>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class='modal' id='modalUser'>
     <div class='modal-container'>
       <div class='modal-content'>
         <span class='icon-close modal-close' id='closeUserModal'></span>
         <form class='modal-form' id='loginForm'>
-          <p class='modal-title' >Change login</p>
-          <label class='modal-label' for='create-login'>Login</label>
+          <p class='modal-title' data-i18n="title.change_login"></p>
+          <label class='modal-label' for='create-login' data-i18n="field.login"></label>
           <input type='text' id='create-login' class='modal-form__input' min='6' max="20"/>
-          <label class='modal-label' for='create-login-new'>New login</label>
+          <label class='modal-label' for='create-login-new' data-i18n="field.new_login"></label>
           <input type='text' name='login' class='modal-form__input' id='create-login-new' min='6' max='20'/>
         </form>
         <form class='modal-form' id="passwordForm">
-          <p class='modal-title margin'>Change password</p>
-          <label class='modal-label' for='password'>Password</label>
+          <p class='modal-title margin' data-i18n="title.change_password"></p>
+          <label class='modal-label' for='password' data-i18n="field.password"></label>
           <input type='text' name='password' id='password' class='modal-form__input' min='8' max='255'/>
-          <label class='modal-label' for='passwordNew'>New password</label>
+          <label class='modal-label' for='passwordNew' data-i18n="field.new_password"></label>
           <input type='text' name='password' id='passwordNew' class='modal-form__input' min='8' max='255'/>
-          <label class='modal-label' for='passwordNewDuplicate'>New password</label>
+          <label class='modal-label' for='passwordNewDuplicate' data-i18n="field.password-confirm"></label>
           <input type='text' name='password' id='passwordNewDuplicate' class='modal-form__input' min='8' max='255'/>
 
           <div class='modal-form__error'>
             <div id='user-form-error'></div>
           </div>
-          <button type='button' class='modal-form__button' id='createUserButton'>Change</button>
+          <button type='button' class='modal-form__button' id='createUserButton' data-i18n="button.change"></button>
         </form>
       </div>
     </div>

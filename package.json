@@ -6,7 +6,8 @@
     "start": "cd ./packages/server && yarn start",
     "build": "yarn build:web && yarn build:server",
     "build:web": "cd ./packages/web && yarn build",
-    "build:server": "cd ./packages/server && yarn build"
+    "build:server": "cd ./packages/server && yarn build",
+    "test": "jest"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "5.10.2",
