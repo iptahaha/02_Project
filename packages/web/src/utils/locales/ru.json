@@ -1,19 +1,63 @@
 {
-  "change_theme": "Сменить тему:",
-  "change_language": "Язык:",
-
-  "login_title": "Войти",
-  "login_button": "Войти",
-  "sign-up_form_message": "Всё ещё нет аккаунта? ",
-  "sign-up_form_link": "Зарегистрируйтесь",
-
-  "register_title": "Регистрация",
-  "register_button": "Регистрация",
-  "login-in_form_message": "Уже есть аккаунт? ",
-  "login-in_form_link": "Войти",
-  "login_already_in_use": "*Логин уже используется",
-
-  "login_field": "Ваш логин",
-  "password_field": "Ваш пароль",
-  "confirm_password_field": "Подтвердите пароль"
+  "header": {
+    "change-theme": "Сменить тему",
+    "change-language": "Сменить язык"
+  },
+  "title": {
+    "db": "База данных",
+    "sort_by": "Сортировать по",
+    "login": "Вход",
+    "auth": "Регистрация",
+    "update": "Обновить данные",
+    "create": "Создать новую запись",
+    "clear_all": "Очистить все записи?",
+    "delete": "Удалить запись?",
+    "user_settings": {
+      "login": "Сменить логин",
+      "password": "Сменить пароль"
+    }
+  },
+  "field": {
+    "login": "Логин",
+    "password": "Пароль",
+    "password-confirm": "Подтвердите пароль",
+    "first_name": "Имя",
+    "last_name": "Фамилия",
+    "age": "Возраст",
+    "phone": "Номер телефона",
+    "phone-sample": "Номер телефона (+38-XXX-XXX-XXX)",
+    "city": "Город",
+    "company": "Компания"
+  },
+  "link": {
+    "to_sign_up-message": "Всё ещё нет аккаунта? ",
+    "to_sign_up": "Зарегистрируйтесь",
+    "to_login-message": "Уже есть аккаунт? ",
+    "to_login": "Войти"
+  },
+  "error": {
+    "login-empty": "*Необходим логин",
+    "login-short": "*Логин должен содержать не менее 6 символов",
+    "login-long": "*Логин должен содержать не более 20 символов",
+    "login-contains": "*Логин должен содержать только буквы, цифры, и нижние подчёркивания",
+    "pass-empty": "*Необходим пароль",
+    "pass-short": "*Пароль должен содержать не менее 8 символов",
+    "pass-contains": "*Пароль должен содержать буквы, цифры, и специальные символы",
+    "try-later": "Повторите позже",
+    "login/pass-empty": "Требуется логин ии пароль",
+    "login/pass-wrong": "Неправильный логин ии пароль",
+    "pass-not_match": "*Password and confirm password does not match",
+    "login-in_use": "*Login already in use"
+  },
+  "button": {
+    "login": "Войти",
+    "auth": "Зарегистрироваться",
+    "update": "Обновить",
+    "create": "Создать",
+    "delete": "Удалить",
+    "clear": "Очистить",
+    "clear_all": "Очистить всё",
+    "change": "Изменить",
+    "cancel": "Отмена"
+  }
 }

@@ -1,12 +1,7 @@
-import { addListener, checkLocalStorageValue, changeInterfaceState } from '../../utils/ts/utils';
+import { addListener, checkLocalStorageValue, changeInterfaceState } from '../../../utils/ts/utils';
 
-import '../../utils/styles/mainPage.scss';
-import { changeLng } from '../../utils/ts/localization';
-import {
-  changeCurrentDB,
-  filterByName,
-  sortData,
-} from './logic';
+import '../../../utils/styles/mainPage.scss';
+import { changeLng } from '../../../utils/ts/localization';
 import { closedModal, fillUpdateModal, openModal } from './modal';
 import { updatePerson } from './updatePesonLogic';
 import { getClick } from './selectPersonLogic';
@@ -14,6 +9,8 @@ import { addNewPerson } from './createPersonLogic';
 import { clearAll } from './clearAllLogic';
 import { getData } from './getPesonDataLogic';
 import { deleteRow } from './deletePersonLogic';
+import { filterByName } from './searchByNameLogic';
+import { changeCurrentDB, sortData } from './selectsLogic';
 
 function init() {
   const mainState = {

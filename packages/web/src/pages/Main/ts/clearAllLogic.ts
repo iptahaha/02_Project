@@ -2,7 +2,7 @@ import {
   removeChild,
   removeDisabledAttributeByID,
   setDisabledAttributeByID,
-} from '../../utils/ts/utils';
+} from '../../../utils/ts/utils';
 import { closedModal } from './modal';
 
 export function clearAll(state) {
@@ -12,6 +12,7 @@ export function clearAll(state) {
     method: 'DELETE',
   })
     .then((response) => {
+
       if (response.redirected) {
         window.location.href = response.url;
         return false;

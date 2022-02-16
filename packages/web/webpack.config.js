@@ -1,28 +1,28 @@
 const path = require('node:path');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function resolve(filepath, fileName) {
-  return path.resolve(process.cwd(), 'src', 'pages', filepath, fileName)
+  return path.resolve(process.cwd(), 'src', 'pages', filepath, fileName);
 }
 
-const isDevMode = /*process.env.DEV_STAGE !== "production"*/ false;
+const isDevMode = /* process.env.DEV_STAGE !== "production" */ false;
 
 module.exports = {
   mode: isDevMode ? 'development' : 'production',
   entry: {
     login: resolve('Login', 'index.ts'),
     register: resolve('Register', 'index.ts'),
-    main: resolve('Main', 'index.ts')
+    main: resolve('Main/ts', 'index.ts'),
   },
   output: {
     path: path.resolve(process.cwd(), 'dist'),
-    filename: '[name]-[hash:8].js'
+    filename: '[name]-[hash:8].js',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.json', 'js']
+    extensions: ['.ts', '.tsx', '.json', 'js'],
   }, // ВАЖНО
   module: {
     rules: [
@@ -31,7 +31,7 @@ module.exports = {
         include: path.resolve(process.cwd(), 'src'),
         loader: require.resolve('babel-loader'),
         options: {
-          presets: ["@babel/env", "@babel/preset-typescript"],
+          presets: ['@babel/env', '@babel/preset-typescript'],
           plugins: [],
         },
       },
@@ -39,35 +39,36 @@ module.exports = {
         test: /\.scss$/i,
         use: [
           isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          "css-loader",
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
-              implementation: require("sass")
-            }
-          }
-        ]
-      }
-    ]
+              implementation: require('sass'),
+            },
+          },
+        ],
+      },
+    ],
   },
-  plugins: [new CleanWebpackPlugin({verbose: true}),
+  plugins: [
+    new CleanWebpackPlugin({ verbose: true }),
     // new CopyPlugin({patterns: [{ from: "public", to: "public" }]}),
     !isDevMode && new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      filename: "login.html",
+      filename: 'login.html',
       template: resolve('Login', 'login.html'),
-      excludeChunks: ['register', 'main']
+      excludeChunks: ['register', 'main'],
     }),
     new HtmlWebpackPlugin({
-      filename: "register.html",
+      filename: 'register.html',
       template: resolve('Register', 'register.html'),
-      excludeChunks: ['login', 'main']
+      excludeChunks: ['login', 'main'],
     }),
     new HtmlWebpackPlugin({
-      filename: "main.html",
+      filename: 'main.html',
       template: resolve('Main', 'main.html'),
-      excludeChunks: ['register', 'login']
-    })
+      excludeChunks: ['register', 'login'],
+    }),
   ].filter(Boolean),
-  devtool: 'source-map'
-}
+  devtool: 'source-map',
+};

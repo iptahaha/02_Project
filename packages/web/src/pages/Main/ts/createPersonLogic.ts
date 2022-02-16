@@ -4,7 +4,7 @@ import {
   removeDisabledAttributeByID,
   setDisabledAttributeByID,
   setTextValue,
-} from '../../utils/ts/utils';
+} from '../../../utils/ts/utils';
 import { validatePersonForm } from './validation';
 import { closedModal } from './modal';
 import { getData } from './getPesonDataLogic';
