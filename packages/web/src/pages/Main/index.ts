@@ -68,6 +68,12 @@ function init() {
   addListener('closedDeleteModal', 'click', closedModal.bind(null, 'deleteModal'));
   addListener('canselDelete', 'click', closedModal.bind(null, 'deleteModal'));
   addListener('saveDelete', 'click', deleteRow.bind(null, mainState));
+
+  //userCreate
+
+  addListener('changeUser', 'click', openModal.bind(null, 'modalUser'));
+  addListener('closeUserModal', 'click', closedModal.bind(null, 'modalUser'));
+  addListener('createUserButton', 'click', closedModal.bind(null, 'modalUser'));
 }
 
 document.addEventListener('DOMContentLoaded', () => {

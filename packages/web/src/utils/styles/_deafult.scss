@@ -113,6 +113,10 @@ body {
   }
 
   .form {
+    &-holder {
+    box-shadow: none;
+    }
+
     &-inputs {
       &__input {
         background-color: $popup-bg-dark;

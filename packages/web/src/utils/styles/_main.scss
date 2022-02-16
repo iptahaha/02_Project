@@ -199,7 +199,6 @@
 
       &:hover {
         background-color: rgb(227, 227, 227);
-        transition: all 0.2s;
         cursor: pointer;
       }
 
@@ -208,7 +207,6 @@
 
         &:hover {
           background-color: rgb(211, 211, 211);
-          transition: all 0.2s;
         }
       }
 
@@ -255,6 +253,10 @@
     text-transform: uppercase;
     font-size: 1.6em;
     margin-bottom: 20px;
+
+    &.margin {
+      margin-top: 60px;
+    }
   }
 
   &-close {
@@ -298,6 +300,7 @@
     &__button {
       @include button;
       margin-top: 30px;
+      background-color: $light-accent;
     }
 
     &__error {

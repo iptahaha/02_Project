@@ -23,7 +23,6 @@ export function addNewPersonRequest(state, personData) {
 
       removeChild('tableBody');
       getData(state);
-      setTextValue('create-form-error', '');
       removeDisabledAttributeByID('createButton');
       closedModal('modalCreate');
       return true;
