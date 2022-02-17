@@ -188,7 +188,6 @@
       border: 2px solid #000000;
       border-right: none;
       padding: 8px 0;
-      background-color: #F3F3F3;
       font-weight: 600;
 
       &:last-child {
@@ -200,20 +199,10 @@
     .table__row {
 
       &:hover {
-        background-color: rgb(227, 227, 227);
         cursor: pointer;
       }
 
-      &--active {
-        background-color: rgb(211, 211, 211);
-
-        &:hover {
-          background-color: rgb(211, 211, 211);
-        }
-      }
-
       td {
-        border: 1px solid #959595;
         padding: 8px 0;
         text-align: center;
       }

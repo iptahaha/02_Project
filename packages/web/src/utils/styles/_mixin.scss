@@ -7,6 +7,10 @@
   text-transform: uppercase;
   border: none;
 
+  &:hover:not([disabled]) {
+    filter: brightness(85%);
+  }
+
   &[disabled] {
     background-color: #e3e3e3;
     color: #363636;
