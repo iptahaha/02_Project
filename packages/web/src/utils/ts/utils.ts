@@ -227,9 +227,7 @@ export function addClass(id, className: string): boolean {
 }
 
 export function validateStatusCheck(state, buttonId): boolean {
-  console.log(state);
   const button = <HTMLElement>getElement(buttonId);
-  console.log(button);
   if (state.includes(false)) {
     if (!hasAttribute(button, 'disabled')) {
       setDisabledAttribute(button);

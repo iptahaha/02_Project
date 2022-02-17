@@ -21,6 +21,7 @@ export class AuthenticationController implements Controller {
     this.router.post('/register', AuthenticationController.register);
     this.router.post('/login', AuthenticationController.login);
     this.router.post('/change-login', authMiddleware, AuthenticationController.changeLogin);
+    this.router.post('/change-password', authMiddleware, AuthenticationController.changePassword);
   }
 
   static async register(req: Request, res: Response) {
@@ -113,9 +114,23 @@ export class AuthenticationController implements Controller {
           res.status(401).end();
         }
       })
-      .catch((err) => {
+      .catch(() => {
         dbRequest.endConnection();
         res.status(409).end();
       });
+  }
+
+  static async changePassword(req: Request, res: Response) {
+    console.log(req.body);
+    console.log(req.user);
+
+    const { login, id } = req.user;
+    const { password, newPassword, confirmNewPassword } = req.body;
+
+    const dbRequest = new MySQLUser();
+
+    dbRequest.loginIn(login, password).then((result) => {
+
+    })
   }
 }

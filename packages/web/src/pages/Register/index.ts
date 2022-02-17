@@ -6,31 +6,47 @@ import {
   showOrHidePassword,
   validateStatusCheck,
 } from '../../utils/ts/utils';
-import { confirmPasswordValidate, loginValidate, passwordValidate, sendRegister} from './logic';
+import { sendRegister } from './logic';
 import { changeLng, checkLocalStorageLangValue } from '../../utils/ts/localization';
+import { confirmPasswordValidate, loginValidate, passwordValidate } from '../../utils/validation/baseValidation';
 
 function initRegister() {
   const state = {
     urlRegister: '/auth/register',
-    validateStatus: [false, false, false],
   };
+
+  const validateStatus = [false, false, false];
 
   checkLocalStorageThemeValue('changeTheme');
   checkLocalStorageLangValue('changeLanguage');
 
   addListener('sign-up-login', 'input', () => {
-    loginValidate.call(null, state);
-    validateStatusCheck.call(null, state, 'create-account');
+    loginValidate.call(null, validateStatus, 0, 'login-message', 'sign-up-login');
+    validateStatusCheck.call(null, validateStatus, 'create-account');
   });
   addListener('sign-up-password', 'input', () => {
-    passwordValidate.call(null, state);
-    confirmPasswordValidate.call(null, state);
-    validateStatusCheck.call(null, state, 'create-account');
+    passwordValidate.call(null, validateStatus, 1, 'password-message', 'sign-up-password');
+    confirmPasswordValidate.call(
+      null,
+      validateStatus,
+      2,
+      'confirm-password-message',
+      'sign-up-password',
+      'sign-up-confirm-password',
+    );
+    validateStatusCheck.call(null, validateStatus, 'create-account');
   });
 
   addListener('sign-up-confirm-password', 'input', () => {
-    confirmPasswordValidate.call(null, state);
-    validateStatusCheck.call(null, state, 'create-account');
+    confirmPasswordValidate.call(
+      null,
+      validateStatus,
+      2,
+      'confirm-password-message',
+      'sign-up-password',
+      'sign-up-confirm-password',
+    );
+    validateStatusCheck.call(null, validateStatus, 'create-account');
   });
 
   addListener('password-hide', 'click', showOrHidePassword.bind(null, 'password-hide', 'sign-up-password'));

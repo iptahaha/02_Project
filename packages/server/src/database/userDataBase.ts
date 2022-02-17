@@ -83,6 +83,20 @@ class MySQLUser {
     });
   }
 
+  changePassword(id: number, newPassword: string) {
+    return new Promise((resolve, reject) => {
+      this.db.query(`UPDATE user_table SET password=? WHERE user_ud=${id}`, newPassword, (err: MysqlError) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          console.log('Password izmenilsya');
+          resolve(200);
+        }
+      })
+    })
+  }
+
   endConnection() {
     this.db.end((err: Error) => {
       if (err) {
