@@ -1,7 +1,5 @@
 import bcrypt from 'bcrypt';
-import mysql, { MysqlError } from 'mysql';
-
-import { Database } from '../interfaces/database.interface';
+import mysql from 'mysql2';
 
 class MySQLUser {
   private db: any;
@@ -22,7 +20,7 @@ class MySQLUser {
 
   checkLoginUniqueness(loginValue: string): any {
     return new Promise((resolve, reject) => {
-      this.db.query('SELECT login FROM user_table WHERE login = ?', loginValue, (err: MysqlError, res: any) => {
+      this.db.query('SELECT login FROM user_table WHERE login = ?', loginValue, (err: Error, res: any) => {
         if (err) {
           reject(err);
         } else if (res.length > 0) {
@@ -36,7 +34,7 @@ class MySQLUser {
 
   createNewUser(login: string, password: string) {
     return new Promise((resolve, reject) => {
-      this.db.query('INSERT INTO user_table SET ?', { login, password }, (err: MysqlError) => {
+      this.db.query('INSERT INTO user_table SET ?', { login, password }, (err: Error) => {
         if (err) {
           reject(err);
         } else {
@@ -48,7 +46,7 @@ class MySQLUser {
 
   loginIn(login: string, password: string) {
     return new Promise((resolve, reject) => {
-      this.db.query('SELECT * from user_table WHERE login = ?', login, async (err: MysqlError, result: any) => {
+      this.db.query('SELECT * from user_table WHERE login = ?', login, async (err: Error, result: any) => {
         if (err) {
           reject(err);
         } else if (result.length > 0) {
@@ -70,7 +68,7 @@ class MySQLUser {
 
   changeLogin(id: number, newLogin: string) {
     return new Promise((resolve, reject) => {
-      this.db.query(`UPDATE user_table SET login=? WHERE user_id=${id}`, newLogin, (err: MysqlError) => {
+      this.db.query(`UPDATE user_table SET login=? WHERE user_id=${id}`, newLogin, (err: Error) => {
         if (err) {
           console.log(err);
           reject(err);
@@ -78,14 +76,13 @@ class MySQLUser {
           console.log('Login izmenilsya');
           resolve(200);
         }
-
       });
     });
   }
 
   changePassword(id: number, newPassword: string) {
     return new Promise((resolve, reject) => {
-      this.db.query(`UPDATE user_table SET password=? WHERE user_ud=${id}`, newPassword, (err: MysqlError) => {
+      this.db.query(`UPDATE user_table SET password=? WHERE user_ud=${id}`, newPassword, (err: Error) => {
         if (err) {
           console.log(err);
           reject(err);
@@ -93,8 +90,8 @@ class MySQLUser {
           console.log('Password izmenilsya');
           resolve(200);
         }
-      })
-    })
+      });
+    });
   }
 
   endConnection() {
