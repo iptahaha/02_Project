@@ -34,5 +34,20 @@ export function changeLng(evt) {
   const selectedLang = evt ? evt.target.value : 'en';
   i18next.changeLanguage(selectedLang).then(() => {
     updateContent();
+    localStorage.setItem('changeLanguage', evt.target.value);
+    checkLocalStorageLangValue('changeLanguage');
   });
+}
+
+export function checkLocalStorageLangValue(value) {
+  const storageElement = localStorage.getItem(`${value}`);
+  const selectElement = document.getElementById(`${value}`) as HTMLSelectElement;
+
+  if (storageElement && selectElement.value !== storageElement) {
+    selectElement.value = storageElement;
+    i18next.changeLanguage(storageElement).then(() => {
+      updateContent();
+    });
+    return true;
+  }
 }

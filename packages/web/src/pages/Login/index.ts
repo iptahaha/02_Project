@@ -2,11 +2,11 @@ import '../../utils/styles/authPage.scss';
 import {
   addListener,
   changeInterfaceState,
-  checkLocalStorageValue,
+  checkLocalStorageThemeValue,
   showOrHidePassword,
 } from '../../utils/ts/utils';
 import { loginIn, loginValidate, passwordValidate, validateStatusCheck } from './logic';
-import { changeLng } from '../../utils/ts/localization';
+import {changeLng, checkLocalStorageLangValue} from '../../utils/ts/localization';
 
 document.addEventListener('DOMContentLoaded', () => {
   initRegister();
@@ -18,7 +18,8 @@ function initRegister() {
     validateStatus: [false, false],
   };
 
-  checkLocalStorageValue('changeTheme');
+  checkLocalStorageThemeValue('changeTheme');
+  checkLocalStorageLangValue('changeLanguage');
 
   addListener('login-in-login', 'input', () => {
     loginValidate.call(null, state);

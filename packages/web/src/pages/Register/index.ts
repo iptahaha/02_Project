@@ -2,7 +2,7 @@ import '../../utils/styles/authPage.scss';
 import {
   addListener,
   changeInterfaceState,
-  checkLocalStorageValue,
+  checkLocalStorageThemeValue,
   showOrHidePassword,
 } from '../../utils/ts/utils';
 import {
@@ -12,7 +12,7 @@ import {
   sendRegister,
   validateStatusCheck,
 } from './logic';
-import { changeLng } from '../../utils/ts/localization';
+import {changeLng, checkLocalStorageLangValue} from '../../utils/ts/localization';
 
 document.addEventListener('DOMContentLoaded', () => {
   initRegister();
@@ -24,7 +24,8 @@ function initRegister() {
     validateStatus: [false, false, false],
   };
 
-  checkLocalStorageValue('changeTheme');
+  checkLocalStorageThemeValue('changeTheme');
+  checkLocalStorageLangValue('changeLanguage');
 
   addListener('sign-up-login', 'input', () => {
     loginValidate.call(null, state);
@@ -53,7 +54,6 @@ function initRegister() {
   );
 
   addListener('create-account', 'click', sendRegister.bind(null, state));
-
   addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
   addListener('dropdownLanguage', 'change', (event) => changeLng(event));
 }

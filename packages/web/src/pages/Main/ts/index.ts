@@ -1,7 +1,7 @@
-import { addListener, checkLocalStorageValue, changeInterfaceState } from '../../../utils/ts/utils';
+import { addListener, checkLocalStorageThemeValue, changeInterfaceState } from '../../../utils/ts/utils';
 
 import './../../../utils/styles/mainPage.scss';
-import { changeLng } from '../../../utils/ts/localization';
+import { changeLng, checkLocalStorageLangValue } from '../../../utils/ts/localization';
 import { closedModal, fillUpdateModal, openModal } from './modal';
 import { updatePerson } from './updatePesonLogic';
 import { getClick } from './selectPersonLogic';
@@ -22,8 +22,8 @@ function init() {
     currentSelectedObj: null,
   };
 
-  checkLocalStorageValue('changeTheme');
-  // checkLocalStorageValue('changeLanguage');
+  checkLocalStorageThemeValue('changeTheme');
+  checkLocalStorageLangValue('changeLanguage');
   getData(mainState);
 
   addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
