@@ -7,6 +7,7 @@ Databases:
 class Person, fields: id, fname, lname, age, city, phoneNumber, email, companyName;
 
 ## Pages
+
 ######Main page:
 1. Дропдаун выбора базы данных, по умолчанию - MySQL;
 2. Поисковая строка для поиска необходимой записи по fname;
@@ -18,8 +19,10 @@ class Person, fields: id, fname, lname, age, city, phoneNumber, email, companyNa
 8. Дропдаун со сменой темы (light, black), по умолчанию light;
 9. Кнопка logout -> переход на страницу авторизации;
 10. Кнопка settings -> настройки пользователя: можно изменить свой логин и/или пароль.
+
 ######Auth page:
 1. Форма с логином и паролем + кнопка Login, а также ссылка на форму регистрации SignUp;
+
 ######Reg page:
 1. Форма с логином, паролем, подтверждением пароля. Логин уникален. Все поля обязательны для ввода.
 
