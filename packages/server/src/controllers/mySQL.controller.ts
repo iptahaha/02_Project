@@ -41,7 +41,6 @@ export class MySQLController implements DatabaseController {
     if (id === 'null') {
       return res.status(409).end();
     }
-    console.log('update');
     const dbRequest = new MySQL();
     dbRequest
       .update(req.body, Number(id))
@@ -75,17 +74,14 @@ export class MySQLController implements DatabaseController {
     if (deleteId === 'null') {
       return res.status(409).end();
     }
-    console.log('delete');
     const dbRequest = new MySQL();
     dbRequest
       .delete(deleteId)
       .then(() => {
-        console.log('delete then');
         dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
-        console.log('delete catch');
         dbRequest.endConnection();
         res.status(409).end();
       });

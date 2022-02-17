@@ -4,19 +4,10 @@ import {
   changeInterfaceState,
   checkLocalStorageThemeValue,
   showOrHidePassword,
-} from '../../utils/ts/utils';
-import {
-  confirmPasswordValidate,
-  loginValidate,
-  passwordValidate,
-  sendRegister,
   validateStatusCheck,
-} from './logic';
-import {changeLng, checkLocalStorageLangValue} from '../../utils/ts/localization';
-
-document.addEventListener('DOMContentLoaded', () => {
-  initRegister();
-});
+} from '../../utils/ts/utils';
+import { confirmPasswordValidate, loginValidate, passwordValidate, sendRegister} from './logic';
+import { changeLng, checkLocalStorageLangValue } from '../../utils/ts/localization';
 
 function initRegister() {
   const state = {
@@ -29,24 +20,20 @@ function initRegister() {
 
   addListener('sign-up-login', 'input', () => {
     loginValidate.call(null, state);
-    validateStatusCheck.call(null, state);
+    validateStatusCheck.call(null, state, 'create-account');
   });
   addListener('sign-up-password', 'input', () => {
     passwordValidate.call(null, state);
     confirmPasswordValidate.call(null, state);
-    validateStatusCheck.call(null, state);
+    validateStatusCheck.call(null, state, 'create-account');
   });
 
   addListener('sign-up-confirm-password', 'input', () => {
     confirmPasswordValidate.call(null, state);
-    validateStatusCheck.call(null, state);
+    validateStatusCheck.call(null, state, 'create-account');
   });
 
-  addListener(
-    'password-hide',
-    'click',
-    showOrHidePassword.bind(null, 'password-hide', 'sign-up-password'),
-  );
+  addListener('password-hide', 'click', showOrHidePassword.bind(null, 'password-hide', 'sign-up-password'));
   addListener(
     'confirm-password-hide',
     'click',
@@ -57,3 +44,7 @@ function initRegister() {
   addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
   addListener('dropdownLanguage', 'change', (event) => changeLng(event));
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  initRegister();
+});

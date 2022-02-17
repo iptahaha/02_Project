@@ -226,6 +226,20 @@ export function addClass(id, className: string): boolean {
   return false;
 }
 
+export function validateStatusCheck(state, buttonId): boolean {
+  console.log(state);
+  const button = <HTMLElement>getElement(buttonId);
+  console.log(button);
+  if (state.includes(false)) {
+    if (!hasAttribute(button, 'disabled')) {
+      setDisabledAttribute(button);
+    }
+    return false;
+  }
+  removeDisabledAttribute(button);
+  return true;
+}
+
 export function removeClassById(id, className: string): boolean {
   const node = document.getElementById(id);
 
