@@ -6,7 +6,8 @@
     "start": "cd ./packages/server && yarn start",
     "build": "yarn build:web && yarn build:server",
     "build:web": "cd ./packages/web && yarn build",
-    "build:server": "cd ./packages/server && yarn build"
+    "build:server": "cd ./packages/server && yarn build",
+    "test": "jest"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "5.10.2",
@@ -25,15 +26,10 @@
     "eslint-plugin-sonarjs": "0.11.0",
     "prettier": "2.5.1"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "engines": {
     "node": "16.x"
   },
   "repository": "https://github.com/iptahaha/02_Project.git",
-  "private": "true",
-  "devDependencies": {
-    "typescript": "^4.5.5"
-  }
+  "private": "true"
 }
