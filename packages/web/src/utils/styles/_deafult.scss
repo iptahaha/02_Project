@@ -1,0 +1,279 @@
+@import "variables";
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  overflow-y: scroll;
+
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    height: 100px;
+    background-color: lightgray;
+    border-radius: 2px;
+    border: 1px solid #959595;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #b8ccae;
+  }
+}
+
+body {
+  background-color: $main-color-light;
+  font-family: 'Roboto', sans-serif;
+  //&::-webkit-scrollbar { /* in case to remove scroll */
+  //  width: 0;
+  //  height: 0;
+  //}
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+input {
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  padding: 10px 25px;
+  font-size: 22px;
+
+
+  &__select {
+    width: 100px;
+    background-color: $green-header;
+    margin-left: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+  }
+
+  &__drop-down {
+    margin-right: 20px;
+    display: flex;
+    text-transform: uppercase;
+    align-items: center;
+    font-size: 15px;
+
+    label {
+      text-transform: uppercase;
+    }
+  }
+
+  &--transparent {
+    background-color: transparent;
+  }
+}
+
+.light-theme {
+  background-color: $main-color-light;
+  color: $main-color-dark;
+
+  .header {
+    background-color: $light-accent;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+
+    &--transparent {
+      background-color: transparent;
+    }
+  }
+
+  .form {
+    &-buttons__button {
+      background-color: $light-accent;
+    }
+  }
+
+  .form-holder {
+    background-color: $popup-bg-light;
+  }
+
+  .form-title {
+    &__text {
+      color: $main-color-dark;
+    }
+  }
+
+  .control-panel {
+
+    &__button {
+      @include button;
+      background-color: #CDEBBF;
+      color: #000000;
+    }
+
+  }
+
+  .table thead th {
+    background-color: darken($popup-bg-light, 10%);
+  }
+
+  .table__row {
+    &:hover {
+      background-color: darken($popup-bg-light, 6%);
+      cursor: pointer;
+    }
+
+    &--active {
+      background-color: darken($popup-bg-light, 10%);
+
+      &:hover {
+        background-color: darken($popup-bg-light, 10%);
+      }
+    }
+
+    td {
+      border: 1px solid #959595;
+    }
+  }
+}
+
+.dark-theme {
+  color: $main-color-light;
+  background-color: $main-color-dark;
+
+  .header {
+    background-color: $dark-accent;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.8);
+
+    &--transparent {
+      background-color: transparent;
+    }
+
+    &__select {
+      background-color: $green-header;
+      color: $main-color-dark;
+    }
+  }
+
+  .form {
+    &-holder {
+    box-shadow: none;
+    }
+
+    &-inputs {
+      &__input {
+        background-color: $popup-bg-dark;
+        color: $popup-bg-light;
+        border: 1px solid;
+      }
+    }
+
+    &-links__link {
+      color: $popup-bg-light;
+    }
+
+    &-buttons__button {
+      background-color: $dark-accent;
+    }
+
+    &-holder {
+      background-color: $popup-bg-dark;
+    }
+
+    &-title {
+      &__text {
+        color: $main-color-light;
+      }
+    }
+  }
+
+  .control-panel {
+    background-color: $popup-bg-dark;
+
+    &__search {
+      background-color: $popup-bg-dark;
+      color: $popup-bg-light;
+    }
+
+    &__button {
+      @include button;
+      background-color: $dark-accent;
+      color: $popup-bg-light;
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  .main {
+    background-color: $popup-bg-dark;
+  }
+
+  .aside {
+    background-color: $popup-bg-dark;
+
+    .dropdown__select {
+      background-color: $dark-accent;
+      color: $popup-bg-light;
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.8);
+      //box-shadow: 2px 2px 2px 2px black;
+
+    &--option {
+        background-color: $popup-bg-dark;
+      }
+    }
+  }
+
+  .aside .dropdown__select--option {
+    option:hover {
+      background-color:  red!important;
+    }
+  }
+
+  .table thead th {
+    background-color: lighten($popup-bg-dark, 15%);
+    color: $popup-bg-light;
+    border: 1px solid;
+
+    &:last-child {
+      border-right: 2px solid;
+    }
+  }
+
+  .table__row {
+    &:hover {
+      background-color: lighten($popup-bg-dark, 10%);
+      cursor: pointer;
+    }
+
+    &--active {
+      background-color: lighten($popup-bg-dark, 12%);
+
+      &:hover {
+        background-color: lighten($popup-bg-dark, 12%);
+      }
+    }
+
+    td {
+      border: 1px solid #959595;
+    }
+  }
+
+  #exitModal .modal-content,
+  #deleteModal .modal-content, #clearModal .modal-content,
+  .modal-container,
+  .modal-form__input {
+    background-color: $popup-bg-dark;
+  }
+
+  .modal-form__input {
+    color: $popup-bg-light;
+  }
+
+  .modal-form__button {
+    background-color: $dark-accent;
+  }
+}

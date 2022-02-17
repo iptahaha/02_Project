@@ -1,0 +1,83 @@
+{
+  "header": {
+    "change-theme": "Сменить тему",
+    "change-language": "Сменить язык",
+    "theme-light": "Светлая",
+    "theme-dark": "Темная"
+  },
+  "title": {
+    "db": "База данных",
+    "sort_by": "Сортировать по",
+    "login": "Вход",
+    "change_login": "Сменить логин",
+    "change_password": "Сменить пароль",
+    "auth": "Регистрация",
+    "update": "Обновить данные",
+    "create": "Создать новую запись",
+    "clear_all": "Очистить все записи?",
+    "delete": "Удалить запись?",
+    "exit": "Вы действительно хотите выйти?",
+    "user_settings": {
+      "login": "Сменить логин",
+      "password": "Сменить пароль"
+    }
+  },
+  "field": {
+    "login": "Логин",
+    "new_login": "Новый логин",
+    "password": "Пароль",
+    "password-confirm": "Подтвердите пароль",
+    "new_password": "Новый пароль",
+    "first_name": "Имя",
+    "last_name": "Фамилия",
+    "age": "Возраст",
+    "phone": "Номер телефона",
+    "phone-sample": "Номер телефона (+38-XXX-XXX-XXX)",
+    "city": "Город",
+    "company": "Компания"
+  },
+  "link": {
+    "to_sign_up-message": "Всё ещё нет аккаунта? ",
+    "to_sign_up": "Зарегистрируйтесь",
+    "to_login-message": "Уже есть аккаунт? ",
+    "to_login": "Войти"
+  },
+  "error": {
+    "login-empty": "*Необходим логин",
+    "login-short": "*Логин должен содержать не менее 6 символов",
+    "login-long": "*Логин должен содержать не более 20 символов",
+    "login-contains": "*Логин должен содержать только буквы, цифры, и нижние подчёркивания",
+    "pass-empty": "*Необходим пароль",
+    "pass-short": "*Пароль должен содержать не менее 8 символов",
+    "pass-contains": "*Пароль должен содержать буквы, цифры, и специальные символы",
+    "try-later": "Повторите позже",
+    "login/pass-empty": "Требуется логин ии пароль",
+    "login/pass-wrong": "Неправильный логин ии пароль",
+    "pass-not_match": "*Password and confirm password does not match",
+    "login-in_use": "*Login already in use",
+    "modal": {
+      "message": "Некорректная информация в поле(ях): ",
+      "first_name": "имя",
+      "last_name": "фамилия",
+      "city": "город",
+      "age": "возраст",
+      "phone_number": "телефон",
+      "email": "e-mail",
+      "company": "компания"
+    }
+  },
+  "button": {
+    "login": "Войти",
+    "auth": "Зарегистрироваться",
+    "update": "Обновить",
+    "create": "Создать",
+    "delete": "Удалить",
+    "clear": "Очистить",
+    "clear_all": "Очистить",
+    "change": "Изменить",
+    "cancel": "Отмена",
+    "confirm": "подтвердить",
+    "update_login": "Обновить логин",
+    "update_password": "Обновить пароль"
+  }
+}
