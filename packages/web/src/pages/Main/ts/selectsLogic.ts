@@ -5,7 +5,7 @@ import {
   removeChild,
   setDisabledAttributeByID,
 } from '../../../utils/ts/utils';
-import { getData } from './getPesonDataLogic';
+import { getData } from './getPersonDataLogic';
 
 export function sortData(state) {
   const sortValue = <string>getInputValue('sort-by-select');

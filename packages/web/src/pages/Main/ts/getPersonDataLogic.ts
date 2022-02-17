@@ -1,10 +1,4 @@
-import {
-  addClass,
-  appendChild,
-  createRowCollection,
-  getInputValue,
-  removeClassById,
-} from '../../../utils/ts/utils';
+import { addClass, appendChild, createRowCollection, getInputValue, removeClassById } from '../../../utils/ts/utils';
 import { Person } from '../../../utils/interfaces/person.interface';
 
 export function getData(state) {
