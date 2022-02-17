@@ -1,5 +1,4 @@
 import { Person } from '../interfaces/person.interface';
-import {MainState} from "../interfaces/mainState.interface";
 
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
@@ -302,15 +301,47 @@ export function createRowCollection(data, sortValue) {
   return dataFragment;
 }
 
-export function slice(state:MainState):any | boolean {
-  if(state) {
-    return state.currentData.slice()
+export function slice(value):any | boolean {
+  if(value) {
+    return value.slice()
   }
   return false;
 }
 
 export function trimToLowerCase(value:string):any {
   if(value) {
-    value.trim().toLowerCase();
+   return value.trim().toLowerCase();
   }
+}
+
+export function includes(id, value) {
+  return id.toLowerCase().includes(value);
+}
+
+export function valueLength(value):number | boolean {
+  if(value) {
+    return value.length;
+  }
+  return false;
+}
+
+export function targetValueClosest(event, value):any {
+  return event.target.closest(value);
+}
+
+export function addId(elem) {
+  return elem.id;
+}
+
+export function addElementClass(id, className: string): boolean {
+    id.classList.add(className);
+    return true;
+}
+
+
+export function addMatch(elem, value) {
+  if(elem) {
+    return elem.match(value);
+  }
+  return false;
 }

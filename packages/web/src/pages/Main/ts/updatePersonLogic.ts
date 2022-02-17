@@ -1,11 +1,5 @@
-import {
-  addHTMLValue,
-  collectData, getElement,
-  removeDisabledAttributeByID, setAttribute,
-  setDisabledAttributeByID,
-  setHTMLValue,
-  setTextValue,
-} from '../../../utils/ts/utils';
+import { addHTMLValue, collectData, getElement, removeDisabledAttributeByID, setDisabledAttributeByID, setHTMLValue,
+  valueLength } from '../../../utils/ts/utils';
 import { closedModal } from './modal';
 import { validatePersonForm } from './validation';
 import {updateContent} from "../../../utils/ts/localization";
@@ -76,14 +70,15 @@ export function updatePerson(state) {
   const validateResult = validatePersonForm(obj);
   const formError = getElement('update-form-error');
 
-  if (validateResult.length > 0) {
+  console.log(obj);
+  if (valueLength(validateResult) > 0) {
 
     addHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
     console.log(validateResult);
     validateResult.forEach((span, idx) => {
 
       addHTMLValue(formError, span);
-      if (idx !== validateResult.length - 1) {
+      if (idx !== <number>valueLength(validateResult) - 1) {
         addHTMLValue(formError, ', ');
       } else {
         addHTMLValue(formError, '.')

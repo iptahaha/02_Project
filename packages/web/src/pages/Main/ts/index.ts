@@ -9,7 +9,7 @@ import {
 import '../../../utils/styles/mainPage.scss';
 import { changeLng, checkLocalStorageLangValue } from '../../../utils/ts/localization';
 import { closedModal, fillUpdateModal, openModal } from './modal';
-import { updatePerson } from './updatePesonLogic';
+import { updatePerson } from './updatePersonLogic';
 import { getClick } from './selectPersonLogic';
 import { addNewPerson } from './createPersonLogic';
 import { clearAll } from './clearAllLogic';

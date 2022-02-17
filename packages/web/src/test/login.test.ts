@@ -1,10 +1,10 @@
-import {initRegister} from './../pages/Login/index';
+import {initRegister} from '../pages/Login';
 
 jest.mock('./../utils/ts/utils', () => {
   return {
     __esModule: true,
     addListener: jest.fn(),
-    checkLocalStorageValue: jest.fn(() => true),
+    checkLocalStorageThemeValue: jest.fn(() => true),
     showOrHidePassword: jest.fn(() => true)
   }
 })
