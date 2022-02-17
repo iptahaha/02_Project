@@ -1,10 +1,9 @@
 # Project_2 via CRUD
 
-Data: Persons (class Person below)
-Databases:
-- SQL (PostgreSQL, H2, MySQL)
-- NoSQL (MongoDB, Redis, Cassandra, GraphDB)
-class Person, fields: id, fname, lname, age, city, phoneNumber, email, companyName;
+- Data: Persons (class Person). Class Person, fields: id, fname, lname, age, city, phoneNumber, email, companyName.
+- Databases:
+1. SQL (PostgreSQL, H2, MySQL)
+2. NoSQL (MongoDB, Redis, Cassandra, GraphDB)
 
 ## Pages
 - Main page:
