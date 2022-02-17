@@ -7,7 +7,7 @@ import {
 } from '../../../utils/ts/utils';
 import { validatePersonForm } from './validation';
 import { closedModal } from './modal';
-import { getData } from './getPesonDataLogic';
+import { getData } from './getPersonDataLogic';
 
 export function addNewPersonRequest(state, personData) {
   const addUrl = `${state.currentDB}/create`;

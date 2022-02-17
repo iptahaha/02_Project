@@ -1,4 +1,5 @@
 import { Person } from '../interfaces/person.interface';
+import {MainState} from "../interfaces/mainState.interface";
 
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
@@ -270,4 +271,17 @@ export function createRowCollection(data, sortValue) {
     dataFragment.append(createTableRow(el));
   });
   return dataFragment;
+}
+
+export function slice(state:MainState):any | boolean {
+  if(state) {
+    return state.currentData.slice()
+  }
+  return false;
+}
+
+export function trimToLowerCase(value:string):any {
+  if(value) {
+    value.trim().toLowerCase();
+  }
 }

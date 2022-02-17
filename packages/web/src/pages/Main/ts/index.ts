@@ -7,12 +7,12 @@ import { updatePerson } from './updatePesonLogic';
 import { getClick } from './selectPersonLogic';
 import { addNewPerson } from './createPersonLogic';
 import { clearAll } from './clearAllLogic';
-import { getData } from './getPesonDataLogic';
+import { getData } from './getPersonDataLogic';
 import { deleteRow } from './deletePersonLogic';
 import { filterByName } from './searchByNameLogic';
 import { changeCurrentDB, sortData } from './selectsLogic';
 
-function init() {
+export function init() {
   const mainState = {
     currentDB: '/mysql',
     currentData: null,

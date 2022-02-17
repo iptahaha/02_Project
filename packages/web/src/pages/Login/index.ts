@@ -8,11 +8,9 @@ import {
 import { loginIn, loginValidate, passwordValidate, validateStatusCheck } from './logic';
 import { changeLng } from '../../utils/ts/localization';
 
-document.addEventListener('DOMContentLoaded', () => {
-  initRegister();
-});
+document.addEventListener('DOMContentLoaded', initRegister.bind(null));
 
-function initRegister() {
+export function initRegister():boolean {
   const state = {
     url: '/auth/login',
     validateStatus: [false, false],
@@ -29,13 +27,10 @@ function initRegister() {
     validateStatusCheck.call(null, state);
   });
 
-  addListener(
-    'password-hide',
-    'click',
-    showOrHidePassword.bind(null, 'password-hide', 'login-in-password'),
-  );
+  addListener('password-hide', 'click', showOrHidePassword.bind(null, 'password-hide', 'login-in-password'));
   addListener('login-in', 'click', loginIn.bind(null, state));
 
   addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
   addListener('dropdownLanguage', 'change', (event) => changeLng(event));
+  return true;
 }

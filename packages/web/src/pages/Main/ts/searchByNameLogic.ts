@@ -1,11 +1,19 @@
-import { appendChild, createRowCollection, getInputValue, removeChild } from '../../../utils/ts/utils';
+import {
+  appendChild,
+  createRowCollection,
+  getInputValue,
+  removeChild,
+  slice,
+  trimToLowerCase
+} from '../../../utils/ts/utils';
 import { Person } from '../../../utils/interfaces/person.interface';
+import {MainState} from "../../../utils/interfaces/mainState.interface";
 
-export function filterByName(state) {
-  const dataCopy = state.currentData.slice();
+export function filterByName(state:MainState):MainState {
+  const dataCopy = slice(state)//state.currentData.slice();
   const searchValue = <string>getInputValue('search');
   const sortValue = <string>getInputValue('sort-by-select');
-  const sortByName = searchValue.trim().toLowerCase();
+  const sortByName = trimToLowerCase(searchValue);//searchValue.trim().toLowerCase();
 
   if (sortByName.length === 0) {
     state.currentSortedData = null;
