@@ -72,6 +72,7 @@ export class MySQL implements Database {
         { fname, lname, age, city, phoneNumber, email, companyName },
         (err: Error) => {
           if (err) {
+            console.log(err);
             reject(err);
           } else {
             resolve(302);
@@ -97,6 +98,7 @@ export class MySQL implements Database {
         },
         (err: Error) => {
           if (err) {
+            console.log(err);
             reject(err);
           } else {
             resolve(302);
@@ -117,25 +119,4 @@ export class MySQL implements Database {
       });
     });
   }
-
-  async checkConnection(connection: Connection) {
-    const disconnected = await new Promise((resolve) => {
-      connection.ping((err: QueryError | null) => {
-        resolve(err);
-      });
-    });
-    if (disconnected) {
-      this.connection();
-    }
-  }
-
-  // endConnection(): void {
-  //   this.db.connect();
-  //   this.db.end((err: Error) => {
-  //     if (err) {
-  //       return err;
-  //     }
-  //     return true;
-  //   });
-  // }
 }
