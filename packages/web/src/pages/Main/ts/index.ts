@@ -1,12 +1,12 @@
 import {
   addListener,
-  checkLocalStorageValue,
+  checkLocalStorageThemeValue,
   changeInterfaceState,
   validateStatusCheck,
 } from '../../../utils/ts/utils';
 
 import './../../../utils/styles/mainPage.scss';
-import { changeLng } from '../../../utils/ts/localization';
+import { changeLng, checkLocalStorageLangValue } from '../../../utils/ts/localization';
 import { closedModal, fillUpdateModal, openModal } from './modal';
 import { updatePerson } from './updatePesonLogic';
 import { getClick } from './selectPersonLogic';
@@ -32,8 +32,9 @@ function init() {
   const validateLoginChange = [false, false];
   const validatePasswordChange = [false, false, false];
 
-  checkLocalStorageValue('changeTheme');
-  // checkLocalStorageValue('changeLanguage');
+  checkLocalStorageThemeValue('changeTheme');
+  checkLocalStorageLangValue('changeLanguage');
+
   getData(mainState);
 
   addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));

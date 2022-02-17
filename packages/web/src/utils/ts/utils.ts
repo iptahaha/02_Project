@@ -171,7 +171,7 @@ export function getSelector(selector) {
   return document.querySelector(selector);
 }
 
-export function checkLocalStorageValue(value) {
+export function checkLocalStorageThemeValue(value) {
   const page = getSelector('.page');
   const storageElement = localStorage.getItem(`${value}`);
   const selectElement = document.getElementById(`${value}`) as HTMLSelectElement;
@@ -189,7 +189,7 @@ export function changeInterfaceState(event) {
   page.classList.toggle('light-theme');
   page.classList.toggle('dark-theme');
   localStorage.setItem('changeTheme', event.target.value);
-  checkLocalStorageValue('changeTheme');
+  checkLocalStorageThemeValue('changeTheme');
 }
 
 export function setDisplay(id: string, display: string) {

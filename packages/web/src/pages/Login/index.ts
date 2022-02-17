@@ -2,12 +2,12 @@ import '../../utils/styles/authPage.scss';
 import {
   addListener,
   changeInterfaceState,
-  checkLocalStorageValue,
+  checkLocalStorageThemeValue,
   showOrHidePassword,
   validateStatusCheck,
 } from '../../utils/ts/utils';
 import { loginIn } from './logic';
-import { changeLng } from '../../utils/ts/localization';
+import { changeLng, checkLocalStorageLangValue } from '../../utils/ts/localization';
 import { loginValidate, passwordValidate } from '../../utils/validation/baseValidation';
 
 function initRegister() {
@@ -17,8 +17,9 @@ function initRegister() {
 
   const validateStatus = [false, false];
 
-  checkLocalStorageValue('changeTheme');
-  checkLocalStorageValue('changeLng');
+  checkLocalStorageThemeValue('changeTheme');
+  checkLocalStorageLangValue('changeLanguage');
+
 
   addListener('login-in-login', 'input', () => {
     loginValidate.call(null, validateStatus, 'login-message', 'login-in-login');
