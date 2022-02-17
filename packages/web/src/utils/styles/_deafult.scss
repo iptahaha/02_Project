@@ -3,11 +3,31 @@
 html {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
+  overflow-y: scroll;
+
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    height: 100px;
+    background-color: lightgray;
+    border-radius: 2px;
+    border: 1px solid #959595;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #b8ccae;
+  }
 }
 
 body {
   background-color: $main-color-light;
   font-family: 'Roboto', sans-serif;
+  //&::-webkit-scrollbar { /* in case to remove scroll */
+  //  width: 0;
+  //  height: 0;
+  //}
 }
 
 *, *:after, *:before {
@@ -65,6 +85,7 @@ input {
 
   .header {
     background-color: $light-accent;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
 
     &--transparent {
       background-color: transparent;
@@ -97,6 +118,28 @@ input {
 
   }
 
+  .table thead th {
+    background-color: darken($popup-bg-light, 10%);
+  }
+
+  .table__row {
+    &:hover {
+      background-color: darken($popup-bg-light, 6%);
+      cursor: pointer;
+    }
+
+    &--active {
+      background-color: darken($popup-bg-light, 10%);
+
+      &:hover {
+        background-color: darken($popup-bg-light, 10%);
+      }
+    }
+
+    td {
+      border: 1px solid #959595;
+    }
+  }
 }
 
 .dark-theme {
@@ -105,6 +148,7 @@ input {
 
   .header {
     background-color: $dark-accent;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.8);
 
     &--transparent {
       background-color: transparent;
@@ -160,6 +204,7 @@ input {
       @include button;
       background-color: $dark-accent;
       color: $popup-bg-light;
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.8);
     }
   }
 
@@ -173,10 +218,11 @@ input {
     .dropdown__select {
       background-color: $dark-accent;
       color: $popup-bg-light;
-      box-shadow: 2px 2px 2px 2px black;
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.8);
+      //box-shadow: 2px 2px 2px 2px black;
 
     &--option {
-        background-color: $green-header;
+        background-color: $popup-bg-dark;
       }
     }
   }
@@ -188,7 +234,7 @@ input {
   }
 
   .table thead th {
-    background-color: $dark_table-accent;
+    background-color: lighten($popup-bg-dark, 15%);
     color: $popup-bg-light;
     border: 1px solid;
 
@@ -197,12 +243,22 @@ input {
     }
   }
 
-  table tbody .table__row {
-    &--active {
-      color: $popup-bg-dark;
-    }
+  .table__row {
     &:hover {
-      color: $popup-bg-dark;
+      background-color: lighten($popup-bg-dark, 10%);
+      cursor: pointer;
+    }
+
+    &--active {
+      background-color: lighten($popup-bg-dark, 12%);
+
+      &:hover {
+        background-color: lighten($popup-bg-dark, 12%);
+      }
+    }
+
+    td {
+      border: 1px solid #959595;
     }
   }
 

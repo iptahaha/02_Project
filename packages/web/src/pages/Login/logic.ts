@@ -1,87 +1,17 @@
 import {
   collectData,
-  getElement,
-  getInputValue,
   setInputValue,
-  setTextValue,
+  setAttribute,
 } from '../../utils/ts/utils';
+import { updateContent } from '../../utils/ts/localization';
+import { loginValidate, passwordValidate } from '../../utils/validation/baseValidation';
 
-export function loginValidate(state) {
-  const loginRegex = /^[a-zA-Z0-9_]{6,20}$/;
-  const value = <string>getInputValue('login-in-login');
-  const loginId = 'login-message';
-
-  if (value === '') {
-    setTextValue(loginId, '*You need login');
-    state.validateStatus[0] = false;
-    return false;
-  }
-
-  if (value.length < 6) {
-    setTextValue(loginId, '*Login at least 6 characters');
-    state.validateStatus[0] = false;
-    return false;
-  }
-
-  if (value.length > 20) {
-    setTextValue(loginId, '*Login can`t be longer than 20 characters');
-    state.validateStatus[0] = false;
-    return false;
-  }
-
-  if (!value.match(loginRegex)) {
-    setTextValue(loginId, '*Login must contain only letters, numbers, and underscores');
-    state.validateStatus[0] = false;
-    return false;
-  }
-
-  setTextValue(loginId, '');
-  state.validateStatus[0] = true;
-  return true;
-}
-
-export function passwordValidate(state) {
-  const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{8,}$/;
-  const value = <string>getInputValue('login-in-password');
-  const passwordId = 'password-message';
-
-  if (value === '') {
-    setTextValue(passwordId, '*You need password');
-    state.validateStatus[1] = false;
-    return false;
-  }
-
-  if (value.length < 8) {
-    setTextValue(passwordId, '*Password at least 8 characters');
-    state.validateStatus[1] = false;
-    return false;
-  }
-
-  if (!value.match(passwordRegex)) {
-    setTextValue(passwordId, '*Password must contain letters, numbers, and special symbols');
-    state.validateStatus[1] = false;
-    return false;
-  }
-
-  setTextValue(passwordId, '');
-  state.validateStatus[1] = true;
-  return true;
-}
-
-export function validateStatusCheck(state): boolean {
-  const button = <HTMLElement>getElement('login-in');
-  if (state.validateStatus.includes(false)) {
-    if (!button.hasAttribute('disabled')) {
-      button.setAttribute('disabled', 'disabled');
-    }
-    return false;
-  }
-  button.removeAttribute('disabled');
-  return true;
-}
 
 export function loginIn(state) {
-  if (loginValidate(state) === false || passwordValidate(state) === false) {
+  if (
+    loginValidate(state, 0, 'login-message', 'login-in-login') === false ||
+    passwordValidate(state,  1,'password-message', 'login-in-password') === false
+  ) {
     return false;
   }
 
@@ -93,29 +23,32 @@ export function loginIn(state) {
     body: data,
   })
     .then((response) => {
-
       if (response.redirected) {
         setInputValue('login-in-login', '');
         window.location.href = response.url;
       }
 
       if (response.status === 409) {
-        setTextValue(globalErrorId, 'Try again later');
+        setAttribute(globalErrorId, 'data-i18n', 'error.try-later');
+        updateContent();
       }
 
       if (response.status === 403) {
-        setTextValue('login-message', 'You need login and password');
-        setTextValue('password-message', 'You need login and password');
+        setAttribute('login-message', 'data-i18n', 'error.login-empty');
+        setAttribute('password-message', 'data-i18n', 'error.pass-empty');
+        updateContent();
       }
 
       if (response.status === 401) {
-        setTextValue(globalErrorId, 'Wrong login or password');
+        setAttribute(globalErrorId, 'data-i18n', 'error.login/pass-wrong');
+        updateContent();
       }
 
       return true;
     })
     .catch(() => {
-      setTextValue(globalErrorId, 'Try again later');
+      setAttribute(globalErrorId, 'data-i18n', 'error.try-later');
+      updateContent();
       return false;
     });
   return true;

@@ -64,6 +64,14 @@ export function setHTMLValue(node, value): boolean {
   return false;
 }
 
+export function addHTMLValue(node, value): boolean {
+  if (node) {
+    node.innerHTML += value;
+    return true;
+  }
+  return false;
+}
+
 export function getForm(id): HTMLFormElement | boolean {
   const form = <HTMLFormElement>document.getElementById(id);
 
@@ -164,7 +172,7 @@ export function getSelector(selector) {
   return document.querySelector(selector);
 }
 
-export function checkLocalStorageValue(value) {
+export function checkLocalStorageThemeValue(value) {
   const page = getSelector('.page');
   const storageElement = localStorage.getItem(`${value}`);
   const selectElement = document.getElementById(`${value}`) as HTMLSelectElement;
@@ -182,7 +190,7 @@ export function changeInterfaceState(event) {
   page.classList.toggle('light-theme');
   page.classList.toggle('dark-theme');
   localStorage.setItem('changeTheme', event.target.value);
-  checkLocalStorageValue('changeTheme');
+  checkLocalStorageThemeValue('changeTheme');
 }
 
 export function setDisplay(id: string, display: string) {
@@ -219,6 +227,18 @@ export function addClass(id, className: string): boolean {
   return false;
 }
 
+export function validateStatusCheck(state, buttonId): boolean {
+  const button = <HTMLElement>getElement(buttonId);
+  if (state.includes(false)) {
+    if (!hasAttribute(button, 'disabled')) {
+      setDisabledAttribute(button);
+    }
+    return false;
+  }
+  removeDisabledAttribute(button);
+  return true;
+}
+
 export function removeClassById(id, className: string): boolean {
   const node = document.getElementById(id);
 
@@ -242,6 +262,15 @@ export function setAttribute(id, attribute, value): boolean {
   const node = <HTMLInputElement>document.getElementById(id);
   if (node) {
     node.setAttribute(attribute, value);
+    return true;
+  }
+  return false;
+}
+
+export function removeAttribute(id, attribute): boolean {
+  const node = <HTMLInputElement>document.getElementById(id);
+  if (node) {
+    node.removeAttribute(attribute);
     return true;
   }
   return false;

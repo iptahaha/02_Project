@@ -2,50 +2,54 @@ import '../../utils/styles/authPage.scss';
 import {
   addListener,
   changeInterfaceState,
-  checkLocalStorageValue,
+  checkLocalStorageThemeValue,
   showOrHidePassword,
-} from '../../utils/ts/utils';
-import {
-  confirmPasswordValidate,
-  loginValidate,
-  passwordValidate,
-  sendRegister,
   validateStatusCheck,
-} from './logic';
-import { changeLng } from '../../utils/ts/localization';
-
-document.addEventListener('DOMContentLoaded', () => {
-  initRegister();
-});
+} from '../../utils/ts/utils';
+import { sendRegister } from './logic';
+import { changeLng, checkLocalStorageLangValue } from '../../utils/ts/localization';
+import { confirmPasswordValidate, loginValidate, passwordValidate } from '../../utils/validation/baseValidation';
 
 function initRegister() {
   const state = {
     urlRegister: '/auth/register',
-    validateStatus: [false, false, false],
   };
 
-  checkLocalStorageValue('changeTheme');
+  const validateStatus = [false, false, false];
+
+  checkLocalStorageThemeValue('changeTheme');
+  checkLocalStorageLangValue('changeLanguage');
 
   addListener('sign-up-login', 'input', () => {
-    loginValidate.call(null, state);
-    validateStatusCheck.call(null, state);
+    loginValidate.call(null, validateStatus, 0, 'login-message', 'sign-up-login');
+    validateStatusCheck.call(null, validateStatus, 'create-account');
   });
   addListener('sign-up-password', 'input', () => {
-    passwordValidate.call(null, state);
-    confirmPasswordValidate.call(null, state);
-    validateStatusCheck.call(null, state);
+    passwordValidate.call(null, validateStatus, 1, 'password-message', 'sign-up-password');
+    confirmPasswordValidate.call(
+      null,
+      validateStatus,
+      2,
+      'confirm-password-message',
+      'sign-up-password',
+      'sign-up-confirm-password',
+    );
+    validateStatusCheck.call(null, validateStatus, 'create-account');
   });
 
   addListener('sign-up-confirm-password', 'input', () => {
-    confirmPasswordValidate.call(null, state);
-    validateStatusCheck.call(null, state);
+    confirmPasswordValidate.call(
+      null,
+      validateStatus,
+      2,
+      'confirm-password-message',
+      'sign-up-password',
+      'sign-up-confirm-password',
+    );
+    validateStatusCheck.call(null, validateStatus, 'create-account');
   });
 
-  addListener(
-    'password-hide',
-    'click',
-    showOrHidePassword.bind(null, 'password-hide', 'sign-up-password'),
-  );
+  addListener('password-hide', 'click', showOrHidePassword.bind(null, 'password-hide', 'sign-up-password'));
   addListener(
     'confirm-password-hide',
     'click',
@@ -53,7 +57,10 @@ function initRegister() {
   );
 
   addListener('create-account', 'click', sendRegister.bind(null, state));
-
   addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
   addListener('dropdownLanguage', 'change', (event) => changeLng(event));
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  initRegister();
+});

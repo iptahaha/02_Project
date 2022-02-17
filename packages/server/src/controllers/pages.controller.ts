@@ -24,15 +24,15 @@ class PagesController implements Controller {
   }
 
   static main(req: Request, res: Response) {
-    res.sendfile(path.resolve(path.resolve(), './../web', 'dist/main.html'));
+    res.sendFile(path.resolve(path.resolve(), './../web', 'dist/main.html'));
   }
 
   static login(req: Request, res: Response) {
-    res.sendfile(path.resolve(path.resolve(), './../web', 'dist/login.html'));
+    res.sendFile(path.resolve(path.resolve(), './../web', 'dist/login.html'));
   }
 
   static register(req: Request, res: Response) {
-    res.sendfile(path.resolve(path.resolve(), './../web', 'dist/register.html'));
+    res.sendFile(path.resolve(path.resolve(), './../web', 'dist/register.html'));
   }
 }
 

@@ -1,12 +1,14 @@
 import {
-  collectData,
+  collectData, getElement,
   removeChild,
   removeDisabledAttributeByID,
   setDisabledAttributeByID,
-  setTextValue,
+  addHTMLValue, setHTMLValue,
+
 } from '../../../utils/ts/utils';
 import { validatePersonForm } from './validation';
 import { closedModal } from './modal';
+import { updateContent } from "../../../utils/ts/localization";
 import { getData } from './getPersonDataLogic';
 
 export function addNewPersonRequest(state, personData) {
@@ -38,9 +40,22 @@ export function addNewPerson(state): boolean {
   const personData = collectData('create-form');
   const obj = Object.fromEntries(personData);
   const validateResult = validatePersonForm(obj);
+  const formError = getElement('create-form-error');
+  setHTMLValue(formError, '');
 
   if (validateResult.length > 0) {
-    setTextValue('create-form-error', `Incorrect data in field(s): ${validateResult.join(', ')}.`);
+
+    addHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
+    validateResult.forEach((span, idx) => {
+
+      addHTMLValue(formError, span);
+      if (idx !== validateResult.length - 1) {
+        addHTMLValue(formError, ', ');
+      } else {
+        addHTMLValue(formError, '.');
+      }
+    })
+    updateContent();
     return false;
   }
   setDisabledAttributeByID('createButton');

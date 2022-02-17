@@ -2,13 +2,16 @@ import '../../utils/styles/authPage.scss';
 import {
   addListener,
   changeInterfaceState,
-  checkLocalStorageValue,
+  checkLocalStorageThemeValue,
   showOrHidePassword,
+  validateStatusCheck,
 } from '../../utils/ts/utils';
-import { loginIn, loginValidate, passwordValidate, validateStatusCheck } from './logic';
-import { changeLng } from '../../utils/ts/localization';
+import { loginIn } from './logic';
+
 
 document.addEventListener('DOMContentLoaded', initRegister.bind(null));
+import { changeLng, checkLocalStorageLangValue } from '../../utils/ts/localization';
+import { loginValidate, passwordValidate } from '../../utils/validation/baseValidation';
 
 export function initRegister():boolean {
   const state = {
@@ -16,15 +19,19 @@ export function initRegister():boolean {
     validateStatus: [false, false],
   };
 
-  checkLocalStorageValue('changeTheme');
+  const validateStatus = [false, false];
+
+  checkLocalStorageThemeValue('changeTheme');
+  checkLocalStorageLangValue('changeLanguage');
+
 
   addListener('login-in-login', 'input', () => {
-    loginValidate.call(null, state);
-    validateStatusCheck.call(null, state);
+    loginValidate.call(null, validateStatus, 0, 'login-message', 'login-in-login');
+    validateStatusCheck.call(null, validateStatus, 'login-in');
   });
   addListener('login-in-password', 'input', () => {
-    passwordValidate.call(null, state);
-    validateStatusCheck.call(null, state);
+    passwordValidate.call(null, validateStatus, 1, 'password-message', 'login-in-password');
+    validateStatusCheck.call(null, validateStatus, 'login-in');
   });
 
   addListener('password-hide', 'click', showOrHidePassword.bind(null, 'password-hide', 'login-in-password'));
@@ -34,3 +41,8 @@ export function initRegister():boolean {
   addListener('dropdownLanguage', 'change', (event) => changeLng(event));
   return true;
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  initRegister();
+});
