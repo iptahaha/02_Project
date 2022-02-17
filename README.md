@@ -1,20 +1,14 @@
 # Project_2 via CRUD
 
-- Data: Persons (class Person). Class Person, fields: id, fname, lname, age, city, phoneNumber, email, companyName.
-- Databases:
-1. SQL (PostgreSQL, H2, MySQL)
-2. NoSQL (MongoDB, Redis, Cassandra, GraphDB)
-
-## Start the project
-- Для страрта пропишите в терминале следущие команды:
-```
-yarn install
-yarn build
-yarn start
-```
+Data: Persons (class Person below)
+Databases:
+- SQL (PostgreSQL, H2, MySQL)
+- NoSQL (MongoDB, Redis, Cassandra, GraphDB)
+class Person, fields: id, fname, lname, age, city, phoneNumber, email, companyName;
 
 ## Pages
-- Main page:
+
+######Main page:
 1. Дропдаун выбора базы данных, по умолчанию - MySQL;
 2. Поисковая строка для поиска необходимой записи по fname;
 3. Поисковая строка для поиска необходимой записи по lname;
@@ -25,9 +19,11 @@ yarn start
 8. Дропдаун со сменой темы (light, black), по умолчанию light;
 9. Кнопка logout -> переход на страницу авторизации;
 10. Кнопка settings -> настройки пользователя: можно изменить свой логин и/или пароль.
-- Auth page:
+
+######Auth page:
 1. Форма с логином и паролем + кнопка Login, а также ссылка на форму регистрации SignUp;
-- Reg page:
+
+######Reg page:
 1. Форма с логином, паролем, подтверждением пароля. Логин уникален. Все поля обязательны для ввода.
 
 ## Main requirements
@@ -42,4 +38,3 @@ yarn start
 
 ### Students of DevEducation, Kharkiv.
 Demo of the project you could find here [https://frogers-db.herokuapp.com/login]
-
