@@ -22,11 +22,11 @@ function initRegister() {
 
 
   addListener('login-in-login', 'input', () => {
-    loginValidate.call(null, validateStatus, 'login-message', 'login-in-login');
+    loginValidate.call(null, validateStatus, 0, 'login-message', 'login-in-login');
     validateStatusCheck.call(null, validateStatus, 'login-in');
   });
   addListener('login-in-password', 'input', () => {
-    passwordValidate.call(null, validateStatus, 'password-message', 'login-in-password');
+    passwordValidate.call(null, validateStatus, 1, 'password-message', 'login-in-password');
     validateStatusCheck.call(null, validateStatus, 'login-in');
   });
 

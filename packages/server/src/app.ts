@@ -33,8 +33,8 @@ class Application {
   }
 
   controllers(controllers: any) {
-    controllers.forEach((el: any) => {
-      this.app.use(el.path, el.router);
+    controllers.forEach((controller: any) => {
+      this.app.use(controller.path, controller.router);
     });
   }
 

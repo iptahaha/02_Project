@@ -19,6 +19,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
           if (!value) {
             accessUser.endConnection();
             req.user = decoded;
+
             next();
           } else {
             accessUser.endConnection();

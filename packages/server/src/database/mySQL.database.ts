@@ -1,12 +1,22 @@
-import mysql from 'mysql';
+import mysql, { Connection } from 'mysql';
 import { Database } from '../interfaces/database.interface';
 import { Person } from '../interfaces/person.interface';
 
 export class MySQL implements Database {
+  private static instance: MySQL;
+
   private db: any;
 
   constructor() {
     this.connection();
+  }
+
+  public static getInstance() {
+    if (!MySQL.instance) {
+      MySQL.instance = new MySQL();
+    }
+
+    return MySQL.instance;
   }
 
   private connection() {
@@ -16,7 +26,6 @@ export class MySQL implements Database {
       password: process.env.MYSQL_PASSWORD || 'root',
       database: process.env.MYSQL_DATABASE || 'userdatabase',
     });
-    this.db.connect();
   }
 
   delete(id: string): any {
@@ -98,12 +107,24 @@ export class MySQL implements Database {
     });
   }
 
-  endConnection(): void {
-    this.db.end((err: Error) => {
-      if (err) {
-        return err;
-      }
-      return true;
+  async checkConnection(connection: Connection) {
+    const disconnected = await new Promise((resolve) => {
+      connection.ping((err: Error) => {
+        resolve(err);
+      });
     });
+    if (disconnected) {
+      this.connection();
+    }
   }
+
+  // endConnection(): void {
+  //   this.db.connect();
+  //   this.db.end((err: Error) => {
+  //     if (err) {
+  //       return err;
+  //     }
+  //     return true;
+  //   });
+  // }
 }

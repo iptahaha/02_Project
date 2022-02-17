@@ -14,7 +14,7 @@ export class MySQLController implements DatabaseController {
   }
 
   checkRoutes() {
-    this.router.get('/data', authMiddleware, this.getData);
+    this.router.get('/data', authMiddleware, this.readData);
     this.router.post('/create', authMiddleware, this.createData);
     this.router.post('/update:*', authMiddleware, this.updateData);
     this.router.delete('/delete:*', authMiddleware, this.deleteData);
@@ -22,15 +22,15 @@ export class MySQLController implements DatabaseController {
   }
 
   clearData(req: Request, res: Response) {
-    const dbRequest = new MySQL();
+    const dbRequest = MySQL.getInstance();
     dbRequest
       .clear()
       .then(() => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.status(409).end();
       });
   }
@@ -45,25 +45,25 @@ export class MySQLController implements DatabaseController {
     dbRequest
       .update(req.body, Number(id))
       .then(() => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.status(409).end();
       });
   }
 
   createData(req: Request, res: Response) {
-    const dbRequest = new MySQL();
+    const dbRequest = MySQL.getInstance();
     dbRequest
       .create(req.body)
       .then(() => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.status(409).end();
       });
   }
@@ -74,29 +74,29 @@ export class MySQLController implements DatabaseController {
     if (deleteId === 'null') {
       return res.status(409).end();
     }
-    const dbRequest = new MySQL();
+    const dbRequest = MySQL.getInstance();
     dbRequest
       .delete(deleteId)
       .then(() => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.status(409).end();
       });
   }
 
-  getData(req: Request, res: Response): void {
-    const dbRequest = new MySQL();
+  readData(req: Request, res: Response): void {
+    const dbRequest = MySQL.getInstance();
     dbRequest
       .get()
       .then((value: Person[]) => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.send(value);
       })
       .catch(() => {
-        dbRequest.endConnection();
+        // dbRequest.endConnection();
         res.status(409).end();
       });
   }

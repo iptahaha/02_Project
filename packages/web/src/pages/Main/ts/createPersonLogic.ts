@@ -1,9 +1,9 @@
 import {
   collectData, getElement,
   removeChild,
-  removeDisabledAttributeByID, setAttribute,
+  removeDisabledAttributeByID,
   setDisabledAttributeByID,
-  addHTMLValue, setHTMLValue, deleteCookie,
+  addHTMLValue, setHTMLValue,
 
 } from '../../../utils/ts/utils';
 import { validatePersonForm } from './validation';
@@ -20,7 +20,6 @@ export function addNewPersonRequest(state, personData) {
     .then((response) => {
       if (response.redirected) {
         window.location.href = response.url;
-        deleteCookie('jwt');
         return false;
       }
 
@@ -53,7 +52,7 @@ export function addNewPerson(state): boolean {
       if (idx !== validateResult.length - 1) {
         addHTMLValue(formError, ', ');
       } else {
-        addHTMLValue(formError, '.')
+        addHTMLValue(formError, '.');
       }
     })
     updateContent();

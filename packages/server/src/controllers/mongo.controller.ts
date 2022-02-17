@@ -14,7 +14,7 @@ class MongoController implements DatabaseController {
   }
 
   checkRoutes() {
-    this.router.get('/data', authMiddleware, this.getData);
+    this.router.get('/data', authMiddleware, this.readData);
     this.router.post('/create', authMiddleware, this.createData);
     this.router.post('/update:*', authMiddleware, this.updateData);
     this.router.delete('/delete:*', authMiddleware, this.deleteData);
@@ -63,7 +63,7 @@ class MongoController implements DatabaseController {
       });
   }
 
-  getData(req: Request, res: Response): void {
+  readData(req: Request, res: Response): void {
     const dbRequest = new MongoDB();
     dbRequest
       .get()

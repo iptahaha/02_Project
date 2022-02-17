@@ -308,6 +308,29 @@
       &__button {
         margin-top: 10px;
       }
+
+      &__input-holder {
+        position: relative;
+      }
+
+      &__button-hide {
+        margin-top: -5px;
+        position: absolute;
+        top: 50%;
+        left: 95%;
+        transform: translate(-50%, -50%);
+
+
+        &:hover {
+
+          &:before {
+            color: #000000;
+            cursor: pointer;
+          }
+        }
+      }
+
+
     }
 
     &-title {
@@ -334,6 +357,7 @@
     &-content {
       background-color: white;
       padding: 40px;
+
     }
 
     &-button {
@@ -349,7 +373,7 @@
         cursor: pointer;
       }
 
-      &--cansel {
+      &--cancel {
         @include button;
         display: block;
         width: 100%;
