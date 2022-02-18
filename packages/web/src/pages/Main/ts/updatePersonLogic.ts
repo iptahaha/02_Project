@@ -5,11 +5,11 @@ import {
   removeDisabledAttributeByID,
   setDisabledAttributeByID,
   updatePersonResponse,
-  valueLength
+  valueLength,
 } from '../../../utils/ts/utils';
-import {closedModal} from './modal';
-import {validatePersonForm} from './validation';
-import {updateContent} from "../../../utils/ts/localization";
+import { closedModal } from './modal';
+import { validatePersonForm } from './validation';
+import { updateContent } from '../../../utils/ts/localization';
 
 export function generateNewRowContent(id, obj) {
   return `
@@ -64,7 +64,7 @@ export function updatePersonRequest(state, data, personObj) {
       // removeDisabledAttributeByID('updateButton');
       // closedModal('modalUpdate');
       return true;
-     })
+    })
     .catch(() => {
       removeDisabledAttributeByID('updateButton');
       closedModal('modalUpdate');
@@ -79,18 +79,16 @@ export function updatePerson(state) {
   const formError = getElement('update-form-error');
 
   if (valueLength(validateResult) > 0) {
-
     addHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
-    //console.log(validateResult);
+    // console.log(validateResult);
     validateResult.forEach((span, idx) => {
-
       addHTMLValue(formError, span);
       if (idx !== <number>valueLength(validateResult) - 1) {
         addHTMLValue(formError, ', ');
       } else {
-        addHTMLValue(formError, '.')
+        addHTMLValue(formError, '.');
       }
-    })
+    });
     updateContent();
     return false;
   }
