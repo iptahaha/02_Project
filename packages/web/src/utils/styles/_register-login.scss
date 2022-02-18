@@ -15,7 +15,7 @@
   box-shadow: 4px 4px 37px -12px rgba(34, 60, 80, 0.3);
 
   &--register {
-    height: 550px;
+    height: 560px;
   }
 
   &--login {
@@ -69,7 +69,7 @@
   }
 
   &__message {
-    height: 20px;
+    height: 30px;
     margin: 5px 0 5px 15px;
     font-size: 1em;
     color: $error-color;
@@ -82,21 +82,20 @@
     @include button;
     width: 100%;
     font-size: 1.2em;
-
   }
 
 
 }
 
 .form-global-message {
-  margin-top: 40px;
+  margin-top: 30px;
   text-align: center;
   color: $error-color;
   height: 30px;
 }
 
 .form-links {
-  margin-top: 30px;
+  margin-top: 20px;
   text-align: center;
   font-size: 1.2em;
 
@@ -143,7 +142,6 @@
   .form-inputs {
     &__message {
       height: 30px;
-
     }
 
     &__button {

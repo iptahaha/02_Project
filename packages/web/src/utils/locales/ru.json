@@ -32,7 +32,7 @@
     "last_name": "Фамилия",
     "age": "Возраст",
     "phone": "Номер телефона",
-    "phone-sample": "Номер телефона (+38-XXX-XXX-XXX)",
+    "phone-sample": "Номер телефона (+38-XXX-XXX-XXXX или +38-XXXXXXXXXX)",
     "city": "Город",
     "company": "Компания"
   },
@@ -53,8 +53,8 @@
     "try-later": "Повторите позже",
     "login/pass-empty": "Требуется логин ии пароль",
     "login/pass-wrong": "Неправильный логин ии пароль",
-    "pass-not_match": "*Password and confirm password does not match",
-    "login-in_use": "*Login already in use",
+    "pass-not_match": "*Пароль и подтверждение пароля не совпадают",
+    "login-in_use": "*Этот логин уже занят",
     "modal": {
       "message": "Некорректная информация в поле(ях): ",
       "first_name": "имя",
@@ -69,7 +69,7 @@
   "button": {
     "login": "Войти",
     "auth": "Зарегистрироваться",
-    "update": "Обновить",
+    "update": "Изменить",
     "create": "Создать",
     "delete": "Удалить",
     "clear": "Очистить",
