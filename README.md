@@ -5,11 +5,13 @@
 1. SQL (PostgreSQL, H2, MySQL)
 2. NoSQL (MongoDB, Redis, Cassandra, GraphDB)
 
-## Start project
+## Start the project
 - Для страрта пропишите в терминале следущие команды:
-1. yarn install
-2. yarn build
-3. yarn start
+```
+yarn install
+yarn build
+yarn start
+```
 
 ## Pages
 - Main page:
