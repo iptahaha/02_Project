@@ -2,13 +2,15 @@ import i18next from 'i18next';
 import locI18next from 'loc-i18next';
 import englishFile from '../locales/en.json';
 import russianFile from '../locales/ru.json';
-import { getElement } from './utils';
+import ukrFile from '../locales/ua.json';
+import chineseFile from '../locales/ch.json';
+import {getElement} from "./utils";
 
 i18next
   .init({
     compatibilityJSON: 'v3',
     lng: 'en',
-    fallbackLng: 'en',
+    fallbackLng: ['en', 'ua', 'ch'],
     debug: false,
     resources: {
       en: {
@@ -16,6 +18,12 @@ i18next
       },
       ru: {
         translation: russianFile,
+      },
+      ua: {
+        translation: ukrFile,
+      },
+      ch: {
+        translation: chineseFile,
       },
     },
   })
