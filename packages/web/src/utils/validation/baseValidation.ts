@@ -1,4 +1,4 @@
-import {getInputValue, getMatch, removeAttribute, setAttribute, setTextValue, valueLength} from '../ts/utils';
+import { getInputValue, getMatch, removeAttribute, setAttribute, setTextValue, valueLength } from '../ts/utils';
 import { updateContent } from '../ts/localization';
 
 export function loginValidate(state, pos, loginMessageId, loginInputId) {
@@ -26,7 +26,7 @@ export function loginValidate(state, pos, loginMessageId, loginInputId) {
     return false;
   }
 
-  if(!getMatch(value, loginRegex)) { //if (!value.match(loginRegex)) {
+  if (!getMatch(value, loginRegex)) {
     setAttribute(loginMessageId, 'data-i18n', 'error.login-contains');
     state[pos] = false;
     updateContent();
@@ -50,14 +50,16 @@ export function passwordValidate(state, pos, passwordMessageId, passwordInputId)
     return false;
   }
 
-  if (valueLength(value) < 8) { //length
+  if (valueLength(value) < 8) {
+    // length
     setAttribute(passwordMessageId, 'data-i18n', 'error.pass-short');
     state[pos] = false;
     updateContent();
     return false;
   }
 
-  if(!getMatch(value, passwordRegex)) {//if (!value.match(passwordRegex)) {
+  if (!getMatch(value, passwordRegex)) {
+    // if (!value.match(passwordRegex)) {
     setAttribute(passwordMessageId, 'data-i18n', 'error.pass-contains');
     state[pos] = false;
     updateContent();
@@ -77,7 +79,6 @@ export function confirmPasswordValidate(
   passwordInputId,
   confirmPasswordInputId,
 ): boolean {
-
   const valuePassword = <string>getInputValue(passwordInputId);
   const valueConfirmPassword = <string>getInputValue(confirmPasswordInputId);
   if (valueConfirmPassword !== valuePassword) {

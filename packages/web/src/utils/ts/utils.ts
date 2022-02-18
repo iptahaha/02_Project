@@ -1,6 +1,7 @@
 import { Person } from '../interfaces/person.interface';
 import { closedModal } from '../../pages/Main/ts/modal';
 import { generateNewRowContent, updateObjInState } from '../../pages/Main/ts/updatePersonLogic';
+import { updateContent } from './localization';
 
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
@@ -183,6 +184,7 @@ export function checkLocalStorageThemeValue(value) {
     selectElement.value = storageElement;
     return true;
   }
+  return false;
 }
 
 export function changeInterfaceState(event) {
@@ -227,7 +229,7 @@ export function addClass(id, className: string): boolean {
   return false;
 }
 
-export function validateStatusCheck(state, buttonId): boolean {
+export function validateStatusCheck(state, buttonId) {
   const button = <HTMLElement>getElement(buttonId);
   if (state.includes(false)) {
     if (!hasAttribute(button, 'disabled')) {
@@ -313,6 +315,7 @@ export function trimToLowerCase(value: string): any {
   if (value) {
     return value.trim().toLowerCase();
   }
+  return false;
 }
 
 export function includes(id, value) {
@@ -347,12 +350,10 @@ export function addMatch(elem, value) {
 }
 
 export function getQuerySelectorAll(tag) {
-  if (tag) {
-    return document.querySelectorAll(tag);
-  }
+  return document.querySelectorAll(tag);
 }
 
-export function updatePersonResponse(state, response, personObj) {
+export function updatePersonResponse(state, response, personObj): boolean {
   if (response.redirected) {
     window.location.href = response.url;
     return false;
@@ -368,10 +369,160 @@ export function updatePersonResponse(state, response, personObj) {
   }
   removeDisabledAttributeByID('updateButton');
   closedModal('modalUpdate');
+  return true;
 }
 
-export function getMatch(value, regex) {
+export function getMatch(value, regex): Node | boolean {
   if (value) {
     return value.match(regex);
   }
+  return false;
+}
+
+export function addFetchUrlRegister(state, data) {
+  fetch(state.urlRegister, {
+    method: 'POST',
+    body: data,
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+      }
+
+      return response.json();
+    })
+    .then((value) => {
+      if (value.message === 'LOGIN_NOT_UNIQUE') {
+        setAttribute('login-message', 'data-i18n', 'error.login-in_use');
+      }
+
+      if (value.message === 'CONNECTION_ERROR') {
+        setAttribute('global-message', 'data-i18n', 'error.try-later');
+      }
+
+      if (value.message === 'CONFIRM_PASSWORD_ERROR') {
+        setAttribute('confirm-password-message', 'data-i18n', 'error.pass-not_match');
+      }
+
+      updateContent();
+    })
+    .catch(() => {
+      setAttribute('global-message', 'data-i18n', 'error.try-later');
+      updateContent();
+    });
+}
+
+export function getFetchLogic(state, data, globalErrorId) {
+  fetch(state.url, {
+    method: 'POST',
+    body: data,
+  })
+    .then((response) => {
+      if (response.redirected) {
+        setInputValue('login-in-login', '');
+        window.location.href = response.url;
+        return true;
+      }
+
+      return response.json();
+    })
+    .then((value) => {
+      if (value.message === 'EMPTY_LOGIN_PASSWORD') {
+        setAttribute('login-message', 'data-i18n', 'error.login-empty');
+        setAttribute('password-message', 'data-i18n', 'error.pass-empty');
+      }
+
+      if (value.message === 'WRONG_LOGIN_PASSWORD') {
+        setAttribute(globalErrorId, 'data-i18n', 'error.login/pass-wrong');
+      }
+
+      if (value.message === 'CONNECTION_ERROR') {
+        setAttribute(globalErrorId, 'data-i18n', 'error.login/pass-wrong');
+      }
+
+      updateContent();
+    })
+    .catch((err) => {
+      console.log(err);
+      setAttribute(globalErrorId, 'data-i18n', 'error.try-later');
+      updateContent();
+      return false;
+    });
+}
+
+export function changeUserPasswordRequest(data) {
+  setDisabledAttributeByID('changePasswordButton');
+  fetch('/auth/change-password', {
+    method: 'POST',
+    body: data,
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+        return true;
+      }
+
+      return response.json();
+    })
+    .then((value) => {
+      if (value.message === 'WRONG_LOGIN_PASSWORD') {
+        setTextValue('change-password-message', '*Wrong password');
+      }
+
+      if (value.message === 'CONFIRM_PASSWORD_ERROR') {
+        setTextValue('change-new-password-message', '*Password and confirm password does not match');
+        setTextValue('change-confirm-password-message', '*Password and confirm password does not match');
+      }
+
+      if (value.message === 'CONNECTION_ERROR') {
+        setTextValue('change-confirm-password-message', '*Try again later');
+      }
+
+      removeDisabledAttributeByID('changePasswordButton');
+      updateContent();
+      return false;
+    })
+    .catch(() => {
+      removeDisabledAttributeByID('changePasswordButton');
+      setTextValue('change-confirm-password-message', '*Try again later');
+      updateContent();
+    });
+}
+
+export function changeUserLoginRequest(data) {
+  setDisabledAttributeByID('changeLoginButton');
+  fetch('/auth/change-login', {
+    method: 'POST',
+    body: data,
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+        return true;
+      }
+
+      return response.json();
+    })
+    .then((value) => {
+      if (value.message === 'LOGIN_NOT_UNIQUE') {
+        setTextValue('change-login-message', '*Login already in use');
+      }
+
+      if (value.message === 'WRONG_LOGIN_PASSWORD') {
+        setTextValue('change-login-password-message', '*Wrong password');
+      }
+
+      if (value.message === 'CONNECTION_ERROR') {
+        setTextValue('change-login-password-message', '*Try again later');
+      }
+
+      updateContent();
+      removeDisabledAttributeByID('changeLoginButton');
+      return false;
+    })
+    .catch(() => {
+      removeDisabledAttributeByID('changeLoginButton');
+      setTextValue('change-login-password-message', '*Try again later');
+      updateContent();
+    });
 }
