@@ -63,8 +63,8 @@ export function initRegister() {
   );
 
   addListener('create-account', 'click', sendRegister.bind(null, state));
-  addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
-  addListener('dropdownLanguage', 'change', (event) => changeLng(event));
+  addListener('dropdownTheme', 'change', changeInterfaceState);
+  addListener('dropdownLanguage', 'change', changeLng);
 }
 
 document.addEventListener('DOMContentLoaded', initRegister.bind(null));
