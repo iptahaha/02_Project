@@ -32,7 +32,7 @@
     "last_name": "Last name",
     "age": "Age",
     "phone": "Phone number",
-    "phone-sample": "Phone number (+38-XXX-XXX-XXX)",
+    "phone-sample": "Phone number (+38-XXX-XXX-XXXX or +38-XXXXXXXXXX)",
     "city": "City",
     "company": "Company"
   },

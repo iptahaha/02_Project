@@ -8,6 +8,10 @@ html {
 body {
   background-color: $main-color-light;
   font-family: 'Roboto', sans-serif;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 *, *:after, *:before {
@@ -69,6 +73,7 @@ input {
 
     &--transparent {
       background-color: transparent;
+      box-shadow: none;
     }
   }
 
@@ -100,6 +105,11 @@ input {
 
   .table thead th {
     background-color: darken($popup-bg-light, 10%);
+    border: 2px solid #000000;
+
+    &:last-child {
+      border-right: 2px solid #000000;
+    }
   }
 
   .table__row {
@@ -214,12 +224,12 @@ input {
   }
 
   .table thead th {
-    background-color: lighten($popup-bg-dark, 15%);
+    background-color: lighten($popup-bg-dark, 8%);
     color: $popup-bg-light;
-    border: 1px solid;
+    border: 1px solid #FFFFFF;
 
     &:last-child {
-      border-right: 2px solid;
+      border-right: 1px solid #FFFFFF;
     }
   }
 
@@ -238,7 +248,7 @@ input {
     }
 
     td {
-      border: 1px solid #959595;
+      border: 1px solid #626262;
     }
   }
 

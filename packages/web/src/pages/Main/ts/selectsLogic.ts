@@ -1,5 +1,5 @@
 import { appendChild, createRowCollection, getInputValue, removeChild, setDisabledAttributeByID,
-  slice } from '../../../utils/ts/utils';
+  slice, setInputValue } from '../../../utils/ts/utils';
 import { getData } from './getPersonDataLogic';
 
 export function sortData(state) {
@@ -31,6 +31,7 @@ export function changeCurrentDB(state) {
   setDisabledAttributeByID('buttonDelete');
   setDisabledAttributeByID('buttonUpdate');
   removeChild('tableBody');
+  setInputValue('search', '');
   getData(state);
   // TODO пусть возвращает все state yopta
 }
