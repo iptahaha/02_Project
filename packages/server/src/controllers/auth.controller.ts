@@ -1,11 +1,11 @@
 import { Request, Response, Router } from 'express';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import MySQLUser from '../database/userDataBase';
 import Controller from '../interfaces/controller.interface';
 import { generateJWT } from '../middleware/jwtGenerate.middleware';
 import authMiddleware from '../middleware/auth.middleware';
 import { RejectError } from '../interfaces/rejectError.interface';
+import { MySQL } from '../database/mySQL.database';
 
 dotenv.config();
 
@@ -27,88 +27,91 @@ export class AuthenticationController implements Controller {
   }
 
   static async register(req: Request, res: Response) {
-    const userData = req.body;
-    const dbRequest = new MySQLUser();
+    const { login, password } = req.body;
+    const dbRequest = MySQL.getInstance();
+    const loginInQuery = `SELECT * from user_table WHERE login = '${login}'`;
 
     if (req.body.password !== req.body.confirmPassword) {
       return res.status(403).send({ message: 'CONFIRM_PASSWORD_ERROR' });
     }
 
     dbRequest
-      .checkLoginUniqueness(userData.login)
-      .then(async (value) => {
-        if (typeof value === 'boolean') {
-          const hashedPassword = await bcrypt.hash(userData.password, 8);
-          if (value) {
-            dbRequest.createNewUser(userData.login, hashedPassword).then(() => res.redirect('/login'));
-          }
-
-          if (!value) {
-            res.status(401).send({ message: 'LOGIN_NOT_UNIQUE' });
-          }
+      .read(loginInQuery)
+      .then(async (result: any) => {
+        if (result.length > 0) {
+          return Promise.reject({ code: 401, message: 'LOGIN_NOT_UNIQUE' });
         }
+        const hashedPassword = await bcrypt.hash(password, 8);
+        const query = 'INSERT INTO user_table SET ?';
+        const column = { login, hashedPassword };
+        return dbRequest.create(query, column);
       })
-      .catch((value) => {
-        dbRequest.endConnection();
+      .then(() => {
+        res.status(200).redirect('/login');
+      })
+      .catch((value: RejectError) => {
         res.status(value.code).send({ message: value.message });
       });
   }
 
   static login(req: Request, res: Response) {
-    const userData = req.body;
-    const dbRequest = new MySQLUser();
+    const { login, password } = req.body;
+    const dbRequest = MySQL.getInstance();
+    const loginInQuery = `SELECT * from user_table WHERE login = '${login}'`;
 
-    if (!userData.login || !userData.password) {
+    if (!login || !password) {
+      console.log('aaaaaaa');
       res.status(403).send({ message: 'EMPTY_LOGIN_PASSWORD' });
     }
 
     dbRequest
-      .loginIn(userData.login, userData.password)
-      .then((value: any) => {
-        dbRequest.endConnection();
+      .read(loginInQuery)
+      .then(async (result: any) => {
+        if (result.length > 0) {
+          const checkPassword = await bcrypt.compare(password, result[0].password);
 
-        if (value.code === 302) {
-          generateJWT(res, value.id, value.login);
-          res.redirect(302, '/main');
-          return userData;
+          if (checkPassword) {
+            generateJWT(res, result[0].user_id, result[0].login);
+            return res.redirect(302, '/main');
+          }
         }
-        res.status(value).end();
-        return userData;
+        return Promise.reject({ code: 401, message: 'WRONG_LOGIN_PASSWORD' });
       })
       .catch((value: RejectError) => {
-        console.log(value);
-        dbRequest.endConnection();
         res.status(value.code).send({ message: value.message });
       });
-
-    return userData;
   }
 
   static async changeLogin(req: Request, res: Response) {
     const { login, id } = req.user;
     const { password } = req.body;
     const newLogin = req.body.login;
-    const dbRequest = new MySQLUser();
+    const loginInQuery = `SELECT * from user_table WHERE login = '${login}'`;
+    const dbRequest = MySQL.getInstance();
 
     dbRequest
-      .loginIn(login, password)
-      .then(() => dbRequest.checkLoginUniqueness(newLogin))
-      .then((value) => {
-        if (typeof value === 'boolean') {
-          if (value) {
-            return dbRequest.changeColumnValue(id, newLogin, 'login');
+      .read(loginInQuery)
+      .then(async (result: any) => {
+        if (result.length > 0) {
+          const checkPassword = await bcrypt.compare(password, result[0].password);
+          const newLoginInQuery = `SELECT * from user_table WHERE login = '${newLogin}'`;
+          if (checkPassword) {
+            return dbRequest.read(newLoginInQuery);
           }
-          res.status(401).send({ message: 'LOGIN_NOT_UNIQUE' });
         }
+        return Promise.reject({ code: 401, message: 'WRONG_LOGIN_PASSWORD' });
       })
-      .then((value) => {
-        if (typeof value === 'number') {
-          dbRequest.endConnection();
-          res.clearCookie('jwt').redirect(302, '/login');
+      .then((value: any) => {
+        if (value.length > 0) {
+          return Promise.reject({ code: 401, message: 'LOGIN_NOT_UNIQUE' });
         }
+        const query = `UPDATE user_table SET login=? WHERE user_id='${id}'`;
+        return dbRequest.update(query, newLogin);
+      })
+      .then(() => {
+        res.clearCookie('jwt').redirect(302, '/login');
       })
       .catch((value: RejectError) => {
-        dbRequest.endConnection();
         res.status(value.code).send({ message: value.message });
       });
   }
@@ -116,22 +119,34 @@ export class AuthenticationController implements Controller {
   static async changePassword(req: Request, res: Response) {
     const { login, id } = req.user;
     const { password, newPassword, confirmNewPassword } = req.body;
-    const dbRequest = new MySQLUser();
+    const loginInQuery = `SELECT * from user_table WHERE login = '${login}'`;
+    const dbRequest = MySQL.getInstance();
 
     if (newPassword !== confirmNewPassword) {
       return res.status(403).send({ message: 'CONFIRM_PASSWORD_ERROR' });
     }
 
     dbRequest
-      .loginIn(login, password)
-      .then(async () => await bcrypt.hash(newPassword, 8))
-      .then((codedPassword) => dbRequest.changeColumnValue(id, codedPassword, 'password'))
+      .read(loginInQuery)
+      .then(async (result: any) => {
+        if (result.length > 0) {
+          const checkPassword = await bcrypt.compare(password, result[0].password);
+          const query = `UPDATE user_table SET password=? WHERE user_id='${id}'`;
+
+          if (checkPassword) {
+            if (newPassword === password) {
+              return Promise.reject({ code: 401, message: 'PASSWORD_ALREADY_USE' });
+            }
+
+            return dbRequest.update(query, newPassword);
+          }
+        }
+        return Promise.reject({ code: 401, message: 'WRONG_LOGIN_PASSWORD' });
+      })
       .then(() => {
-        dbRequest.endConnection();
         res.clearCookie('jwt').redirect(302, '/login');
       })
       .catch((value: RejectError) => {
-        dbRequest.endConnection();
         res.status(value.code).send({ message: value.message });
       });
   }

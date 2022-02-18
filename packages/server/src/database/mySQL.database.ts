@@ -1,8 +1,7 @@
 import mysql from 'mysql2';
-import { Database } from '../interfaces/database.interface';
-import { Person } from '../interfaces/person.interface';
+import { SQLCRUD } from '../interfaces/database.interface';
 
-export class MySQL implements Database {
+export class MySQL implements SQLCRUD {
   private static instance: MySQL | null;
 
   private db: any;
@@ -14,9 +13,7 @@ export class MySQL implements Database {
   public static getInstance() {
     if (!MySQL.instance) {
       MySQL.instance = new MySQL();
-      console.log('Noviy instance');
     }
-    console.log('Stariy instance');
     return MySQL.instance;
   }
 
@@ -29,32 +26,29 @@ export class MySQL implements Database {
       database: process.env.MYSQL_DATABASE || 'userdatabase',
     });
 
-    this.db.on('error', (err: Error) => {
-
+    this.db.on('error', () => {
       MySQL.instance = null;
-      console.log('Instans udalilsya');
     });
   }
 
-
-  delete(id: string): any {
+  delete(query: string): any {
     return new Promise((resolve, reject) => {
-      const deleteQuery = `DELETE FROM person_table WHERE id = ${id}`;
-      this.db.query(deleteQuery, (err: Error) => {
+      this.db.query(query, (err: Error) => {
         if (err) {
-          reject(err);
+          reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else {
-          resolve('Super');
+          resolve(200);
         }
       });
     });
   }
 
-  get(): any {
+  read(query: string): any {
     return new Promise((resolve, reject) => {
-      this.db.query('SELECT * FROM person_table', (err: Error, result: any) => {
+      this.db.query(query, (err: Error, result: any) => {
         if (err) {
-          reject(err);
+          console.log(err);
+          reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else {
           resolve(result);
         }
@@ -62,55 +56,36 @@ export class MySQL implements Database {
     });
   }
 
-  create(obj: Person): any {
-    const { fname, lname, age, city, phoneNumber, email, companyName } = obj;
+  create(query: string, column: Record<string, unknown>): any {
     return new Promise((resolve, reject) => {
-      this.db.query(
-        'INSERT INTO person_table SET ?',
-        { fname, lname, age, city, phoneNumber, email, companyName },
-        (err: Error) => {
-          if (err) {
-            console.log(err);
-            reject(err);
-          } else {
-            resolve(302);
-          }
-        },
-      );
-    });
-  }
-
-  update(obj: Person, id: number): any {
-    const { fname, lname, age, city, phoneNumber, email, companyName } = obj;
-    return new Promise((resolve, reject) => {
-      this.db.query(
-        `UPDATE person_table SET ? WHERE id=${id}`,
-        {
-          fname,
-          lname,
-          age,
-          city,
-          phoneNumber,
-          email,
-          companyName,
-        },
-        (err: Error) => {
-          if (err) {
-            console.log(err);
-            reject(err);
-          } else {
-            resolve(302);
-          }
-        },
-      );
-    });
-  }
-
-  clear(): any {
-    return new Promise((resolve, reject) => {
-      this.db.query('TRUNCATE TABLE person_table', (err: Error) => {
+      this.db.query(query, column, (err: Error) => {
         if (err) {
-          reject();
+          reject({ code: 409, message: 'CONNECTION_ERROR' });
+        } else {
+          resolve(302);
+        }
+      });
+    });
+  }
+
+  update(query: string, updateColumn: Record<string, unknown> | string): any {
+    return new Promise((resolve, reject) => {
+      this.db.query(query, updateColumn, (err: Error) => {
+        if (err) {
+          console.log(err);
+          reject({ code: 409, message: 'CONNECTION_ERROR' });
+        } else {
+          resolve(302);
+        }
+      });
+    });
+  }
+
+  clear(query: string): any {
+    return new Promise((resolve, reject) => {
+      this.db.query(query, (err: Error) => {
+        if (err) {
+          reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else {
           resolve(200);
         }
