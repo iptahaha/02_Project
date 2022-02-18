@@ -1,16 +1,17 @@
-import { removeDisabledAttributeByID, setDisabledAttributeByID } from '../../../utils/ts/utils';
+import { addElementClass, addId, removeClass, removeDisabledAttributeByID,
+  setDisabledAttributeByID, targetValueClosest } from '../../../utils/ts/utils';
 import { Person } from '../../../utils/interfaces/person.interface';
 
-function selectRow(event, state) {
-  const target = event.target.closest('tr');
+export function selectRow(event, state) {
+  const target = targetValueClosest(event, 'tr')//event.target.closest('tr');
   const previousRow = state.currentSelectedNode;
 
   if (target) {
-    target.classList.add('table__row--active');
+    addElementClass(target, 'table__row--active');// target.classList.add('table__row--active');
   }
 
   if (previousRow) {
-    previousRow.classList.remove('table__row--active');
+    removeClass(previousRow, 'table__row--active')// previousRow.classList.remove('table__row--active');
   }
 
   if (target === previousRow) {
@@ -19,20 +20,20 @@ function selectRow(event, state) {
     state.currentSelectedObj = null;
     setDisabledAttributeByID('buttonDelete');
     setDisabledAttributeByID('buttonUpdate');
-    return target.id;
+    return addId(target);//target.id;
   }
 
   state.currentData.forEach((el: Person) => {
-    if (el.id === Number(target.id)) {
+    if (el.id === Number(addId(target))) {//Number(target.id)) {
       state.currentSelectedObj = el;
     }
   });
 
-  state.currentSelectedId = target.id;
+  state.currentSelectedId = addId(target);//target.id;
   state.currentSelectedNode = target;
   removeDisabledAttributeByID('buttonDelete');
   removeDisabledAttributeByID('buttonUpdate');
-  return target.id;
+  return addId(target);//target.id;
 }
 
 export function getClick(state) {

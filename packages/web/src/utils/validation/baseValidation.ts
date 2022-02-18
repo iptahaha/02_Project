@@ -1,4 +1,4 @@
-import { getInputValue, removeAttribute, setAttribute, setTextValue } from '../ts/utils';
+import {getInputValue, getMatch, removeAttribute, setAttribute, setTextValue, valueLength} from '../ts/utils';
 import { updateContent } from '../ts/localization';
 
 export function loginValidate(state, pos, loginMessageId, loginInputId) {
@@ -12,21 +12,21 @@ export function loginValidate(state, pos, loginMessageId, loginInputId) {
     return false;
   }
 
-  if (value.length < 6) {
+  if (valueLength(value) < 6) {
     setAttribute(loginMessageId, 'data-i18n', 'error.login-short');
     state[pos] = false;
     updateContent();
     return false;
   }
 
-  if (value.length > 20) {
+  if (valueLength(value) > 20) {
     setAttribute(loginMessageId, 'data-i18n', 'error.login-long');
     state[pos] = false;
     updateContent();
     return false;
   }
 
-  if (!value.match(loginRegex)) {
+  if(!getMatch(value, loginRegex)) { //if (!value.match(loginRegex)) {
     setAttribute(loginMessageId, 'data-i18n', 'error.login-contains');
     state[pos] = false;
     updateContent();

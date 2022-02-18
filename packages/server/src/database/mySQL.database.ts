@@ -1,4 +1,4 @@
-import mysql, { Connection, QueryError } from 'mysql2';
+import mysql from 'mysql2';
 import { Database } from '../interfaces/database.interface';
 import { Person } from '../interfaces/person.interface';
 
@@ -19,8 +19,6 @@ export class MySQL implements Database {
     console.log('Stariy instance');
     return MySQL.instance;
   }
-
-
 
   private connection() {
     this.db = mysql.createConnection({

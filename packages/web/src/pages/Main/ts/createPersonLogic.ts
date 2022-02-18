@@ -3,13 +3,13 @@ import {
   removeChild,
   removeDisabledAttributeByID,
   setDisabledAttributeByID,
-  addHTMLValue, setHTMLValue,
+  addHTMLValue, setHTMLValue, valueLength,
 
 } from '../../../utils/ts/utils';
 import { validatePersonForm } from './validation';
 import { closedModal } from './modal';
-import { getData } from './getPersonDataLogic';
 import { updateContent } from "../../../utils/ts/localization";
+import { getData } from './getPersonDataLogic';
 
 export function addNewPersonRequest(state, personData) {
   const addUrl = `${state.currentDB}/create`;
@@ -43,7 +43,7 @@ export function addNewPerson(state): boolean {
   const formError = getElement('create-form-error');
   setHTMLValue(formError, '');
 
-  if (validateResult.length > 0) {
+  if (valueLength(validateResult) > 0) {
 
     addHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
     validateResult.forEach((span, idx) => {

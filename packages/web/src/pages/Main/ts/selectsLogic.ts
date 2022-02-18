@@ -1,10 +1,5 @@
-import {
-  appendChild,
-  createRowCollection,
-  getInputValue,
-  removeChild,
-  setDisabledAttributeByID,
-} from '../../../utils/ts/utils';
+import { appendChild, createRowCollection, getInputValue, removeChild, setDisabledAttributeByID,
+  slice } from '../../../utils/ts/utils';
 import { getData } from './getPersonDataLogic';
 
 export function sortData(state) {
@@ -16,9 +11,9 @@ export function sortData(state) {
   setDisabledAttributeByID('buttonUpdate');
   let dataCopy;
   if (state.currentSortedData !== null) {
-    dataCopy = state.currentSortedData.slice();
+    dataCopy = slice(state.currentSortedData);//state.currentSortedData.slice();
   } else {
-    dataCopy = state.currentData.slice();
+    dataCopy = slice(state.currentData)//state.currentData.slice();
   }
 
   removeChild('tableBody');
