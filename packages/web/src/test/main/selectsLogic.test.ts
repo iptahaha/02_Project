@@ -10,6 +10,7 @@ jest.mock('./../../utils/ts/utils', () => {
     createRowCollection: jest.fn(),
     appendChild: jest.fn(),
     addClass: jest.fn(),
+    setInputValue: jest.fn(),
   }
 })
 

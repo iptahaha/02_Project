@@ -27,6 +27,12 @@ jest.mock('./../../pages/Main/ts/getPersonDataLogic', () => {
     getData: jest.fn(() => true)
   }
 })
+jest.mock('./../../pages/Main/ts/logoutLogic', () => {
+  return {
+    __esModule: true,
+    logout: jest.fn(() => true)
+  }
+})
 jest.mock('./../../utils/ts/utils', () => {
   return {
     __esModule: true,
@@ -35,6 +41,7 @@ jest.mock('./../../utils/ts/utils', () => {
     showOrHidePassword: jest.fn(() => true),
     addClass: jest.fn(),
     validateStatusCheck: jest.fn(),
+    setInputValue: jest.fn(),
     // collectData: jest.fn(),
     // getElement: jest.fn(),
     // setHTMLValue: jest.fn(),

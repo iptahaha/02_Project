@@ -107,8 +107,7 @@ export function changeUserPassword(state) {
       'change-confirm-password-message',
       'update-new-password',
       'update-confirm-new-password',
-    ) === false
-  ) {
+    ) === false) {
     return false;
   }
 

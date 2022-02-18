@@ -28,7 +28,8 @@ jest.mock('./../../utils/ts/utils', () => {
     setDisplay: jest.fn(),
     getQuerySelectorAll: jest.fn(),
     cleanForm: jest.fn(),
-    updatePersonResponse: jest.fn()
+    updatePersonResponse: jest.fn(),
+    setHTMLValue: jest.fn(),
   }
 })
 
@@ -42,7 +43,6 @@ const obj = {
   email: 'test@gmail.com',
   companyName: 'my test'
 };
-
 
 describe('updatePerson', () => {
   const arr = [obj];
