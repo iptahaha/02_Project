@@ -69,6 +69,7 @@ input {
 
     &--transparent {
       background-color: transparent;
+      box-shadow: none;
     }
   }
 
@@ -132,6 +133,7 @@ input {
 
     &--transparent {
       background-color: transparent;
+      box-shadow: none;
     }
 
     &__select {

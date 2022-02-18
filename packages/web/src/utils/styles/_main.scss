@@ -203,7 +203,7 @@
 
   .table {
     border-collapse: separate;
-    width: 100%;
+    width: calc(100% - 10px);
     border-spacing: 0 6px;
 
     thead {
