@@ -3,7 +3,7 @@ import {
   removeChild,
   removeDisabledAttributeByID,
   setDisabledAttributeByID,
-  addHTMLValue, setHTMLValue,
+  addHTMLValue, setHTMLValue, valueLength,
 
 } from '../../../utils/ts/utils';
 import { validatePersonForm } from './validation';
@@ -43,7 +43,7 @@ export function addNewPerson(state): boolean {
   const formError = getElement('create-form-error');
   setHTMLValue(formError, '');
 
-  if (validateResult.length > 0) {
+  if (valueLength(validateResult) > 0) {
 
     addHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
     validateResult.forEach((span, idx) => {

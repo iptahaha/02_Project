@@ -1,4 +1,6 @@
-//import {init} from './../../pages/Main/ts/index';
+import {init} from './../../pages/Main/ts/index';
+// import { enableFetchMocks } from 'jest-fetch-mock';
+// enableFetchMocks();
 
 jest.mock('./../../pages/Main/ts/clearAllLogic', () => {
   return {
@@ -15,7 +17,8 @@ jest.mock('./../../pages/Main/ts/deletePersonLogic', () => {
 jest.mock('./../../pages/Main/ts/createPersonLogic', () => {
   return {
     __esModule: true,
-    addNewPersonRequest: jest.fn(() => true)
+    addNewPersonRequest: jest.fn(() => true),
+    addNewPerson: jest.fn(),
   }
 })
 jest.mock('./../../pages/Main/ts/getPersonDataLogic', () => {
@@ -29,12 +32,27 @@ jest.mock('./../../utils/ts/utils', () => {
     __esModule: true,
     addListener: jest.fn(),
     checkLocalStorageThemeValue: jest.fn(() => true),
-    showOrHidePassword: jest.fn(() => true)
+    showOrHidePassword: jest.fn(() => true),
+    addClass: jest.fn(),
+    validateStatusCheck: jest.fn(),
+    // collectData: jest.fn(),
+    // getElement: jest.fn(),
+    // setHTMLValue: jest.fn(),
+    // valueLength: jest.fn(),
+    // addHTMLValue: jest.fn(),
+    // setDisabledAttributeByID: jest.fn(),
   }
 })
 
-// describe('init', () => {
-//   test('init', () => {
-//     expect(init()).toBeUndefined();
-//   })
-// })
+jest.mock('./../../utils/ts/localization', () => {
+  return {
+    __esModule: true,
+    checkLocalStorageLangValue: jest.fn(),
+  }
+})
+
+describe('init', () => {
+  test('init', () => {
+    expect(init()).toBeUndefined();
+  })
+})

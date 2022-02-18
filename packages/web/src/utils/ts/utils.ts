@@ -1,4 +1,6 @@
 import { Person } from '../interfaces/person.interface';
+import {closedModal} from "../../pages/Main/ts/modal";
+import {generateNewRowContent, updateObjInState} from "../../pages/Main/ts/updatePersonLogic";
 
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
@@ -9,14 +11,14 @@ export function addListener(id, eventType, callback) {
   return false;
 }
 
-export function removeListener(id, eventType, callback) {
-  const node = document.getElementById(id);
-  if (node) {
-    node.removeEventListener(eventType, callback);
-    return true;
-  }
-  return false;
-}
+// export function removeListener(id, eventType, callback) {
+//   const node = document.getElementById(id);
+//   if (node) {
+//     node.removeEventListener(eventType, callback);
+//     return true;
+//   }
+//   return false;
+// }
 
 export function getElement(id): HTMLElement | boolean {
   const node = document.getElementById(id);
@@ -338,10 +340,39 @@ export function addElementClass(id, className: string): boolean {
     return true;
 }
 
-
 export function addMatch(elem, value) {
   if(elem) {
     return elem.match(value);
   }
   return false;
+}
+
+export function getQuerySelectorAll(tag) {
+  if(tag) {
+    return document.querySelectorAll(tag);
+  }
+}
+
+export function updatePersonResponse(state, response, personObj) {
+  if (response.redirected) {
+    window.location.href = response.url;
+    return false;
+  }
+
+  if (response.status === 200) {
+    setHTMLValue(state.currentSelectedNode, generateNewRowContent(state.currentSelectedId, personObj));
+    updateObjInState(state.currentData, state.currentSelectedId, personObj);
+
+    if (state.currentSortedData !== null) {
+      updateObjInState(state.currentSortedData, state.currentSelectedId, personObj);
+    }
+  }
+  removeDisabledAttributeByID('updateButton');
+  closedModal('modalUpdate');
+}
+
+export function getMatch(value, regex) {
+  if(value) {
+   return value.match(regex);
+  }
 }

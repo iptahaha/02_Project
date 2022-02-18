@@ -1,11 +1,12 @@
-import {setDisplay, setInputValue, setTextValue} from '../../../utils/ts/utils';
+import {getQuerySelectorAll, setDisplay, setInputValue, setTextValue} from '../../../utils/ts/utils';
 import { Person } from '../../../utils/interfaces/person.interface';
 
-export function openModal(id: string): void {
+export function openModal(id: string): boolean {
   setDisplay(id, 'block');
+  return true;
 }
 
-export function fillUpdateModal(state) {
+export function fillUpdateModal(state):boolean {
   const currentObj: Person = state.currentSelectedObj;
   setInputValue('update-fname', currentObj.fname);
   setInputValue('update-lname', currentObj.lname);
@@ -16,11 +17,12 @@ export function fillUpdateModal(state) {
   setInputValue('update-company', currentObj.companyName);
 
   openModal('modalUpdate');
+  return true;
 }
 
 export function cleanForm() {
-  const input = document.querySelectorAll('input');
-  input.forEach(( el) => {
+  const input = getQuerySelectorAll('input');//document.querySelectorAll('input');
+  input.forEach((el) => {
     if(el.id !== 'search') {
       el.value = '';
     }

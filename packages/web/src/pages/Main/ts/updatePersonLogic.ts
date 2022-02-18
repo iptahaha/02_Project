@@ -1,7 +1,14 @@
-import { addHTMLValue, collectData, getElement, removeDisabledAttributeByID, setDisabledAttributeByID, setHTMLValue,
-  valueLength } from '../../../utils/ts/utils';
-import { closedModal } from './modal';
-import { validatePersonForm } from './validation';
+import {
+  addHTMLValue,
+  collectData,
+  getElement,
+  removeDisabledAttributeByID,
+  setDisabledAttributeByID,
+  updatePersonResponse,
+  valueLength
+} from '../../../utils/ts/utils';
+import {closedModal} from './modal';
+import {validatePersonForm} from './validation';
 import {updateContent} from "../../../utils/ts/localization";
 
 export function generateNewRowContent(id, obj) {
@@ -40,23 +47,24 @@ export function updatePersonRequest(state, data, personObj) {
     body: data,
   })
     .then((response) => {
-      if (response.redirected) {
-        window.location.href = response.url;
-        return false;
-      }
-
-      if (response.status === 200) {
-        setHTMLValue(state.currentSelectedNode, generateNewRowContent(state.currentSelectedId, personObj));
-        updateObjInState(state.currentData, state.currentSelectedId, personObj);
-
-        if (state.currentSortedData !== null) {
-          updateObjInState(state.currentSortedData, state.currentSelectedId, personObj);
-        }
-      }
-      removeDisabledAttributeByID('updateButton');
-      closedModal('modalUpdate');
+      updatePersonResponse(state, response, personObj);
+      // if (response.redirected) {
+      //   window.location.href = response.url;
+      //   return false;
+      // }
+      //
+      // if (response.status === 200) {
+      //   setHTMLValue(state.currentSelectedNode, generateNewRowContent(state.currentSelectedId, personObj));
+      //   updateObjInState(state.currentData, state.currentSelectedId, personObj);
+      //
+      //   if (state.currentSortedData !== null) {
+      //     updateObjInState(state.currentSortedData, state.currentSelectedId, personObj);
+      //   }
+      // }
+      // removeDisabledAttributeByID('updateButton');
+      // closedModal('modalUpdate');
       return true;
-    })
+     })
     .catch(() => {
       removeDisabledAttributeByID('updateButton');
       closedModal('modalUpdate');
@@ -70,11 +78,10 @@ export function updatePerson(state) {
   const validateResult = validatePersonForm(obj);
   const formError = getElement('update-form-error');
 
-  console.log(obj);
   if (valueLength(validateResult) > 0) {
 
     addHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
-    console.log(validateResult);
+    //console.log(validateResult);
     validateResult.forEach((span, idx) => {
 
       addHTMLValue(formError, span);
