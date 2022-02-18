@@ -11,6 +11,10 @@
     filter: brightness(85%);
   }
 
+  &:active {
+    transform: translateY(2px);
+  }
+
   &[disabled] {
     background-color: #e3e3e3;
     color: #363636;

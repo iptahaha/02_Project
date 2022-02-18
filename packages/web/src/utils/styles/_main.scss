@@ -200,7 +200,7 @@
 
   .table {
     border-collapse: separate;
-    width: 100%;
+    width: calc(100% - 10px);
     border-spacing: 0 6px;
 
     thead {
@@ -208,14 +208,9 @@
       top: 0;
 
       th {
-        border: 2px solid #000000;
         border-right: none;
         padding: 8px 0;
         font-weight: 600;
-
-        &:last-child {
-          border-right: 2px solid #000000;
-        }
       }
     }
     tbody {
