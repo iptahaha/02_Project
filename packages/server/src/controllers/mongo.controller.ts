@@ -22,7 +22,7 @@ class MongoController implements DatabaseController {
   }
 
   clearData(req: Request, res: Response): void {
-    const dbRequest = new MongoDB();
+    const dbRequest = MongoDB.getInstance()
     dbRequest
       .clear()
       .then((code: number) => {
@@ -34,7 +34,7 @@ class MongoController implements DatabaseController {
   }
 
   createData(req: Request, res: Response): void {
-    const dbRequest = new MongoDB();
+    const dbRequest = MongoDB.getInstance()
     dbRequest
       .create(req.body)
       .then((code: number) => {
@@ -52,7 +52,7 @@ class MongoController implements DatabaseController {
       return res.status(409).end();
     }
 
-    const dbRequest = new MongoDB();
+    const dbRequest = MongoDB.getInstance()
     dbRequest
       .delete(deleteId)
       .then((code: number) => {
@@ -64,7 +64,7 @@ class MongoController implements DatabaseController {
   }
 
   readData(req: Request, res: Response): void {
-    const dbRequest = new MongoDB();
+    const dbRequest = MongoDB.getInstance()
     dbRequest
       .get()
       .then((data: Person[]) => {
@@ -81,7 +81,7 @@ class MongoController implements DatabaseController {
     if (updateId === 'null') {
       return res.status(409).end();
     }
-    const dbRequest = new MongoDB();
+    const dbRequest = MongoDB.getInstance()
     dbRequest
       .update(req.body, Number(updateId))
       .then((code: number) => {

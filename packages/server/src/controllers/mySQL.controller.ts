@@ -23,14 +23,13 @@ export class MySQLController implements DatabaseController {
 
   clearData(req: Request, res: Response) {
     const dbRequest = MySQL.getInstance();
+    const query = `TRUNCATE TABLE person_table`;
     dbRequest
-      .clear()
+      .clear(query)
       .then(() => {
-        // dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
-        // dbRequest.endConnection();
         res.status(409).end();
       });
   }
@@ -41,29 +40,31 @@ export class MySQLController implements DatabaseController {
     if (id === 'null') {
       return res.status(409).end();
     }
-    const dbRequest = new MySQL();
+    const { fname, lname, age, city, phoneNumber, email, companyName } = req.body;
+    const query = `UPDATE person_table SET ? WHERE id=${id}`;
+    const column = { fname, lname, age, city, phoneNumber, email, companyName };
+    const dbRequest = MySQL.getInstance();
     dbRequest
-      .update(req.body, Number(id))
+      .update(query, column)
       .then(() => {
-        // dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
-        // dbRequest.endConnection();
         res.status(409).end();
       });
   }
 
   createData(req: Request, res: Response) {
+    const { fname, lname, age, city, phoneNumber, email, companyName } = req.body;
+    const column = { fname, lname, age, city, phoneNumber, email, companyName };
+    const query = 'INSERT INTO person_table SET ?';
     const dbRequest = MySQL.getInstance();
     dbRequest
-      .create(req.body)
+      .create(query, column)
       .then(() => {
-        // dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
-        // dbRequest.endConnection();
         res.status(409).end();
       });
   }
@@ -74,29 +75,28 @@ export class MySQLController implements DatabaseController {
     if (deleteId === 'null') {
       return res.status(409).end();
     }
+
+    const query = `DELETE FROM person_table WHERE id = ${deleteId}`;
     const dbRequest = MySQL.getInstance();
     dbRequest
-      .delete(deleteId)
+      .delete(query)
       .then(() => {
-        // dbRequest.endConnection();
         res.status(200).end();
       })
       .catch(() => {
-        // dbRequest.endConnection();
         res.status(409).end();
       });
   }
 
   readData(req: Request, res: Response): void {
     const dbRequest = MySQL.getInstance();
+    const query = `SELECT * FROM person_table`;
     dbRequest
-      .get()
+      .read(query)
       .then((value: Person[]) => {
-        // dbRequest.endConnection();
         res.send(value);
       })
       .catch(() => {
-        // dbRequest.endConnection();
         res.status(409).end();
       });
   }

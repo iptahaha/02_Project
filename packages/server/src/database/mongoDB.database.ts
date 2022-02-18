@@ -1,17 +1,25 @@
 import { MongoClient, MongoError } from 'mongodb';
-import { Database } from '../interfaces/database.interface';
+import { ObjDatabase } from '../interfaces/database.interface';
 import { Person } from '../interfaces/person.interface';
 
-export class MongoDB implements Database {
+export class MongoDB implements ObjDatabase {
+  private static instance: MongoDB | null;
+
   private db: any;
 
   constructor() {
     this.connection();
   }
 
+  public static getInstance() {
+    if (!MongoDB.instance) {
+      MongoDB.instance = new MongoDB();
+    }
+    return MongoDB.instance;
+  }
+
   connection() {
-    const url =
-      'mongodb+srv://admin:admin@users.fdv5b.mongodb.net/users?retryWrites=true&w=majority';
+    const url = <string>process.env.MONGO_DATABASE;
     this.db = new MongoClient(url);
   }
 
@@ -38,10 +46,7 @@ export class MongoDB implements Database {
         if (err) {
           reject(409);
         }
-        const result = await this.db
-          .db('userdatabase')
-          .collection('person_collection')
-          .deleteMany({});
+        const result = await this.db.db('userdatabase').collection('person_collection').deleteMany({});
 
         if (result) {
           resolve(200);
@@ -73,10 +78,7 @@ export class MongoDB implements Database {
             }
             const user: Person = obj;
             user.id = id;
-            const result = await this.db
-              .db('userdatabase')
-              .collection('person_collection')
-              .insertOne(user);
+            const result = await this.db.db('userdatabase').collection('person_collection').insertOne(user);
 
             if (result) {
               resolve(200);
@@ -117,10 +119,7 @@ export class MongoDB implements Database {
         }
 
         const query = { id };
-        const result = await this.db
-          .db('userdatabase')
-          .collection('person_collection')
-          .updateOne(query, { $set: obj });
+        const result = await this.db.db('userdatabase').collection('person_collection').updateOne(query, { $set: obj });
 
         if (result) {
           resolve(200);

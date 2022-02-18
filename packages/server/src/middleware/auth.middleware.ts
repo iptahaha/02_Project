@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import MySQLUser from '../database/userDataBase';
 import { user } from '../interfaces/controller.interface';
+import { MySQL } from '../database/mySQL.database';
 
 dotenv.config();
 
@@ -11,18 +11,15 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
     const jwtCookie = req.cookies.jwt;
     if (jwtCookie) {
       const decoded: user = <user>jwt.verify(jwtCookie, <string>process.env.JWT_SECRET);
-
-      const accessUser = new MySQLUser();
+      const loginInQuery = `SELECT * from user_table WHERE login = '${decoded.login}'`;
+      const accessUser = MySQL.getInstance();
       accessUser
-        .checkLoginUniqueness(decoded.login)
-        .then((value) => {
-          if (!value) {
-            accessUser.endConnection();
+        .read(loginInQuery)
+        .then((result: any) => {
+          if (result.length > 0) {
             req.user = decoded;
-
             next();
           } else {
-            accessUser.endConnection();
             res.redirect(303, '/login');
           }
         })
