@@ -1,14 +1,18 @@
-import {cleanForm, closedModal, fillUpdateModal, openModal} from "../../pages/Main/ts/modal";
+import { cleanForm, closedModal, fillUpdateModal, openModal } from '../../pages/Main/ts/modal';
 
-jest.mock('./../../utils/ts/utils', () => {
-  return {
-    __esModule: true,
-    setDisplay: jest.fn,
-    setInputValue: jest.fn(),
-    getQuerySelectorAll: jest.fn(() => [{id: 1, value: 'test'}]),
-    setTextValue: jest.fn(),
-  }
-})
+jest.mock('./../../utils/ts/utils', () => ({
+  __esModule: true,
+  setDisplay: jest.fn,
+  setInputValue: jest.fn(),
+  getQuerySelectorAll: jest.fn(() => [{ id: 1, value: 'test' }]),
+  setTextValue: jest.fn(),
+}));
+jest.mock('./../../utils/ts/localization', () => ({
+  __esModule: true,
+  checkLocalStorageLangValue: jest.fn(),
+  updateContent: jest.fn(),
+  changeLng: jest.fn(),
+}));
 
 const obj = {
   id: 1,
@@ -18,11 +22,11 @@ const obj = {
   city: 'Kharkiv',
   phoneNumber: '+3809999999999',
   email: 'test@gmail.com',
-  companyName: 'my test'
+  companyName: 'my test',
 };
 const mainState = {
   currentDB: '/mysql',
-  currentData: [{id:1},{id:2}],
+  currentData: [{ id: 1 }, { id: 2 }],
   currentSortedData: null,
   currentSelectedNode: null,
   currentSelectedId: null,
@@ -32,23 +36,23 @@ const mainState = {
 describe('openModal', () => {
   test('openModal', () => {
     expect(openModal('string')).toBeTruthy();
-  })
-})
+  });
+});
 
 describe('fillUpdateModal', () => {
   test('fillUpdateModal', () => {
     expect(fillUpdateModal(mainState)).toBeTruthy();
-  })
-})
+  });
+});
 
 describe('cleanForm', () => {
   test('cleanForm', () => {
     expect(cleanForm()).toBeUndefined();
-  })
-})
-//
+  });
+});
+
 describe('closedModal', () => {
   test('closedModal', () => {
     expect(closedModal('string')).toBeUndefined();
-  })
-})
+  });
+});

@@ -6,16 +6,11 @@ import {
   showOrHidePassword,
   validateStatusCheck,
 } from '../../utils/ts/utils';
-import { loginIn } from './logic';
 import { changeLng, checkLocalStorageLangValue } from '../../utils/ts/localization';
 import { loginValidate, passwordValidate } from '../../utils/validation/baseValidation';
+import { loginIn } from './logic';
 
-document.addEventListener('DOMContentLoaded', () => {
-  initLogin();
-});
-
-
-export function initLogin(): boolean {
+export function initLogin() {
   const state = {
     url: '/auth/login',
     validateStatus: [false, false],
@@ -26,20 +21,20 @@ export function initLogin(): boolean {
   checkLocalStorageThemeValue('changeTheme');
   checkLocalStorageLangValue('changeLanguage');
 
-  addListener('login-in-login', 'input', () => {
-    loginValidate.call(null, validateStatus, 0, 'login-message', 'login-in-login');
-    validateStatusCheck.call(null, validateStatus, 'login-in');
-  });
-  addListener('login-in-password', 'input', () => {
-    passwordValidate.call(null, validateStatus, 1, 'password-message', 'login-in-password');
-    validateStatusCheck.call(null, validateStatus, 'login-in');
-  });
+  addListener(
+    'login-in-login',
+    'input',
+    loginValidate.bind(null, validateStatus, 0, 'login-message', 'login-in-login'),
+  );
+  addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
+  addListener('dropdownLanguage', 'change', (event) => changeLng(event));
+
+  addListener('login-in-login', 'input', validateStatusCheck.bind(null, validateStatus, 'login-in'));
+  addListener('login-in-password', 'input', passwordValidate.bind(null, validateStatus, 1, 'password-message', 'login-in-password'));
+  addListener('login-in-password', 'input', validateStatusCheck.bind(null, validateStatus, 'login-in'));
 
   addListener('password-hide', 'click', showOrHidePassword.bind(null, 'password-hide', 'login-in-password'));
   addListener('login-in', 'click', loginIn.bind(null, state));
-
-  addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
-  addListener('dropdownLanguage', 'change', (event) => changeLng(event));
-  return true;
 }
 
+document.addEventListener('DOMContentLoaded', initLogin.bind(null));

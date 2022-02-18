@@ -1,4 +1,4 @@
-import {getQuerySelectorAll, setDisplay, setInputValue, setTextValue} from '../../../utils/ts/utils';
+import { getQuerySelectorAll, setDisplay, setInputValue, setTextValue } from '../../../utils/ts/utils';
 import { Person } from '../../../utils/interfaces/person.interface';
 
 export function openModal(id: string): boolean {
@@ -6,7 +6,7 @@ export function openModal(id: string): boolean {
   return true;
 }
 
-export function fillUpdateModal(state):boolean {
+export function fillUpdateModal(state): boolean {
   const currentObj: Person = state.currentSelectedObj;
   setInputValue('update-fname', currentObj.fname);
   setInputValue('update-lname', currentObj.lname);
@@ -21,9 +21,9 @@ export function fillUpdateModal(state):boolean {
 }
 
 export function cleanForm() {
-  const input = getQuerySelectorAll('input');//document.querySelectorAll('input');
+  const input = getQuerySelectorAll('input'); // document.querySelectorAll('input');
   input.forEach((el) => {
-    if(el.id !== 'search') {
+    if (el.id !== 'search') {
       el.value = '';
     }
   });
