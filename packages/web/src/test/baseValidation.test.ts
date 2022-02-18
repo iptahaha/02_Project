@@ -19,7 +19,9 @@ jest.mock('./../utils/ts/utils', () => ({
     .mockImplementationOnce(() => '6')
     .mockImplementationOnce(() => '')
     .mockImplementationOnce(() => '')
-    .mockImplementationOnce(() => '9'),
+    .mockImplementationOnce(() => '9')
+    .mockImplementationOnce(() => '10')
+    .mockImplementationOnce(() => '11'),
   setAttribute: jest.fn(),
   valueLength: jest
     .fn(() => 15)
@@ -30,8 +32,13 @@ jest.mock('./../utils/ts/utils', () => ({
     .mockImplementationOnce(() => 15)
     .mockImplementationOnce(() => 15)
     .mockImplementationOnce(() => 15)
+    .mockImplementationOnce(() => 15)
     .mockImplementationOnce(() => 7),
-  getMatch: jest.fn(() => 'test').mockImplementationOnce(() => ''),
+  getMatch: jest
+    .fn(() => 'test')
+    .mockImplementationOnce(() => '')
+    .mockImplementationOnce(() => '1')
+    .mockImplementationOnce(() => ''),
   removeAttribute: jest.fn(),
   setTextValue: jest.fn(),
 }));
@@ -77,7 +84,7 @@ describe('password validate', () => {
     expect(passwordValidate([false], 0, 'text', 'text')).toBeFalsy();
   });
   test('should be function password validate === false', () => {
-    expect(passwordValidate([false], 0, 'text', 'text')).toBeTruthy();
+    expect(passwordValidate([false], 0, 'text', 'text')).toBeFalsy();
   });
 });
 
@@ -89,7 +96,7 @@ describe('confirm password validate', () => {
     expect(typeof passwordValidate).toBe('function');
   });
   test('should be function confirm password validate === false', () => {
-    expect(confirmPasswordValidate([false], 0, 'text', 'text', 'text')).toBeTruthy();
+    expect(confirmPasswordValidate([false], 0, 'text', 'text', 'text')).toBeFalsy();
   });
   test('should be function confirm password validate === true', () => {
     expect(confirmPasswordValidate([false], 0, 'text', 'text', 'text')).toBeTruthy();

@@ -51,7 +51,6 @@ export function passwordValidate(state, pos, passwordMessageId, passwordInputId)
   }
 
   if (valueLength(value) < 8) {
-    // length
     setAttribute(passwordMessageId, 'data-i18n', 'error.pass-short');
     state[pos] = false;
     updateContent();
@@ -59,7 +58,6 @@ export function passwordValidate(state, pos, passwordMessageId, passwordInputId)
   }
 
   if (!getMatch(value, passwordRegex)) {
-    // if (!value.match(passwordRegex)) {
     setAttribute(passwordMessageId, 'data-i18n', 'error.pass-contains');
     state[pos] = false;
     updateContent();
