@@ -48,10 +48,10 @@ describe('init register', () => {
   test('should be function', () => {
     expect(typeof sendRegister).toBe('function');
   });
-  test('should be init register', () => {
+  test('should be init register === false', () => {
     expect(sendRegister(state)).toBeFalsy();
   });
-  test('should be init register', () => {
+  test('should be init register === true', () => {
     expect(sendRegister(state)).toBeTruthy();
   });
 });

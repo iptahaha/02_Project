@@ -44,19 +44,31 @@ const mainState = {
 };
 
 describe('changeUserLogin', () => {
-  test('changeUserLogin', () => {
+  test('should be function', () => {
+    expect(changeUserLogin).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof changeUserLogin).toBe('function');
+  });
+  test('should be function change user login === true', () => {
     expect(changeUserLogin(mainState)).toBeTruthy();
   });
-  test('changeUserLogin', () => {
+  test('should be function change user login === false', () => {
     expect(changeUserLogin(mainState)).toBeFalsy();
   });
 });
 
 describe('changeUserPassword', () => {
-  test('changeUserPassword', () => {
+  test('should be function', () => {
+    expect(changeUserPassword).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof changeUserPassword).toBe('function');
+  });
+  test('should be function change user password === false', () => {
     expect(changeUserPassword(mainState)).toBeFalsy();
   });
-  test('changeUserPassword', () => {
+  test('should be function change user password === true', () => {
     expect(changeUserPassword(mainState)).toBeTruthy();
   });
 });

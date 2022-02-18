@@ -35,7 +35,7 @@ describe('init login', () => {
   test('should be defined', () => {
     expect(initLogin).toBeDefined();
   });
-  test('should be function', () => {
+  test('should be function typeof function', () => {
     expect(typeof initLogin).toBe('function');
   });
   test('should be init', () => {
@@ -57,10 +57,10 @@ describe('init login', () => {
   test('should be function', () => {
     expect(typeof loginIn).toBe('function');
   });
-  test('should be init login', () => {
+  test('should be init login === false', () => {
     expect(loginIn(state)).toBeFalsy();
   });
-  test('should be init login', () => {
+  test('should be init login === false', () => {
     expect(loginIn(state)).toBeTruthy();
   });
 });

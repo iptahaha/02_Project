@@ -32,24 +32,30 @@ const mainState = {
   currentSelectedObj: null,
 };
 
-describe('filterByName', () => {
+describe('sort data', () => {
   test('should be defined', () => {
     expect(sortData).toBeDefined();
   });
-  test('should be function', () => {
+  test('should be function typeof function', () => {
     expect(typeof sortData).toBe('function');
   });
-  test('sort data', () => {
+  test('should be function sort data', () => {
     expect(sortData(mainState)).toBeUndefined();
   });
-  test('filterByName', () => {
+  test('should be function sort data', () => {
     mainState.currentSortedData = [null];
     expect(sortData(mainState)).toBeUndefined();
   });
 });
 
-describe('changeCurrentDB', () => {
-  test('changeCurrentDB', () => {
+describe('change current DB', () => {
+  test('should be defined', () => {
+    expect(changeCurrentDB).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof changeCurrentDB).toBe('function');
+  });
+  test('should be function change current DB', () => {
     expect(changeCurrentDB(mainState)).toBeUndefined();
   });
 });
