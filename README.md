@@ -6,7 +6,7 @@
 2. NoSQL (MongoDB, Redis, Cassandra, GraphDB)
 
 ##Start project
-Для страрта пропишите в терминале следущие команды:
+-Для страрта пропишите в терминале следущие команды:
 1. yarn install
 2. yarn build
 3. yarn start
