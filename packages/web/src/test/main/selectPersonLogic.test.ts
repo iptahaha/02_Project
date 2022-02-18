@@ -29,17 +29,29 @@ jest.mock('./../../utils/ts/localization', () => ({
 const { targetValueClosest } = require('../../utils/ts/utils');
 
 describe('select row test', () => {
-  test('select row', () => {
+  test('should be function', () => {
+    expect(selectRow).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof selectRow).toBe('function');
+  });
+  test('should be function select row', () => {
     expect(selectRow(event, mainState)).toBe(1);
   });
-  test('select row', () => {
+  test('should be function select row', () => {
     targetValueClosest.mockImplementationOnce(() => 1);
     expect(selectRow(event, mainState)).toBe(1);
   });
 });
 
 describe('get click', () => {
-  test('get click', () => {
+  test('should be function', () => {
+    expect(getClick).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof getClick).toBe('function');
+  });
+  test('should be function get click', () => {
     expect(getClick(mainState)).toStrictEqual(mainState);
   });
 });

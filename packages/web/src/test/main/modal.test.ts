@@ -33,26 +33,50 @@ const mainState = {
   currentSelectedObj: obj,
 };
 
-describe('openModal', () => {
-  test('openModal', () => {
+describe('open modal', () => {
+  test('should be function', () => {
+    expect(openModal).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof openModal).toBe('function');
+  });
+  test('should be function open modal', () => {
     expect(openModal('string')).toBeTruthy();
   });
 });
 
-describe('fillUpdateModal', () => {
-  test('fillUpdateModal', () => {
+describe('fill update modal', () => {
+  test('should be function', () => {
+    expect(fillUpdateModal).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof fillUpdateModal).toBe('function');
+  });
+  test('should be function fill update modal', () => {
     expect(fillUpdateModal(mainState)).toBeTruthy();
   });
 });
 
-describe('cleanForm', () => {
-  test('cleanForm', () => {
+describe('clean form', () => {
+  test('should be function', () => {
+    expect(cleanForm).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof cleanForm).toBe('function');
+  });
+  test('should be function clean form', () => {
     expect(cleanForm()).toBeUndefined();
   });
 });
 
-describe('closedModal', () => {
-  test('closedModal', () => {
+describe('closed modal', () => {
+  test('should be function', () => {
+    expect(closedModal).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof closedModal).toBe('function');
+  });
+  test('should be function closed modal', () => {
     expect(closedModal('string')).toBeUndefined();
   });
 });

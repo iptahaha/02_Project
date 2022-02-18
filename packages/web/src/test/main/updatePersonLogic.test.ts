@@ -57,18 +57,30 @@ const obj = {
   companyName: 'my test',
 };
 
-describe('updatePerson', () => {
+describe('update person', () => {
   const arr = [obj];
-  test('updatePerson', () => {
+  test('should be function', () => {
+    expect(updatePerson).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof updatePerson).toBe('function');
+  });
+  test('should be function update person === false', () => {
     expect(updatePerson(arr)).toBeFalsy();
   });
-  test('updatePerson', () => {
+  test('should be function updatePerson === true', () => {
     expect(updatePerson(arr)).toBeTruthy();
   });
 });
 
-describe('generateNewRowContent', () => {
-  test('generateNewRowContent', () => {
+describe('generate new row content', () => {
+  test('should be function', () => {
+    expect(generateNewRowContent).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof generateNewRowContent).toBe('function');
+  });
+  test('should be function generate new row content', () => {
     expect(generateNewRowContent(1, obj)).toStrictEqual(`
           <td>1</td>
           <td>test</td>
@@ -81,19 +93,31 @@ describe('generateNewRowContent', () => {
   });
 });
 
-describe('updateObjInState', () => {
-  test('updateObjInState', () => {
+describe('update obj in state', () => {
+  test('should be function', () => {
+    expect(updateObjInState).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof updateObjInState).toBe('function');
+  });
+  test('should be function update obj in state', () => {
     const arr = [obj];
     expect(updateObjInState(arr, 1, obj)).toStrictEqual(arr);
   });
-  test('updateObjInState', () => {
+  test('should be function update obj in state', () => {
     const arr = [obj];
     expect(updateObjInState(arr, 2, obj)).toStrictEqual(arr);
   });
 });
 
-describe('updatePersonRequest', () => {
-  test('updatePersonRequest', () => {
+describe('update person request', () => {
+  test('should be function', () => {
+    expect(updatePersonRequest).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof updatePersonRequest).toBe('function');
+  });
+  test('should be function update person request', () => {
     const arr = [obj];
     expect(updatePersonRequest(arr, 1, obj)).toBeUndefined();
   });

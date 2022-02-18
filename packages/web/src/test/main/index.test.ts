@@ -1,6 +1,4 @@
 import { init } from '../../pages/Main/ts/index';
-// import { enableFetchMocks } from 'jest-fetch-mock';
-// enableFetchMocks();
 
 jest.mock('./../../pages/Main/ts/clearAllLogic', () => ({
   __esModule: true,
@@ -31,12 +29,6 @@ jest.mock('./../../utils/ts/utils', () => ({
   addClass: jest.fn(),
   validateStatusCheck: jest.fn(),
   setInputValue: jest.fn(),
-  // collectData: jest.fn(),
-  // getElement: jest.fn(),
-  // setHTMLValue: jest.fn(),
-  // valueLength: jest.fn(),
-  // addHTMLValue: jest.fn(),
-  // setDisabledAttributeByID: jest.fn(),
 }));
 
 jest.mock('./../../utils/ts/localization', () => ({
@@ -53,7 +45,13 @@ jest.mock('./../../utils/validation/baseValidation', () => ({
 }));
 
 describe('init', () => {
-  test('init', () => {
+  test('should be function', () => {
+    expect(init).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof init).toBe('function');
+  });
+  test('should be function init', () => {
     expect(init()).toBeUndefined();
   });
 });

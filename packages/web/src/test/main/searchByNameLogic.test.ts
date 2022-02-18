@@ -30,13 +30,13 @@ describe('filterByName', () => {
   test('should be defined', () => {
     expect(filterByName).toBeDefined();
   });
-  test('should be function', () => {
+  test('should be function typeof function', () => {
     expect(typeof filterByName).toBe('function');
   });
-  test('filterByName', () => {
+  test('should be function filter by name', () => {
     expect(filterByName(mainState)).toStrictEqual(mainState);
   });
-  test('filterByName', () => {
+  test('should be function filter by name', () => {
     expect(filterByName(mainState)).toStrictEqual(mainState);
   });
 });

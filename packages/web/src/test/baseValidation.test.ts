@@ -9,54 +9,98 @@ jest.mock('./../utils/ts/localization', () => ({
 jest.mock('./../utils/ts/utils', () => ({
   __esModule: true,
   addListener: jest.fn(),
-  getInputValue: jest.fn(() => 'true').mockImplementationOnce(() => ''),
+  getInputValue: jest
+    .fn(() => '1')
+    .mockImplementationOnce(() => '')
+    .mockImplementationOnce(() => '2')
+    .mockImplementationOnce(() => '3')
+    .mockImplementationOnce(() => '4')
+    .mockImplementationOnce(() => '5')
+    .mockImplementationOnce(() => '6')
+    .mockImplementationOnce(() => '')
+    .mockImplementationOnce(() => '')
+    .mockImplementationOnce(() => '9'),
   setAttribute: jest.fn(),
   valueLength: jest
     .fn(() => 15)
     .mockImplementationOnce(() => 3)
-    .mockImplementationOnce(() => 21),
-  getMatch: jest.fn(),
+    .mockImplementationOnce(() => 15)
+    .mockImplementationOnce(() => 21)
+    .mockImplementationOnce(() => 15)
+    .mockImplementationOnce(() => 15)
+    .mockImplementationOnce(() => 15)
+    .mockImplementationOnce(() => 15)
+    .mockImplementationOnce(() => 7),
+  getMatch: jest.fn(() => 'test').mockImplementationOnce(() => ''),
   removeAttribute: jest.fn(),
   setTextValue: jest.fn(),
 }));
 
-describe('', () => {
-  test('test', () => {
-    expect(true).toBeTruthy();
+describe('login validate', () => {
+  test('should be function', () => {
+    expect(loginValidate).toBeDefined();
   });
-  test('loginValidate', () => {
+  test('should be function typeof function', () => {
+    expect(typeof loginValidate).toBe('function');
+  });
+  test('should be function login validate === false', () => {
     expect(loginValidate([false], 0, 'text', 'text')).toBeFalsy();
   });
-  test('loginValidate', () => {
+  test('should be function login validate === false', () => {
     expect(loginValidate([false], 0, 'text', 'text')).toBeFalsy();
   });
-  test('loginValidate', () => {
+  test('should be function login validate === false', () => {
     expect(loginValidate([false], 0, 'text', 'text')).toBeFalsy();
   });
-  test('loginValidate', () => {
+  test('should be function login validate === false', () => {
     expect(loginValidate([false], 0, 'text', 'text')).toBeFalsy();
   });
-  test('loginValidate', () => {
-    expect(loginValidate([false], 0, 'text', 'text')).toBeFalsy();
-  });
-  test('loginValidate', () => {
-    expect(loginValidate([false], 0, 'text', 'text')).toBeFalsy();
+  test('should be function login validate === true', () => {
+    expect(loginValidate([false], 0, 'text', 'text')).toBeTruthy();
   });
 });
 
-describe('passwordValidate', () => {
-  test('passwordValidate', () => {
+describe('password validate', () => {
+  test('should be function', () => {
+    expect(passwordValidate).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof passwordValidate).toBe('function');
+  });
+  test('should be function password validate === false', () => {
     expect(passwordValidate([false], 0, 'text', 'text')).toBeFalsy();
   });
-  test('passwordValidate', () => {
+  test('should be function password validate === false', () => {
     expect(passwordValidate([false], 0, 'text', 'text')).toBeFalsy();
+  });
+  test('should be function password validate === false', () => {
+    expect(passwordValidate([false], 0, 'text', 'text')).toBeFalsy();
+  });
+  test('should be function password validate === false', () => {
+    expect(passwordValidate([false], 0, 'text', 'text')).toBeTruthy();
   });
 });
-describe('confirmPasswordValidate', () => {
-  test('confirmPasswordValidate', () => {
+
+describe('confirm password validate', () => {
+  test('should be function', () => {
+    expect(passwordValidate).toBeDefined();
+  });
+  test('should be function typeof function', () => {
+    expect(typeof passwordValidate).toBe('function');
+  });
+  test('should be function confirm password validate === false', () => {
     expect(confirmPasswordValidate([false], 0, 'text', 'text', 'text')).toBeTruthy();
   });
-  test('confirmPasswordValidate', () => {
+  test('should be function confirm password validate === true', () => {
+    expect(confirmPasswordValidate([false], 0, 'text', 'text', 'text')).toBeTruthy();
+  });
+  test('should be function confirm password validate === true', () => {
+    expect(confirmPasswordValidate([false], 0, 'text', 'text', 'text')).toBeTruthy();
+  });
+  test('should be function confirm password validate === true', () => {
+    expect(confirmPasswordValidate([false], 0, 'text', 'text', 'text')).toBeTruthy();
+  });
+  test('should be function confirm password validate === true', () => {
     expect(confirmPasswordValidate([false], 0, 'text', 'text', 'text')).toBeTruthy();
   });
 });
