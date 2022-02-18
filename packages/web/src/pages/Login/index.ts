@@ -7,13 +7,15 @@ import {
   validateStatusCheck,
 } from '../../utils/ts/utils';
 import { loginIn } from './logic';
-
-
-document.addEventListener('DOMContentLoaded', initRegister.bind(null));
 import { changeLng, checkLocalStorageLangValue } from '../../utils/ts/localization';
 import { loginValidate, passwordValidate } from '../../utils/validation/baseValidation';
 
-export function initRegister():boolean {
+document.addEventListener('DOMContentLoaded', () => {
+  initLogin();
+});
+
+
+export function initLogin(): boolean {
   const state = {
     url: '/auth/login',
     validateStatus: [false, false],
@@ -23,7 +25,6 @@ export function initRegister():boolean {
 
   checkLocalStorageThemeValue('changeTheme');
   checkLocalStorageLangValue('changeLanguage');
-
 
   addListener('login-in-login', 'input', () => {
     loginValidate.call(null, validateStatus, 0, 'login-message', 'login-in-login');
@@ -42,7 +43,3 @@ export function initRegister():boolean {
   return true;
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  initRegister();
-});

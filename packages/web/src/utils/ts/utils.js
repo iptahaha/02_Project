@@ -104,7 +104,6 @@ exports.showOrHidePassword = showOrHidePassword;
 function collectData(id) {
     const data = new URLSearchParams();
     const formData = new FormData(getForm(id));
-    console.log([...formData]);
     for (const values of formData) {
         data.append(values[0], values[1]);
     }
@@ -218,9 +217,8 @@ function addClass(id, className) {
 }
 exports.addClass = addClass;
 function validateStatusCheck(state, buttonId) {
-    console.log(state);
     const button = getElement(buttonId);
-    console.log(button);
+    cancel(button);
     if (state.includes(false)) {
         if (!hasAttribute(button, 'disabled')) {
             setDisabledAttribute(button);

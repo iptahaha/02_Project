@@ -1,30 +1,48 @@
-import { collectData, setTextValue } from '../../../utils/ts/utils';
+import {
+  collectData,
+  removeDisabledAttributeByID,
+  setDisabledAttributeByID,
+  setTextValue,
+} from '../../../utils/ts/utils';
 import { confirmPasswordValidate, loginValidate, passwordValidate } from '../../../utils/validation/baseValidation';
+import { updateContent } from '../../../utils/ts/localization';
 
 export function changeUserLoginRequest(data) {
+  setDisabledAttributeByID('changeLoginButton');
   fetch('/auth/change-login', {
     method: 'POST',
     body: data,
-  }).then((response) => {
-    if (response.redirected) {
-      window.location.href = response.url;
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+        return true;
+      }
+
+      return response.json();
+    })
+    .then((value) => {
+      if (value.message === 'WRONG_LOGIN_PASSWORD') {
+        setTextValue('change-login-password-message', '*Wrong password');
+      }
+
+      if (value.message === 'LOGIN_NOT_UNIQUE') {
+        setTextValue('change-login-message', '*Login already in use');
+      }
+
+      if (value.message === 'CONNECTION_ERROR') {
+        setTextValue('change-login-password-message', '*Try again later');
+      }
+
+      updateContent();
+      removeDisabledAttributeByID('changeLoginButton');
       return false;
-    }
-
-    if (response.status === 401) {
-      setTextValue('change-login-password-message', '*Wrong password');
-    }
-
-    if (response.status === 403) {
-      setTextValue('change-login-message', '*Login already in use');
-    }
-
-    if (response.status === 409) {
-      setTextValue('change-login-message', '*Try again later');
-    }
-    return true;
-  });
-  return true;
+    })
+    .catch(() => {
+      removeDisabledAttributeByID('changeLoginButton')
+      setTextValue('change-login-password-message', '*Try again later');
+      updateContent();
+    });
 }
 
 export function changeUserLogin(state) {
@@ -41,10 +59,42 @@ export function changeUserLogin(state) {
 }
 
 export function changeUserPasswordRequest(data) {
+  setDisabledAttributeByID('changePasswordButton')
   fetch('/auth/change-password', {
     method: 'POST',
     body: data,
-  });
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+        return true;
+      }
+
+      return response.json();
+    })
+    .then((value) => {
+      if (value.message === 'WRONG_LOGIN_PASSWORD') {
+        setTextValue('change-password-message', '*Wrong password');
+      }
+
+      if (value.message === 'CONFIRM_PASSWORD_ERROR') {
+        setTextValue('change-new-password-message', '*Password and confirm password does not match');
+        setTextValue('change-confirm-password-message', '*Password and confirm password does not match');
+      }
+
+      if (value.message === 'CONNECTION_ERROR') {
+        setTextValue('change-confirm-password-message', '*Try again later');
+      }
+
+      removeDisabledAttributeByID('changePasswordButton');
+      updateContent();
+      return false;
+    })
+    .catch(() => {
+      removeDisabledAttributeByID('changePasswordButton');
+      setTextValue('change-confirm-password-message', '*Try again later');
+      updateContent();
+    });
 }
 
 export function changeUserPassword(state) {

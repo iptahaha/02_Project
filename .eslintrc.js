@@ -48,7 +48,7 @@ module.exports = {
     ],
 
     'no-param-reassign': [2, { props: false }],
-
+    "prefer-promise-reject-errors": 0,
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'no-shadow': 'off',

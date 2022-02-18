@@ -1,6 +1,6 @@
 import { Person } from '../interfaces/person.interface';
-import {closedModal} from "../../pages/Main/ts/modal";
-import {generateNewRowContent, updateObjInState} from "../../pages/Main/ts/updatePersonLogic";
+import { closedModal } from '../../pages/Main/ts/modal';
+import { generateNewRowContent, updateObjInState } from '../../pages/Main/ts/updatePersonLogic';
 
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
@@ -112,7 +112,6 @@ export function showOrHidePassword(buttonID, inputID): boolean {
 export function collectData(id): URLSearchParams {
   const data = new URLSearchParams();
   const formData = new FormData(<HTMLFormElement>getForm(id));
-  console.log([...formData]);
   for (const values of formData) {
     data.append(values[0], <string>values[1]);
   }
@@ -303,16 +302,16 @@ export function createRowCollection(data, sortValue) {
   return dataFragment;
 }
 
-export function slice(value):any | boolean {
-  if(value) {
-    return value.slice()
+export function slice(value): any | boolean {
+  if (value) {
+    return value.slice();
   }
   return false;
 }
 
-export function trimToLowerCase(value:string):any {
-  if(value) {
-   return value.trim().toLowerCase();
+export function trimToLowerCase(value: string): any {
+  if (value) {
+    return value.trim().toLowerCase();
   }
 }
 
@@ -320,14 +319,14 @@ export function includes(id, value) {
   return id.toLowerCase().includes(value);
 }
 
-export function valueLength(value):number | boolean {
-  if(value) {
+export function valueLength(value): number | boolean {
+  if (value) {
     return value.length;
   }
   return false;
 }
 
-export function targetValueClosest(event, value):any {
+export function targetValueClosest(event, value): any {
   return event.target.closest(value);
 }
 
@@ -336,19 +335,19 @@ export function addId(elem) {
 }
 
 export function addElementClass(id, className: string): boolean {
-    id.classList.add(className);
-    return true;
+  id.classList.add(className);
+  return true;
 }
 
 export function addMatch(elem, value) {
-  if(elem) {
+  if (elem) {
     return elem.match(value);
   }
   return false;
 }
 
 export function getQuerySelectorAll(tag) {
-  if(tag) {
+  if (tag) {
     return document.querySelectorAll(tag);
   }
 }
@@ -372,7 +371,7 @@ export function updatePersonResponse(state, response, personObj) {
 }
 
 export function getMatch(value, regex) {
-  if(value) {
-   return value.match(regex);
+  if (value) {
+    return value.match(regex);
   }
 }

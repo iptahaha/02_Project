@@ -40,7 +40,6 @@ export function loginValidate(state, pos, loginMessageId, loginInputId) {
 }
 
 export function passwordValidate(state, pos, passwordMessageId, passwordInputId) {
-  console.log('aaa');
   const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{8,}$/;
   const value = <string>getInputValue(passwordInputId);
 

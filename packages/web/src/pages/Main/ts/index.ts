@@ -1,19 +1,25 @@
-import {addListener, checkLocalStorageThemeValue, changeInterfaceState, validateStatusCheck, showOrHidePassword,
+import {
+  addListener,
+  checkLocalStorageThemeValue,
+  changeInterfaceState,
+  validateStatusCheck,
+  showOrHidePassword,
 } from '../../../utils/ts/utils';
 
 import '../../../utils/styles/mainPage.scss';
-import {changeLng, checkLocalStorageLangValue} from '../../../utils/ts/localization';
-import {closedModal, fillUpdateModal, openModal} from './modal';
-import {updatePerson} from './updatePersonLogic';
-import {getClick} from './selectPersonLogic';
-import {addNewPerson} from './createPersonLogic';
-import {clearAll} from './clearAllLogic';
-import {getData} from './getPersonDataLogic';
-import {deleteRow} from './deletePersonLogic';
-import {filterByName} from './searchByNameLogic';
-import {changeCurrentDB, sortData} from './selectsLogic';
-import {changeUserLogin, changeUserPassword} from './changeUserLogic';
-import {confirmPasswordValidate, loginValidate, passwordValidate} from '../../../utils/validation/baseValidation';
+import { changeLng, checkLocalStorageLangValue } from '../../../utils/ts/localization';
+import { closedModal, fillUpdateModal, openModal } from './modal';
+import { updatePerson } from './updatePersonLogic';
+import { getClick } from './selectPersonLogic';
+import { addNewPerson } from './createPersonLogic';
+import { clearAll } from './clearAllLogic';
+import { getData } from './getPersonDataLogic';
+import { deleteRow } from './deletePersonLogic';
+import { filterByName } from './searchByNameLogic';
+import { changeCurrentDB, sortData } from './selectsLogic';
+import { changeUserLogin, changeUserPassword } from './changeUserLogic';
+import { confirmPasswordValidate, loginValidate, passwordValidate } from '../../../utils/validation/baseValidation';
+import { logout } from './logoutLogic';
 
 export function init() {
   const mainState = {
@@ -117,7 +123,7 @@ export function init() {
   addListener('exitUser', 'click', openModal.bind(null, 'exitModal'));
   addListener('closedExitModal', 'click', closedModal.bind(null, 'exitModal'));
   addListener('cancelExit', 'click', closedModal.bind(null, 'exitModal'));
-  addListener('saveExit', 'click', closedModal.bind(null, 'exitModal'));
+  addListener('saveExit', 'click', logout);
 }
 
 document.addEventListener('DOMContentLoaded', init.bind(null));

@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import mysql from 'mysql2';
+import { RejectError } from '../interfaces/rejectError.interface';
 
 class MySQLUser {
   private db: any;
@@ -18,11 +19,14 @@ class MySQLUser {
     this.db.connect();
   }
 
-  checkLoginUniqueness(loginValue: string): any {
+  checkLoginUniqueness(loginValue: string): Promise<RejectError | boolean> {
     return new Promise((resolve, reject) => {
       this.db.query('SELECT login FROM user_table WHERE login = ?', loginValue, (err: Error, res: any) => {
         if (err) {
-          reject(err);
+          reject({
+            code: 409,
+            message: 'CONNECTION_ERROR',
+          });
         } else if (res.length > 0) {
           resolve(false);
         } else {
@@ -32,11 +36,11 @@ class MySQLUser {
     });
   }
 
-  createNewUser(login: string, password: string) {
+  createNewUser(login: string, password: string): Promise<RejectError | number> {
     return new Promise((resolve, reject) => {
       this.db.query('INSERT INTO user_table SET ?', { login, password }, (err: Error) => {
         if (err) {
-          reject(err);
+          reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else {
           resolve(302);
         }
@@ -44,14 +48,15 @@ class MySQLUser {
     });
   }
 
-  loginIn(login: string, password: string) {
+  loginIn(login: string, password: string): Promise<RejectError | { code: number; id: number; login: string }> {
     return new Promise((resolve, reject) => {
       this.db.query('SELECT * from user_table WHERE login = ?', login, async (err: Error, result: any) => {
         if (err) {
-          reject(err);
+          console.log(err);
+          reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else if (result.length > 0) {
           if (!(await bcrypt.compare(password, result[0].password))) {
-            resolve(401);
+            reject({ code: 403, message: 'WRONG_LOGIN_PASSWORD' });
           } else {
             resolve({
               code: 302,
@@ -60,22 +65,23 @@ class MySQLUser {
             });
           }
         } else {
-          resolve(401);
+          reject({ code: 403, message: 'WRONG_LOGIN_PASSWORD' });
         }
       });
     });
   }
 
-  changeLogin(id: number, newLogin: string) {
+  changeColumnValue(id: number, changeValue: string, changeColumn: string): Promise<RejectError | number> {
     return new Promise((resolve, reject) => {
-      this.db.query(`UPDATE user_table SET login=? WHERE user_id=${id}`, newLogin, (err: Error) => {
+      this.db.query(`UPDATE user_table SET ${changeColumn}=? WHERE user_id=${id}`, changeValue, (err: Error) => {
         if (err) {
-          console.log(err);
-          reject(err);
-        } else {
-          console.log('Login izmenilsya');
-          resolve(200);
+          reject({
+            code: 409,
+            message: 'CONNECTION_ERROR',
+          });
         }
+        console.log('Chtoto izmenilos');
+        resolve(200);
       });
     });
   }
