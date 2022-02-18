@@ -39,8 +39,8 @@ export function init() {
 
   getData(mainState);
 
-  addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
-  addListener('dropdownLanguage', 'change', (event) => changeLng(event));
+  addListener('dropdownTheme', 'change', changeInterfaceState);
+  addListener('dropdownLanguage', 'change', changeLng);
 
   // search
   addListener('search', 'input', filterByName.bind(null, mainState));

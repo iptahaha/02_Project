@@ -26,8 +26,6 @@ export function initLogin() {
     'input',
     loginValidate.bind(null, validateStatus, 0, 'login-message', 'login-in-login'),
   );
-  addListener('dropdownTheme', 'change', (event) => changeInterfaceState(event));
-  addListener('dropdownLanguage', 'change', (event) => changeLng(event));
 
   addListener('login-in-login', 'input', validateStatusCheck.bind(null, validateStatus, 'login-in'));
   addListener('login-in-password', 'input', passwordValidate.bind(null, validateStatus, 1, 'password-message', 'login-in-password'));
@@ -35,6 +33,9 @@ export function initLogin() {
 
   addListener('password-hide', 'click', showOrHidePassword.bind(null, 'password-hide', 'login-in-password'));
   addListener('login-in', 'click', loginIn.bind(null, state));
+
+  addListener('dropdownTheme', 'change', changeInterfaceState);
+  addListener('dropdownLanguage', 'change', changeLng);
 }
 
 document.addEventListener('DOMContentLoaded', initLogin.bind(null));

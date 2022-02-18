@@ -187,11 +187,12 @@ export function checkLocalStorageThemeValue(value) {
   return false;
 }
 
-export function changeInterfaceState(event) {
+export function changeInterfaceState() {
   const page = getSelector('.page');
+  const target = <HTMLSelectElement>event.target;
   page.classList.toggle('light-theme');
   page.classList.toggle('dark-theme');
-  localStorage.setItem('changeTheme', event.target.value);
+  localStorage.setItem('changeTheme', target.value);
   checkLocalStorageThemeValue('changeTheme');
 }
 

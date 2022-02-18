@@ -5,6 +5,8 @@ import russianFile from '../locales/ru.json';
 import ukrFile from '../locales/ua.json';
 import chineseFile from '../locales/ch.json';
 import {getElement} from "./utils";
+import * as events from 'events';
+import * as Events from 'events';
 
 i18next
   .init({
@@ -39,11 +41,13 @@ export function updateContent() {
   localize('html');
 }
 
-export function changeLng(evt) {
-  const selectedLang = evt ? evt.target.value : 'en';
+export function changeLng() {
+  const evt = event;
+  const target = <HTMLSelectElement>event.target;
+  const selectedLang = evt ? target.value : 'en';
   i18next.changeLanguage(selectedLang).then(() => {
     updateContent();
-    localStorage.setItem('changeLanguage', evt.target.value);
+    localStorage.setItem('changeLanguage', target.value);
     checkLocalStorageLangValue('changeLanguage');
   });
 }
