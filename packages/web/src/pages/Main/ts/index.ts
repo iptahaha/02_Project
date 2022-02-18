@@ -19,6 +19,7 @@ import { filterByName } from './searchByNameLogic';
 import { changeCurrentDB, sortData } from './selectsLogic';
 import { changeUserLogin, changeUserPassword } from './changeUserLogic';
 import { confirmPasswordValidate, loginValidate, passwordValidate } from '../../../utils/validation/baseValidation';
+import { logout } from './logoutLogic';
 
 function init() {
   const mainState = {
@@ -155,7 +156,7 @@ function init() {
   addListener('exitUser', 'click', openModal.bind(null, 'exitModal'));
   addListener('closedExitModal', 'click', closedModal.bind(null, 'exitModal'));
   addListener('cancelExit', 'click', closedModal.bind(null, 'exitModal'));
-  addListener('saveExit', 'click', closedModal.bind(null, 'exitModal'));
+  addListener('saveExit', 'click', logout);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

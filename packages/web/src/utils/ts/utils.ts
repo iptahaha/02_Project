@@ -110,7 +110,6 @@ export function showOrHidePassword(buttonID, inputID): boolean {
 export function collectData(id): URLSearchParams {
   const data = new URLSearchParams();
   const formData = new FormData(<HTMLFormElement>getForm(id));
-  console.log([...formData]);
   for (const values of formData) {
     data.append(values[0], <string>values[1]);
   }

@@ -15,7 +15,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
       const accessUser = new MySQLUser();
       accessUser
         .checkLoginUniqueness(decoded.login)
-        .then((value: boolean) => {
+        .then((value) => {
           if (!value) {
             accessUser.endConnection();
             req.user = decoded;

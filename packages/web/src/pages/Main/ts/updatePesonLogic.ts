@@ -79,7 +79,6 @@ export function updatePerson(state) {
   if (validateResult.length > 0) {
 
     addHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
-    console.log(validateResult);
     validateResult.forEach((span, idx) => {
 
       addHTMLValue(formError, span);
