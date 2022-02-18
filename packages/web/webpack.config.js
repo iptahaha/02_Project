@@ -70,5 +70,5 @@ module.exports = {
       excludeChunks: ['register', 'login'],
     }),
   ].filter(Boolean),
-  // devtool: 'source-map',
+//  devtool: 'source-map',
 };

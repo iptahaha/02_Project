@@ -2,6 +2,7 @@ import i18next from 'i18next';
 import locI18next from 'loc-i18next';
 import englishFile from '../locales/en.json';
 import russianFile from '../locales/ru.json';
+import {getElement} from "./utils";
 
 i18next
   .init({
@@ -41,7 +42,7 @@ export function changeLng(evt) {
 
 export function checkLocalStorageLangValue(value) {
   const storageElement = localStorage.getItem(`${value}`);
-  const selectElement = document.getElementById(`${value}`) as HTMLSelectElement;
+  const selectElement = getElement(`${value}`) as HTMLSelectElement;
 
   if (storageElement && selectElement.value !== storageElement) {
     selectElement.value = storageElement;
