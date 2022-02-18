@@ -5,6 +5,12 @@
 1. SQL (PostgreSQL, H2, MySQL)
 2. NoSQL (MongoDB, Redis, Cassandra, GraphDB)
 
+##Start project
+Для страрта пропишите в терминале следущие команды:
+1. yarn install
+2. yarn build
+3. yarn start
+
 ## Pages
 - Main page:
 1. Дропдаун выбора базы данных, по умолчанию - MySQL;
