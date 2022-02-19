@@ -3,6 +3,7 @@ import { DatabaseController } from '../interfaces/databaseContrroler';
 import { AuthMiddleware } from '../middleware/auth.middleware';
 import { MongoDB } from '../database/mongoDB.database';
 import { Person } from '../interfaces/person.interface';
+import { ValidationMiddleware } from '../middleware/validation.middleware';
 
 export class MongoController implements DatabaseController {
   path = '/mongo';
@@ -15,14 +16,14 @@ export class MongoController implements DatabaseController {
 
   checkRoutes() {
     this.router.get('/data', AuthMiddleware.mainAuth, this.readData);
-    this.router.post('/create', AuthMiddleware.mainAuth, this.createData);
-    this.router.post('/update:*', AuthMiddleware.mainAuth, this.updateData);
+    this.router.post('/create', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.createData);
+    this.router.post('/update:*', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.updateData);
     this.router.delete('/delete:*', AuthMiddleware.mainAuth, this.deleteData);
     this.router.delete('/clear', AuthMiddleware.mainAuth, this.clearData);
   }
 
   clearData(req: Request, res: Response): void {
-    const dbRequest = MongoDB.getInstance()
+    const dbRequest = MongoDB.getInstance();
     dbRequest
       .clear()
       .then((code: number) => {
@@ -34,7 +35,7 @@ export class MongoController implements DatabaseController {
   }
 
   createData(req: Request, res: Response): void {
-    const dbRequest = MongoDB.getInstance()
+    const dbRequest = MongoDB.getInstance();
     dbRequest
       .create(req.body)
       .then((code: number) => {
@@ -52,7 +53,7 @@ export class MongoController implements DatabaseController {
       return res.status(409).end();
     }
 
-    const dbRequest = MongoDB.getInstance()
+    const dbRequest = MongoDB.getInstance();
     dbRequest
       .delete(deleteId)
       .then((code: number) => {
@@ -64,7 +65,7 @@ export class MongoController implements DatabaseController {
   }
 
   readData(req: Request, res: Response): void {
-    const dbRequest = MongoDB.getInstance()
+    const dbRequest = MongoDB.getInstance();
     dbRequest
       .read()
       .then((data: Person[]) => {
@@ -81,7 +82,7 @@ export class MongoController implements DatabaseController {
     if (updateId === 'null') {
       return res.status(409).end();
     }
-    const dbRequest = MongoDB.getInstance()
+    const dbRequest = MongoDB.getInstance();
     dbRequest
       .update(req.body, Number(updateId))
       .then((code: number) => {

@@ -4,6 +4,7 @@ import { MySQL } from '../database/mySQL.database';
 import { Person } from '../interfaces/person.interface';
 import { AuthMiddleware } from '../middleware/auth.middleware';
 import { RejectError } from '../interfaces/rejectError.interface';
+import { ValidationMiddleware } from '../middleware/validation.middleware';
 
 export class MySQLController implements DatabaseController {
   path = '/mysql';
@@ -16,8 +17,8 @@ export class MySQLController implements DatabaseController {
 
   checkRoutes() {
     this.router.get('/data', AuthMiddleware.mainAuth, this.readData);
-    this.router.post('/create', AuthMiddleware.mainAuth, this.createData);
-    this.router.post('/update:*', AuthMiddleware.mainAuth, this.updateData);
+    this.router.post('/create', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.createData);
+    this.router.post('/update:*', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.updateData);
     this.router.delete('/delete:*', AuthMiddleware.mainAuth, this.deleteData);
     this.router.delete('/clear', AuthMiddleware.mainAuth, this.clearData);
   }

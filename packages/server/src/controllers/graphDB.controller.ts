@@ -3,6 +3,7 @@ import { DatabaseController } from '../interfaces/databaseContrroler';
 import { AuthMiddleware } from '../middleware/auth.middleware';
 import { GraphDB } from '../database/neo4j.database';
 import { RejectError } from '../interfaces/rejectError.interface';
+import { ValidationMiddleware } from '../middleware/validation.middleware';
 
 export class GraphController implements DatabaseController {
   path = '/graph';
@@ -16,8 +17,8 @@ export class GraphController implements DatabaseController {
   // AuthMiddleware.mainAuth,
   checkRoutes() {
     this.router.get('/data', this.readData);
-    this.router.post('/create', AuthMiddleware.mainAuth, this.createData);
-    this.router.post('/update:*', AuthMiddleware.mainAuth, this.updateData);
+    this.router.post('/create', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.createData);
+    this.router.post('/update:*', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.updateData);
     this.router.delete('/delete:*', AuthMiddleware.mainAuth, this.deleteData);
     this.router.delete('/clear', AuthMiddleware.mainAuth, this.clearData);
   }

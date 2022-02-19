@@ -475,6 +475,11 @@ export function changeUserPasswordRequest(data) {
         setTextValue('change-confirm-password-message', '*Password and confirm password does not match');
       }
 
+      if (value.message === 'PASSWORD_ALREADY_USE') {
+        setTextValue('change-new-password-message', '*You already use this password');
+        setTextValue('change-password-message', '*You already use this password');
+      }
+
       if (value.message === 'CONNECTION_ERROR') {
         setTextValue('change-confirm-password-message', '*Try again later');
       }

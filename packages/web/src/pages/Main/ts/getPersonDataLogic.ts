@@ -22,7 +22,7 @@ export function getData(state) {
       const sortValue = <string>getInputValue('sort-by-select');
       appendChild('tableBody', createRowCollection(state.currentData, sortValue));
       removeClassById('loader', 'page__loader--active');
-      removeDisabledAttributeByID('data-base-select')
+      removeDisabledAttributeByID('data-base-select');
       return true;
     })
     .catch(() => false);
