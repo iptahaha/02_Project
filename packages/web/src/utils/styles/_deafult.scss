@@ -5,13 +5,8 @@ html {
   font-size: 14px;
 }
 
-body {
-  background-color: $main-color-light;
-  font-family: 'Roboto', sans-serif;
-
-  &::-webkit-scrollbar {
-    width: 0;
-  }
+body::-webkit-scrollbar {
+  width: 0;
 }
 
 *, *:after, *:before {
@@ -34,11 +29,10 @@ input {
   display: flex;
   padding: 10px 25px;
   font-size: 22px;
-
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
 
   &__select {
     width: 100px;
-    background-color: $green-header;
     margin-left: 10px;
     padding: 5px 10px;
     text-align: center;
@@ -60,6 +54,7 @@ input {
 
   &--transparent {
     background-color: transparent;
+    box-shadow: none;
   }
 }
 
@@ -69,11 +64,36 @@ input {
 
   .header {
     background-color: $light-accent;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+
+    &__select {
+      background-color: $green-header;
+    }
 
     &--transparent {
       background-color: transparent;
-      box-shadow: none;
+    }
+  }
+
+  .aside {
+    .dropdown__select {
+      background: $light-accent;
+
+      &--option {
+        background-color: $popup-bg-light;
+
+        &:hover {
+          background: $dark-accent;
+        }
+      }
+    }
+
+    .dropbtn {
+      background-color: $light-accent;
+
+      &:hover,
+      &:focus {
+        background-color: #cdebbf;
+      }
     }
   }
 
@@ -81,19 +101,20 @@ input {
     &-buttons__button {
       background-color: $light-accent;
     }
-  }
 
-  .form-holder {
-    background-color: $popup-bg-light;
-  }
+    &-holder {
+      background-color: $popup-bg-light;
+    }
 
-  .form-title {
-    &__text {
-      color: $main-color-dark;
+    &-title {
+      &__text {
+        color: $main-color-dark;
+      }
     }
   }
 
   .control-panel {
+    background-color: $popup-bg-light;
 
     &__button {
       @include button;
@@ -101,21 +122,24 @@ input {
       color: #000000;
     }
 
+    &__search {
+      border: 1px solid $disabled;
+    }
   }
+
 
   .table thead th {
     background-color: darken($popup-bg-light, 10%);
-    border: 2px solid #000000;
+    border: 1px solid $dark_table-accent;
 
     &:last-child {
-      border-right: 2px solid #000000;
+      border-right: 1px solid $dark_table-accent;
     }
   }
 
   .table__row {
     &:hover {
       background-color: darken($popup-bg-light, 6%);
-      cursor: pointer;
     }
 
     &--active {
@@ -128,6 +152,30 @@ input {
 
     td {
       border: 1px solid #959595;
+    }
+  }
+
+  .modal {
+    &-container {
+      background-color: $popup-bg-light;
+    }
+
+    &-label {
+      color: $placeholder-text;
+    }
+
+    &-form {
+      &__input {
+        border: 1px solid $shade-border;
+      }
+
+      &__button {
+        background-color: $light-accent;
+      }
+
+      &__error {
+        color: $error-color;
+      }
     }
   }
 }
@@ -152,7 +200,7 @@ input {
 
   .form {
     &-holder {
-    box-shadow: none;
+      box-shadow: none;
     }
 
     &-inputs {
@@ -209,9 +257,8 @@ input {
       background-color: $dark-accent;
       color: $popup-bg-light;
       box-shadow: 0 3px 3px rgba(0, 0, 0, 0.8);
-      //box-shadow: 2px 2px 2px 2px black;
 
-    &--option {
+      &--option {
         background-color: $popup-bg-dark;
       }
     }
@@ -219,17 +266,17 @@ input {
 
   .aside .dropdown__select--option {
     option:hover {
-      background-color:  red!important;
+      background-color: red !important;
     }
   }
 
   .table thead th {
     background-color: lighten($popup-bg-dark, 8%);
     color: $popup-bg-light;
-    border: 1px solid #FFFFFF;
+    border: 1px solid $popup-bg-light;
 
     &:last-child {
-      border-right: 1px solid #FFFFFF;
+      border-right: 1px solid $popup-bg-light;
     }
   }
 
@@ -260,7 +307,8 @@ input {
   }
 
   .modal-form__input {
-    color: $popup-bg-light;
+    color: $lightgray;
+    border: 1px solid;
   }
 
   .modal-form__button {
