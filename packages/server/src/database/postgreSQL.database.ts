@@ -47,6 +47,7 @@ export class PostgreSQL implements SQLCRUD {
     return new Promise((resolve, reject) => {
       this.db.query(query, (err: Error, result: any) => {
         if (err) {
+          console.log(err);
           reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else {
           resolve(result.rows);
