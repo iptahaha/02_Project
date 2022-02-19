@@ -1,7 +1,7 @@
-import { Person } from '../interfaces/person.interface';
+import { updateContent } from './localization';
 import { closedModal } from '../../pages/Main/ts/modal';
 import { generateNewRowContent, updateObjInState } from '../../pages/Main/ts/updatePersonLogic';
-import { updateContent } from './localization';
+import { Person } from '../interfaces/person.interface';
 
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
@@ -313,10 +313,7 @@ export function slice(value): any | boolean {
 }
 
 export function trimToLowerCase(value: string): any {
-  if (value) {
-    return value.trim().toLowerCase();
-  }
-  return false;
+  return value.trim().toLowerCase();
 }
 
 export function includes(id, value) {
@@ -324,10 +321,7 @@ export function includes(id, value) {
 }
 
 export function valueLength(value): number | boolean {
-  if (value) {
-    return value.length;
-  }
-  return false;
+  return value.length;
 }
 
 export function targetValueClosest(event, value): any {
