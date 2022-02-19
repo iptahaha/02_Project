@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import Controller from '../interfaces/controller.interface';
 import { generateJWT } from '../middleware/jwtGenerate.middleware';
-import authMiddleware from '../middleware/auth.middleware';
 import { RejectError } from '../interfaces/rejectError.interface';
 import { MySQL } from '../database/mySQL.database';
+import { AuthMiddleware } from '../middleware/auth.middleware';
 
 dotenv.config();
 
@@ -21,9 +21,9 @@ export class AuthenticationController implements Controller {
   checkRoutes() {
     this.router.post('/register', AuthenticationController.register);
     this.router.post('/login', AuthenticationController.login);
-    this.router.post('/change-login', authMiddleware, AuthenticationController.changeLogin);
-    this.router.post('/change-password', authMiddleware, AuthenticationController.changePassword);
-    this.router.delete('/logout', authMiddleware, AuthenticationController.logout);
+    this.router.post('/change-login', AuthMiddleware.mainAuth, AuthenticationController.changeLogin);
+    this.router.post('/change-password', AuthMiddleware.mainAuth, AuthenticationController.changePassword);
+    this.router.delete('/logout', AuthMiddleware.mainAuth, AuthenticationController.logout);
   }
 
   static async register(req: Request, res: Response) {

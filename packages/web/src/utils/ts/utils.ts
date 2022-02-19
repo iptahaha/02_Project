@@ -438,7 +438,7 @@ export function getFetchLogic(state, data, globalErrorId) {
       }
 
       if (value.message === 'CONNECTION_ERROR') {
-        setAttribute(globalErrorId, 'data-i18n', 'error.login/pass-wrong');
+        setAttribute(globalErrorId, 'data-i18n', 'error.try-later');
       }
 
       updateContent();

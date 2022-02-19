@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express';
 import { DatabaseController } from '../interfaces/databaseContrroler';
 import { MySQL } from '../database/mySQL.database';
 import { Person } from '../interfaces/person.interface';
-import authMiddleware from '../middleware/auth.middleware';
+import { AuthMiddleware } from '../middleware/auth.middleware';
 
 export class MySQLController implements DatabaseController {
   path = '/mysql';
@@ -14,11 +14,11 @@ export class MySQLController implements DatabaseController {
   }
 
   checkRoutes() {
-    this.router.get('/data', authMiddleware, this.readData);
-    this.router.post('/create', authMiddleware, this.createData);
-    this.router.post('/update:*', authMiddleware, this.updateData);
-    this.router.delete('/delete:*', authMiddleware, this.deleteData);
-    this.router.delete('/clear', authMiddleware, this.clearData);
+    this.router.get('/data', AuthMiddleware.mainAuth, this.readData);
+    this.router.post('/create', AuthMiddleware.mainAuth, this.createData);
+    this.router.post('/update:*', AuthMiddleware.mainAuth, this.updateData);
+    this.router.delete('/delete:*', AuthMiddleware.mainAuth, this.deleteData);
+    this.router.delete('/clear', AuthMiddleware.mainAuth, this.clearData);
   }
 
   clearData(req: Request, res: Response) {
