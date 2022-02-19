@@ -3,8 +3,6 @@ import { DatabaseController } from '../interfaces/databaseContrroler';
 import { MySQL } from '../database/mySQL.database';
 import { Person } from '../interfaces/person.interface';
 import { AuthMiddleware } from '../middleware/auth.middleware';
-import { RejectError } from '../interfaces/rejectError.interface';
-import { ValidationMiddleware } from '../middleware/validation.middleware';
 
 export class MySQLController implements DatabaseController {
   path = '/mysql';
@@ -17,8 +15,8 @@ export class MySQLController implements DatabaseController {
 
   checkRoutes() {
     this.router.get('/data', AuthMiddleware.mainAuth, this.readData);
-    this.router.post('/create', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.createData);
-    this.router.post('/update:*', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.updateData);
+    this.router.post('/create', AuthMiddleware.mainAuth, this.createData);
+    this.router.post('/update:*', AuthMiddleware.mainAuth, this.updateData);
     this.router.delete('/delete:*', AuthMiddleware.mainAuth, this.deleteData);
     this.router.delete('/clear', AuthMiddleware.mainAuth, this.clearData);
   }
@@ -31,8 +29,8 @@ export class MySQLController implements DatabaseController {
       .then(() => {
         res.status(200).end();
       })
-      .catch((value: RejectError) => {
-        res.status(value.code).send({ message: value.message });
+      .catch(() => {
+        res.status(409).end();
       });
   }
 
@@ -48,12 +46,9 @@ export class MySQLController implements DatabaseController {
     const dbRequest = MySQL.getInstance();
     dbRequest
       .update(query, column)
-      .then(() => {
-        res.status(200).end();
-      })
-      .catch((value: RejectError) => {
-        res.status(value.code).send({ message: value.message });
-      });
+      .then(() => res.status(200).end())
+      .catch(() => res.status(409).end());
+    return id;
   }
 
   createData(req: Request, res: Response) {
@@ -63,12 +58,8 @@ export class MySQLController implements DatabaseController {
     const dbRequest = MySQL.getInstance();
     dbRequest
       .create(query, column)
-      .then(() => {
-        res.status(200).end();
-      })
-      .catch((value: RejectError) => {
-        res.status(value.code).send({ message: value.message });
-      });
+      .then(() => res.status(200).end())
+      .catch(() => res.status(409).end());
   }
 
   deleteData(req: Request, res: Response) {
@@ -82,12 +73,9 @@ export class MySQLController implements DatabaseController {
     const dbRequest = MySQL.getInstance();
     dbRequest
       .delete(query)
-      .then(() => {
-        res.status(200).end();
-      })
-      .catch((value: RejectError) => {
-        res.status(value.code).send({ message: value.message });
-      });
+      .then(() => res.status(200).end())
+      .catch(() => res.status(409).end());
+    return deleteId;
   }
 
   readData(req: Request, res: Response): void {
@@ -98,8 +86,8 @@ export class MySQLController implements DatabaseController {
       .then((value: Person[]) => {
         res.send(value);
       })
-      .catch((value: RejectError) => {
-        res.status(value.code).send({ message: value.message });
+      .catch(() => {
+        res.status(409).end();
       });
   }
 }

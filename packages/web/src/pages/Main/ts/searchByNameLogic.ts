@@ -16,8 +16,7 @@ export function filterByName(state: MainState): MainState {
   const searchValue = <string>getInputValue('search');
   const sortValue = <string>getInputValue('sort-by-select');
   const sortByName = trimToLowerCase(searchValue);
-
-  if (valueLength(sortByName) === 0) {
+  if (!valueLength(sortByName)) {
     state.currentSortedData = null;
     removeChild('tableBody');
     appendChild('tableBody', createRowCollection(state.currentData, sortValue));

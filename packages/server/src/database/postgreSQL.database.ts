@@ -1,8 +1,8 @@
-import mysql from 'mysql2';
+import { Pool } from 'pg';
 import { SQLCRUD } from '../interfaces/database.interface';
 
-export class MySQL implements SQLCRUD {
-  private static instance: MySQL | null;
+export class PostgreSQL implements SQLCRUD {
+  private static instance: PostgreSQL | null;
 
   private db: any;
 
@@ -11,23 +11,23 @@ export class MySQL implements SQLCRUD {
   }
 
   public static getInstance() {
-    if (!MySQL.instance) {
-      MySQL.instance = new MySQL();
+    if (!PostgreSQL.instance) {
+      PostgreSQL.instance = new PostgreSQL();
     }
-    return MySQL.instance;
+    return PostgreSQL.instance;
   }
 
   private connection() {
-    this.db = mysql.createConnection({
-      // connectionLimit: 5,
-      host: process.env.MYSQL_HOST || 'localhost',
-      user: process.env.MYSQL_USER || 'root',
-      password: process.env.MYSQL_PASSWORD || 'root',
-      database: process.env.MYSQL_DATABASE || 'userdatabase',
+    this.db = new Pool({
+      host: process.env.POSTGRESQL_HOST || 'localhost',
+      user: process.env.POSTGRESQL_USER || 'postgres',
+      password: process.env.POSTGRESQL_PASSWORD || 'root',
+      database: process.env.POSTGRESQL_DATABASE || 'persons',
+      port: 5432,
     });
 
     this.db.on('error', () => {
-      MySQL.instance = null;
+      PostgreSQL.instance = null;
     });
   }
 
@@ -47,18 +47,17 @@ export class MySQL implements SQLCRUD {
     return new Promise((resolve, reject) => {
       this.db.query(query, (err: Error, result: any) => {
         if (err) {
-          console.log(err);
           reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else {
-          resolve(result);
+          resolve(result.rows);
         }
       });
     });
   }
 
-  create(query: string, column: Record<string, unknown>): any {
+  create(query: string): any {
     return new Promise((resolve, reject) => {
-      this.db.query(query, column, (err: Error) => {
+      this.db.query(query, (err: Error) => {
         if (err) {
           reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else {
@@ -68,11 +67,10 @@ export class MySQL implements SQLCRUD {
     });
   }
 
-  update(query: string, updateColumn: Record<string, unknown> | string): any {
+  update(query: string): any {
     return new Promise((resolve, reject) => {
-      this.db.query(query, updateColumn, (err: Error) => {
+      this.db.query(query, (err: Error) => {
         if (err) {
-          console.log(err);
           reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else {
           resolve(302);

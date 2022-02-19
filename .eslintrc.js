@@ -14,12 +14,7 @@ module.exports = {
     jest: true,
     node: true,
   },
-  extends: [
-    'airbnb',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'plugin:sonarjs/recommended',
-  ],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'prettier', 'plugin:sonarjs/recommended'],
   plugins: ['import', 'prettier', '@typescript-eslint'],
   settings: {
     'import/resolver': { node: { extensions: ['.js', '.ts', '.json'] } },
@@ -48,7 +43,8 @@ module.exports = {
     ],
 
     'no-param-reassign': [2, { props: false }],
-    "prefer-promise-reject-errors": 0,
+    'prefer-promise-reject-errors': 0,
+    'class-methods-use-this': 'off',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'no-shadow': 'off',
