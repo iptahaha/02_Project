@@ -49,21 +49,6 @@ export function updatePersonRequest(state, data, personObj) {
   })
     .then((response) => {
       updatePersonResponse(state, response, personObj);
-      // if (response.redirected) {
-      //   window.location.href = response.url;
-      //   return false;
-      // }
-      //
-      // if (response.status === 200) {
-      //   setHTMLValue(state.currentSelectedNode, generateNewRowContent(state.currentSelectedId, personObj));
-      //   updateObjInState(state.currentData, state.currentSelectedId, personObj);
-      //
-      //   if (state.currentSortedData !== null) {
-      //     updateObjInState(state.currentSortedData, state.currentSelectedId, personObj);
-      //   }
-      // }
-      // removeDisabledAttributeByID('updateButton');
-      // closedModal('modalUpdate');
       return true;
     })
     .catch(() => {
@@ -81,7 +66,6 @@ export function updatePerson(state) {
 
   if (valueLength(validateResult) > 0) {
     setHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
-    // console.log(validateResult);
     validateResult.forEach((span, idx) => {
       addHTMLValue(formError, span);
       if (idx !== <number>valueLength(validateResult) - 1) {
