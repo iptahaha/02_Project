@@ -3,6 +3,7 @@ import { DatabaseController } from '../interfaces/databaseContrroler';
 import { MySQL } from '../database/mySQL.database';
 import { Person } from '../interfaces/person.interface';
 import { AuthMiddleware } from '../middleware/auth.middleware';
+import { RejectError } from '../interfaces/rejectError.interface';
 
 export class MySQLController implements DatabaseController {
   path = '/mysql';
@@ -29,8 +30,8 @@ export class MySQLController implements DatabaseController {
       .then(() => {
         res.status(200).end();
       })
-      .catch(() => {
-        res.status(409).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 
@@ -49,8 +50,8 @@ export class MySQLController implements DatabaseController {
       .then(() => {
         res.status(200).end();
       })
-      .catch(() => {
-        res.status(409).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 
@@ -64,8 +65,8 @@ export class MySQLController implements DatabaseController {
       .then(() => {
         res.status(200).end();
       })
-      .catch(() => {
-        res.status(409).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 
@@ -83,8 +84,8 @@ export class MySQLController implements DatabaseController {
       .then(() => {
         res.status(200).end();
       })
-      .catch(() => {
-        res.status(409).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 
@@ -96,8 +97,8 @@ export class MySQLController implements DatabaseController {
       .then((value: Person[]) => {
         res.send(value);
       })
-      .catch(() => {
-        res.status(409).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 }

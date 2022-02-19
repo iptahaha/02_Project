@@ -8,12 +8,12 @@ export interface SQLCRUD {
   create(query: string, column: Record<string, unknown>): any;
 }
 
-export interface ObjDatabase {
-  get(): any;
-  delete(id: string, query?: string): any;
-  clear(query?: string): any;
-  update(obj?: Person, id?: number): any;
-  create(obj?: Person, query?: string): any;
+export interface NoSQLCRUD {
+  read(): any;
+  delete(id: string): any;
+  clear(): any;
+  update(obj: Person, id: number): any;
+  create(obj: Person, query: string): any;
 }
 
 // updateColumn?: Record<string, unknown> | string, query?: string
