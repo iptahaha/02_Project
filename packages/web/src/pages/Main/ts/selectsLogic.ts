@@ -34,5 +34,5 @@ export function changeCurrentDB(state) {
   removeChild('tableBody');
   setInputValue('search', '');
   getData(state);
-  // TODO пусть возвращает все state yopta
+  localStorage.setItem('changeDb', state.currentDB);
 }
