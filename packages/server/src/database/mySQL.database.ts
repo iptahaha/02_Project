@@ -19,7 +19,6 @@ export class MySQL implements SQLCRUD {
 
   private connection() {
     this.db = mysql.createConnection({
-      // connectionLimit: 5,
       host: process.env.MYSQL_HOST || 'localhost',
       user: process.env.MYSQL_USER || 'root',
       password: process.env.MYSQL_PASSWORD || 'root',

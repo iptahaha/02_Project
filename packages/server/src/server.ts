@@ -6,9 +6,6 @@ import { MongoController } from './controllers/mongo.controller';
 import { GraphController } from './controllers/graphDB.controller';
 import { PostgreSQLController } from './controllers/postgreSQL.controller';
 
-// import {MongoDB} from "./database/mongoDB";
-// import MongoController from "./controllers/mainMongo";
-
 const app = new Application([
   new AuthenticationController(),
   new PagesController(),
