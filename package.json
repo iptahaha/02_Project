@@ -1,5 +1,5 @@
 {
-  "name": "server-tech",
+  "name": "frogers",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -32,8 +32,10 @@
     "node": "16.x"
   },
   "repository": "https://github.com/iptahaha/02_Project.git",
-  "private": "true",
+  "private": true,
   "devDependencies": {
     "typescript": "^4.5.5"
-  }
+  },
+  "main": "index.js",
+  "author": "Tykha Nataliia <iptahaha@gmail.com>"
 }
