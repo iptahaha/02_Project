@@ -4,6 +4,7 @@ import { AuthenticationController } from './controllers/auth.controller';
 import { MySQLController } from './controllers/mySQL.controller';
 import { MongoController } from './controllers/mongo.controller';
 import { GraphController } from './controllers/graphDB.controller';
+import { PostgreSQLController } from './controllers/postgreSQL.controller';
 
 // import {MongoDB} from "./database/mongoDB";
 // import MongoController from "./controllers/mainMongo";
@@ -14,6 +15,7 @@ const app = new Application([
   new MySQLController(),
   new MongoController(),
   new GraphController(),
+  new PostgreSQLController(),
 ]);
 
 app.start();

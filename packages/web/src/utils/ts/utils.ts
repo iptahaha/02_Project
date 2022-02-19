@@ -324,10 +324,7 @@ export function includes(id, value) {
 }
 
 export function valueLength(value): number | boolean {
-  if (value) {
-    return value.length;
-  }
-  return false;
+  return value.length;
 }
 
 export function targetValueClosest(event, value): any {
