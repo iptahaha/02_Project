@@ -4,9 +4,6 @@ import { AuthenticationController } from './controllers/auth.controller';
 import { MySQLController } from './controllers/mySQL.controller';
 import MongoController from './controllers/mongo.controller';
 
-// import {MongoDB} from "./database/mongoDB";
-// import MongoController from "./controllers/mainMongo";
-
 const app = new Application([
   new AuthenticationController(),
   new PagesController(),
