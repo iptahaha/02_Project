@@ -2,6 +2,7 @@ import { updateContent } from './localization';
 import { closedModal } from '../../pages/Main/ts/modal';
 import { generateNewRowContent, updateObjInState } from '../../pages/Main/ts/updatePersonLogic';
 import { Person } from '../interfaces/person.interface';
+import {getData} from "../../pages/Main/ts/getPersonDataLogic";
 
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
@@ -181,6 +182,18 @@ export function checkLocalStorageThemeValue(value) {
   if (storageElement && selectElement.value !== storageElement) {
     page.classList.toggle('light-theme');
     page.classList.toggle('dark-theme');
+    selectElement.value = storageElement;
+    return true;
+  }
+  return false;
+}
+
+export function checkLocalStorageDbValue(value, state) {
+  const storageElement = localStorage.getItem(`${value}`);
+  const selectElement = document.getElementById('data-base-select') as HTMLSelectElement;
+
+  if (storageElement && selectElement.value !== storageElement) {
+    state.currentDB = storageElement;
     selectElement.value = storageElement;
     return true;
   }

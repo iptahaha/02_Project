@@ -4,6 +4,7 @@ import {
   changeInterfaceState,
   validateStatusCheck,
   showOrHidePassword,
+  checkLocalStorageDbValue
 } from '../../../utils/ts/utils';
 
 import '../../../utils/styles/mainPage.scss';
@@ -36,11 +37,12 @@ export function init() {
 
   checkLocalStorageThemeValue('changeTheme');
   checkLocalStorageLangValue('changeLanguage');
-
-  getData(mainState);
+  checkLocalStorageDbValue('changeDb', mainState);
 
   addListener('dropdownTheme', 'change', changeInterfaceState);
   addListener('dropdownLanguage', 'change', changeLng);
+
+  getData(mainState);
 
   // search
   addListener('search', 'input', filterByName.bind(null, mainState));
