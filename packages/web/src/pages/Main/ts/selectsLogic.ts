@@ -30,6 +30,7 @@ export function changeCurrentDB(state) {
   state.currentSelectedObj = null;
   setDisabledAttributeByID('buttonDelete');
   setDisabledAttributeByID('buttonUpdate');
+  setDisabledAttributeByID('data-base-select')
   removeChild('tableBody');
   setInputValue('search', '');
   getData(state);
