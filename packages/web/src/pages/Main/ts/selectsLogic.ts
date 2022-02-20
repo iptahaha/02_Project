@@ -1,5 +1,12 @@
-import { appendChild, createRowCollection, getInputValue, removeChild, setDisabledAttributeByID,
-  slice, setInputValue } from '../../../utils/ts/utils';
+import {
+  appendChild,
+  createRowCollection,
+  getInputValue,
+  removeChild,
+  setDisabledAttributeByID,
+  slice,
+  setInputValue,
+} from '../../../utils/ts/utils';
 import { getData } from './getPersonDataLogic';
 
 export function sortData(state) {
@@ -11,9 +18,9 @@ export function sortData(state) {
   setDisabledAttributeByID('buttonUpdate');
   let dataCopy;
   if (state.currentSortedData !== null) {
-    dataCopy = slice(state.currentSortedData);//state.currentSortedData.slice();
+    dataCopy = slice(state.currentSortedData);
   } else {
-    dataCopy = slice(state.currentData)//state.currentData.slice();
+    dataCopy = slice(state.currentData);
   }
 
   removeChild('tableBody');
@@ -30,7 +37,7 @@ export function changeCurrentDB(state) {
   state.currentSelectedObj = null;
   setDisabledAttributeByID('buttonDelete');
   setDisabledAttributeByID('buttonUpdate');
-  setDisabledAttributeByID('data-base-select')
+  setDisabledAttributeByID('data-base-select');
   removeChild('tableBody');
   setInputValue('search', '');
   getData(state);

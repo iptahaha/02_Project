@@ -29,6 +29,7 @@ jest.mock('./../../utils/ts/utils', () => ({
   addClass: jest.fn(),
   validateStatusCheck: jest.fn(),
   setInputValue: jest.fn(),
+  checkLocalStorageDbValue: jest.fn(),
 }));
 
 jest.mock('./../../utils/ts/localization', () => ({

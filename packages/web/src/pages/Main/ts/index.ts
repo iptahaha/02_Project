@@ -4,7 +4,7 @@ import {
   changeInterfaceState,
   validateStatusCheck,
   showOrHidePassword,
-  checkLocalStorageDbValue
+  checkLocalStorageDbValue,
 } from '../../../utils/ts/utils';
 
 import '../../../utils/styles/mainPage.scss';
@@ -81,43 +81,108 @@ export function init() {
   addListener('closeUserModal', 'click', closedModal.bind(null, 'modalUser'));
 
   // login
-
-  addListener('update-login', 'input', loginValidate.bind(null, validateLoginChange, 0, 'change-login-message', 'update-login'));
+  addListener(
+    'update-login',
+    'input',
+    loginValidate.bind(null, validateLoginChange, 0, 'change-login-message', 'update-login'),
+  );
   addListener('update-login', 'input', validateStatusCheck.bind(null, validateLoginChange, 'changeLoginButton'));
-  addListener('update-login-password', 'input', passwordValidate.bind(null, validateLoginChange, 1, 'change-login-password-message', 'update-login-password'));
-  addListener('update-login-password', 'input', validateStatusCheck.bind(null, validateLoginChange, 'changeLoginButton'))
-  addListener('update-login-password-hide', 'click', showOrHidePassword.bind(null, 'update-login-password-hide', 'update-login-password'));
+  addListener(
+    'update-login-password',
+    'input',
+    passwordValidate.bind(null, validateLoginChange, 1, 'change-login-password-message', 'update-login-password'),
+  );
+  addListener(
+    'update-login-password',
+    'input',
+    validateStatusCheck.bind(null, validateLoginChange, 'changeLoginButton'),
+  );
+  addListener(
+    'update-login-password-hide',
+    'click',
+    showOrHidePassword.bind(null, 'update-login-password-hide', 'update-login-password'),
+  );
   addListener('changeLoginButton', 'click', changeUserLogin.bind(null, validateLoginChange));
 
   // password
+  addListener(
+    'update-password',
+    'input',
+    validateStatusCheck.bind(null, validatePasswordChange, 'changePasswordButton'),
+  );
+  addListener(
+    'update-password',
+    'input',
+    passwordValidate.bind(null, validatePasswordChange, 0, 'change-password-message', 'update-password'),
+  );
 
-  addListener('update-password', 'input', validateStatusCheck.bind(null, validatePasswordChange, 'changePasswordButton'));
-  addListener('update-password', 'input', passwordValidate.bind(null, validatePasswordChange, 0, 'change-password-message', 'update-password'));
-
-  addListener('update-new-password', 'input', passwordValidate.bind(null,
-    validatePasswordChange, 1, 'change-new-password-message', 'update-new-password'));
-  addListener('update-new-password', 'input', confirmPasswordValidate.bind(null,
-    validatePasswordChange, 2,
-    'change-confirm-password-message',
+  addListener(
     'update-new-password',
-    'update-confirm-new-password',
-  ))
-  addListener('update-new-password', 'input', validateStatusCheck.bind(null, validatePasswordChange, 'changePasswordButton'));
+    'input',
+    passwordValidate.bind(null, validatePasswordChange, 1, 'change-new-password-message', 'update-new-password'),
+  );
+  addListener(
+    'update-new-password',
+    'input',
+    confirmPasswordValidate.bind(
+      null,
+      validatePasswordChange,
+      2,
+      'change-confirm-password-message',
+      'update-new-password',
+      'update-confirm-new-password',
+    ),
+  );
+  addListener(
+    'update-new-password',
+    'input',
+    validateStatusCheck.bind(null, validatePasswordChange, 'changePasswordButton'),
+  );
 
-  addListener('update-confirm-new-password', 'input', passwordValidate.bind(null, validatePasswordChange, 1,
+  addListener(
+    'update-confirm-new-password',
+    'input',
+    passwordValidate.bind(
+      null,
+      validatePasswordChange,
+      1,
       'change-confirm-password-message',
       'update-confirm-new-password',
-    ));
-  addListener('update-confirm-new-password', 'input', confirmPasswordValidate.bind(null, validatePasswordChange, 2,
-    'change-confirm-password-message',
-    'update-new-password',
+    ),
+  );
+  addListener(
     'update-confirm-new-password',
-  ))
-  addListener('update-confirm-new-password', 'input', validateStatusCheck.bind(null, validatePasswordChange, 'changePasswordButton'));
+    'input',
+    confirmPasswordValidate.bind(
+      null,
+      validatePasswordChange,
+      2,
+      'change-confirm-password-message',
+      'update-new-password',
+      'update-confirm-new-password',
+    ),
+  );
+  addListener(
+    'update-confirm-new-password',
+    'input',
+    validateStatusCheck.bind(null, validatePasswordChange, 'changePasswordButton'),
+  );
 
-  addListener('update-password-hide', 'click', showOrHidePassword.bind(null, 'update-password-hide', 'update-password'));
-  addListener('update-new-password-hide', 'click', showOrHidePassword.bind(null, 'update-new-password-hide', 'update-new-password'));
-  addListener('update-confirm-password-hide', 'click', showOrHidePassword.bind(null, 'update-confirm-password-hide', 'update-confirm-new-password'));
+  addListener(
+    'update-password-hide',
+    'click',
+    showOrHidePassword.bind(null, 'update-password-hide', 'update-password'),
+  );
+  addListener(
+    'update-new-password-hide',
+    'click',
+    showOrHidePassword.bind(null, 'update-new-password-hide', 'update-new-password'),
+  );
+  addListener(
+    'update-confirm-password-hide',
+    'click',
+    showOrHidePassword.bind(null, 'update-confirm-password-hide', 'update-confirm-new-password'),
+  );
 
   addListener('changePasswordButton', 'click', changeUserPassword.bind(null, validatePasswordChange));
 

@@ -5,8 +5,6 @@ import russianFile from '../locales/ru.json';
 import ukrFile from '../locales/ua.json';
 import chineseFile from '../locales/ch.json';
 import {getElement} from "./utils";
-import * as events from 'events';
-import * as Events from 'events';
 
 i18next
   .init({

@@ -14,7 +14,6 @@ export class GraphController implements DatabaseController {
     this.checkRoutes();
   }
 
-  // AuthMiddleware.mainAuth,
   checkRoutes() {
     this.router.get('/data', this.readData);
     this.router.post('/create', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.createData);
