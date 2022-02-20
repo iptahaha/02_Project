@@ -31,7 +31,7 @@ i18next
     updateContent();
   });
 
-export function updateContent() {
+export function updateContent(): void {
   const localize = locI18next.init(i18next, {
     optionsAttr: 'data-i18n-options',
     useOptionsAttr: true,
@@ -39,7 +39,7 @@ export function updateContent() {
   localize('html');
 }
 
-export function changeLng() {
+export function changeLng(): void {
   const evt = event;
   const target = <HTMLSelectElement>event.target;
   const selectedLang = evt ? target.value : 'en';
@@ -50,7 +50,7 @@ export function changeLng() {
   });
 }
 
-export function checkLocalStorageLangValue(value) {
+export function checkLocalStorageLangValue(value: string): boolean {
   const storageElement = localStorage.getItem(`${value}`);
   const selectElement = getElement(`${value}`) as HTMLSelectElement;
 
@@ -61,4 +61,5 @@ export function checkLocalStorageLangValue(value) {
     });
     return true;
   }
+  return false;
 }

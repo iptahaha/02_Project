@@ -83,8 +83,6 @@
     width: 100%;
     font-size: 1.2em;
   }
-
-
 }
 
 .form-global-message {
@@ -105,26 +103,57 @@
   }
 }
 
-@media screen and (max-width: 678px) {
+@media screen and (max-width: 430px) {
+  .form-inputs {
 
-  .dark-theme {
-    .header--transparent {
-      background-color: $popup-bg-dark;
+    &__button {
+      left: 93%;
+      font-size: 25px;
     }
   }
 
+  .dark-theme .form-holder {
+    background-color: $main-color-dark;
+  }
+
+
   .light-theme {
-    .header--transparent {
-      background-color: $popup-bg-light;
+    background-color: $popup-bg-light;
+
+    .form-holder {
+      box-shadow: none;
     }
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .form {
+    &-inputs {
+      margin-bottom: 8px;
+
+      &__message {
+        margin: 0;
+      }
+    }
+
+    &-global-message {
+      margin-top: 0;
+    }
+  }
+
+
+  .form-holder {
+    box-shadow: none;
   }
 
   .header--transparent {
     position: relative;
+    flex-direction: column;
 
     .header__drop-down {
       font-size: 14px;
       text-align: center;
+      margin: 10px;
     }
   }
 
@@ -155,14 +184,29 @@
     padding: 10px 20px;
     border-radius: 0;
   }
+
+  .dark-theme {
+    .header--transparent {
+      background-color: $popup-bg-dark;
+    }
+
+    .form-holder {
+      background-color: $main-color-dark;
+    }
+  }
+
+  .light-theme {
+    background-color: $popup-bg-light;
+
+    .header--transparent {
+      background-color: $main-color-light;
+      box-shadow: 0 0 3px 3px lightgrey;
+    }
+  }
 }
 
-@media screen and (max-width: 430px) {
-  .form-inputs {
-
-    &__button {
-      left: 93%;
-      font-size: 25px;
-    }
+@media screen and (min-width: 520px) {
+  .header--transparent {
+    flex-direction: row;
   }
 }

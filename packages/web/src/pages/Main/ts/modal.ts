@@ -2,7 +2,7 @@ import { getQuerySelectorAll, setDisplay, setInputValue, setTextValue } from '..
 import { Person } from '../../../utils/interfaces/person.interface';
 
 export function openModal(id: string): boolean {
-  setDisplay(id, 'block');
+  setDisplay(id, 'flex');
   return true;
 }
 

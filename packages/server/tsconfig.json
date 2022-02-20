@@ -9,7 +9,9 @@
     "strict": true,                                   /* Enable all strict type-checking options. */
     "skipLibCheck": true                              /* Skip type checking all .d.ts files. */
   },
-  "exclude": ["node_modules", "src/tests"],
+  "exclude": ["node_modules",
+    "src/test"
+  ],
   "include": ["src/**/*.ts"],
   "typeRoots": [
     "./@types",
