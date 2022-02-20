@@ -63,13 +63,16 @@
       height: 40px;
       border: none;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-      text-align: center;
+      border-radius: 2px;
       font-size: 1.1em;
       cursor: pointer;
+      padding: 5px 10px;
 
       &--option {
+        display: inline-block;
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         padding: 10px 0;
+        text-align: left;
         cursor: pointer;
 
         &:hover {
@@ -234,7 +237,7 @@
 
   &-container {
     width: 600px;
-    height: 100%;
+    height: max-content;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -325,13 +328,6 @@
         left: 95%;
         transform: translate(-50%, -50%);
         margin-top: -5px;
-
-        //&:hover {
-        //  &:before {
-        //    color: $popup-bg-light;
-        //    cursor: pointer;
-        //  }
-        //}
       }
     }
 
@@ -382,6 +378,200 @@
         border: none;
         padding: 15px;
         cursor: pointer;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 1120px) {
+  .header {
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    padding: 7px 0 0;
+
+    &__drop {
+      flex-direction: column;
+
+      &-down {
+        margin: 0 0 10px 10px;
+      }
+    }
+
+    &__change span {
+      padding: 0 7px;
+      cursor: pointer;
+      margin-top: 24px;
+      display: inline-block;
+    }
+  }
+
+  .container {
+    display: block;
+  }
+
+  .aside {
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5px 10px 0 0;
+
+    .dropdown {
+      display: inline-block;
+      margin: 0 auto 7px;
+    }
+  }
+
+  .main {
+    padding: 0 5px 0 0;
+
+    .control-panel {
+      flex-wrap: wrap;
+      flex-direction: row;
+      padding: 10px 0;
+
+      &__buttons-holder {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      &__button {
+        margin: 11px;
+      }
+
+      &__buttons-holder {
+        justify-content: center;
+      }
+
+      &__search {
+        width: 290px;
+        margin: auto;
+
+        &-holder {
+          padding: 10px 0 10px;
+          margin: auto;
+        }
+      }
+    }
+  }
+
+  .modal {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-container {
+    width: 100%;
+    padding: 0 15px;
+    height: max-content;
+  }
+
+  #modalUser .modal-form__button-hide {
+    left: 92%;
+  }
+
+
+
+
+
+
+
+
+}
+
+@media only screen and (min-width: 580px) and (max-width: 1120px) {
+  .header {
+    padding: 10px 15px 0;
+    justify-content: space-between;
+
+    &__drop {
+      flex-direction: row;
+    }
+
+    &__change span {
+      padding: 0 7px;
+      cursor: pointer;
+      margin-top: 2px;
+    }
+  }
+
+  .aside  {
+    justify-content: flex-end;
+
+    .dropdown {
+      display: flex;
+      align-items: baseline;
+      margin: 10px;
+
+      &__title {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .main {
+    .control-panel {
+      &__button {
+        margin: 10px 10px 10px 0;
+      }
+
+      &__search {
+        width: 315px;
+      }
+
+      &__buttons-holder {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 610px) and (max-width: 1120px) {
+  .modal-container {
+    width: 600px;
+  }
+}
+
+@media only screen and (min-width: 880px) and (max-width: 1120px) {
+  .main {
+    .control-panel {
+      flex-wrap: nowrap;
+      align-items: baseline;
+
+      &__search {
+        width: 290px;
+        height: 45px;
+        margin-top: 9px;
+        margin-right: 3px;
+
+        &-holder {
+          padding: 0;
+          margin: auto;
+        }
+      }
+
+      &__buttons-holder {
+        justify-content: flex-start;
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 930px) and (max-width: 1024px) {
+  .aside {
+    padding-left: 20px;
+  }
+
+  .main {
+    .control-panel {
+      &__search {
+        height: 36px;
+        margin-right: 20px;
+        margin-top: 0;
+      }
+
+      &__buttons-holder {
+        margin-left: 20px;
       }
     }
   }
