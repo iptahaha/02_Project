@@ -74,7 +74,7 @@ export function getForm(id): HTMLFormElement | boolean {
   return false;
 }
 
-export function appendChild(id, value) {
+export function appendChild(id, value): boolean {
   const node = document.getElementById(id);
 
   if (node) {
@@ -164,7 +164,7 @@ export function getSelector(selector) {
   return document.querySelector(selector);
 }
 
-export function checkLocalStorageThemeValue(value) {
+export function checkLocalStorageThemeValue(value): boolean {
   const page = getSelector('.page');
   const storageElement = localStorage.getItem(`${value}`);
   const selectElement = document.getElementById(`${value}`) as HTMLSelectElement;
@@ -178,7 +178,7 @@ export function checkLocalStorageThemeValue(value) {
   return false;
 }
 
-export function checkLocalStorageDbValue(value, state) {
+export function checkLocalStorageDbValue(value, state): boolean {
   const storageElement = localStorage.getItem(`${value}`);
   const selectElement = document.getElementById('data-base-select') as HTMLSelectElement;
 
@@ -199,7 +199,7 @@ export function changeInterfaceState() {
   checkLocalStorageThemeValue('changeTheme');
 }
 
-export function setDisplay(id: string, display: string) {
+export function setDisplay(id: string, display: string): boolean {
   const node = document.getElementById(id);
   if (node) {
     node.style.display = display;
@@ -233,7 +233,7 @@ export function addClass(id, className: string): boolean {
   return false;
 }
 
-export function validateStatusCheck(state, buttonId) {
+export function validateStatusCheck(state, buttonId): boolean {
   const button = <HTMLElement>getElement(buttonId);
   if (state.includes(false)) {
     if (!hasAttribute(button, 'disabled')) {
