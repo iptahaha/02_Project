@@ -4,11 +4,12 @@ import {
   createRowCollection,
   getInputValue,
   removeClassById,
-  removeDisabledAttributeByID,
+  removeDisabledAttributeByID, setDisabledAttributeByID,
 } from '../../../utils/ts/utils';
 import { Person } from '../../../utils/interfaces/person.interface';
 
 export function getData(state) {
+  setDisabledAttributeByID('sort-by-select');
   state.currentSortedData = null;
   const dataUrl = `${state.currentDB}/data`;
   addClass('loader', 'page__loader--active');
