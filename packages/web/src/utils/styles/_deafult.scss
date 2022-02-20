@@ -129,7 +129,6 @@ input {
     }
   }
 
-
   .table thead th {
     background-color: darken($popup-bg-light, 10%);
     border: 1px solid $dark_table-accent;
@@ -137,6 +136,10 @@ input {
     &:last-child {
       border-right: 1px solid $dark_table-accent;
     }
+  }
+
+  tbody {
+    background-color: $popup-bg-light;
   }
 
   .table__row {
@@ -280,6 +283,10 @@ input {
     &:last-child {
       border-right: 1px solid $popup-bg-light;
     }
+  }
+
+  .table__container .table tbody {
+    background-color: $popup-bg-dark;
   }
 
   .table__row {

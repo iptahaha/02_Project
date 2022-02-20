@@ -210,6 +210,7 @@
     }
 
     tbody {
+      background-color: $popup-bg-light;
       .table__row {
         &:hover {
           cursor: pointer;
@@ -427,6 +428,7 @@
     padding: 0 5px 0 0;
 
     .control-panel {
+      top: 17px;
       flex-wrap: wrap;
       flex-direction: row;
       padding: 10px 0;
@@ -465,14 +467,6 @@
   #modalUser .modal-form__button-hide {
     left: 92%;
   }
-
-
-
-
-
-
-
-
 }
 
 @media only screen and (min-width: 580px) and (max-width: 1120px) {
@@ -507,6 +501,8 @@
 
   .main {
     .control-panel {
+      top: 15px;
+
       &__button {
         margin: 10px 10px 10px 0;
       }
@@ -561,6 +557,8 @@
 
   .main {
     .control-panel {
+      top: 0;
+
       &__search {
         height: 36px;
         margin-right: 20px;
