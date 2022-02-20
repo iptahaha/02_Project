@@ -24,9 +24,9 @@ export class PostgreSQL implements SQLCRUD {
       password: process.env.POSTGRESQL_PASSWORD || 'root',
       database: process.env.POSTGRESQL_DATABASE || 'persons',
       port: 5432,
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      // ssl: {
+      //   rejectUnauthorized: false,
+      // },
     });
 
     this.db.on('error', () => {

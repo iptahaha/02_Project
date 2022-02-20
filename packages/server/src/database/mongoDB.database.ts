@@ -18,7 +18,7 @@ export class MongoDB implements NoSQLCRUD {
     return MongoDB.instance;
   }
 
-  connection() {
+  private connection() {
     const url = <string>process.env.MONGO_DATABASE;
     this.db = new MongoClient(url);
   }

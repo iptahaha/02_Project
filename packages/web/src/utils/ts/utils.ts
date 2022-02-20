@@ -284,7 +284,7 @@ export function removeAttribute(id, attribute): boolean {
 
 export function createTableRow(obj: Person) {
   const row = document.createElement('tr');
-  row.id = obj.id.toString();
+  row.dataset.id = obj.id.toString();
   row.classList.add('table__row');
   row.innerHTML = `
     <td>${obj.id}</td>
@@ -302,8 +302,11 @@ export function createTableRow(obj: Person) {
 export function createRowCollection(data, sortValue) {
   const dataFragment = document.createDocumentFragment();
   data.sort((a: Person, b: Person) => (a[sortValue] > b[sortValue] ? 1 : -1));
-  data.forEach((el: Person) => {
+  data.forEach((el: Person, idx) => {
     dataFragment.append(createTableRow(el));
+    if (idx === data.length - 1) {
+      removeDisabledAttributeByID('sort-by-select');
+    }
   });
   return dataFragment;
 }
@@ -332,7 +335,7 @@ export function targetValueClosest(event, value): any {
 }
 
 export function addId(elem) {
-  return elem.id;
+  return elem.dataset.id;
 }
 
 export function addElementClass(id, className: string): boolean {
@@ -464,21 +467,21 @@ export function changeUserPasswordRequest(data) {
     })
     .then((value) => {
       if (value.message === 'WRONG_LOGIN_PASSWORD') {
-        setAttribute('change-password-message', 'data-i18n', 'pass-wrong');
+        setAttribute('change-password-message', 'data-i18n', 'error.pass-wrong');
       }
 
       if (value.message === 'CONFIRM_PASSWORD_ERROR') {
-        setAttribute('change-new-password-message', 'data-i18n', 'pass-not_match');
-        setAttribute('change-confirm-password-message', 'data-i18n', 'pass-not_match');
+        setAttribute('change-new-password-message', 'data-i18n', 'error.pass-not_match');
+        setAttribute('change-confirm-password-message', 'data-i18n', 'error.pass-not_match');
       }
 
       if (value.message === 'PASSWORD_ALREADY_USE') {
-        setAttribute('change-new-password-message', 'data-i18n', 'pass-in_use');
-        setAttribute('change-password-message', 'data-i18n', 'pass-in_use');
+        setAttribute('change-new-password-message', 'data-i18n', 'error.pass-in_use');
+        setAttribute('change-password-message', 'data-i18n', 'error.pass-in_use');
       }
 
       if (value.message === 'CONNECTION_ERROR') {
-        setAttribute('change-confirm-password-message', 'data-i18n', 'try-later');
+        setAttribute('change-confirm-password-message', 'data-i18n', 'error.try-later');
       }
 
       removeDisabledAttributeByID('changePasswordButton');
@@ -487,7 +490,7 @@ export function changeUserPasswordRequest(data) {
     })
     .catch(() => {
       removeDisabledAttributeByID('changePasswordButton');
-      setAttribute('change-confirm-password-message', 'data-i18n', 'try-later');
+      setAttribute('change-confirm-password-message', 'data-i18n', 'error.try-later');
       updateContent();
     });
 }
@@ -508,15 +511,15 @@ export function changeUserLoginRequest(data) {
     })
     .then((value) => {
       if (value.message === 'LOGIN_NOT_UNIQUE') {
-        setAttribute('change-login-message', 'data-i18n', 'login-in_use');
+        setAttribute('change-login-message', 'data-i18n', 'error.login-in_use');
       }
 
       if (value.message === 'WRONG_LOGIN_PASSWORD') {
-        setAttribute('change-login-password-message', 'data-i18n', 'pass-wrong');
+        setAttribute('change-login-password-message', 'data-i18n', 'error.pass-wrong');
       }
 
       if (value.message === 'CONNECTION_ERROR') {
-        setAttribute('change-login-password-message', 'data-i18n', 'try-later');
+        setAttribute('change-login-password-message', 'data-i18n', 'error.try-later');
       }
 
       updateContent();
@@ -525,7 +528,7 @@ export function changeUserLoginRequest(data) {
     })
     .catch(() => {
       removeDisabledAttributeByID('changeLoginButton');
-      setAttribute('change-login-password-message', 'data-i18n', 'try-later');
+      setAttribute('change-login-password-message', 'data-i18n', 'error.try-later');
       updateContent();
     });
 }
