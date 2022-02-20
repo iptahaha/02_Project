@@ -4,7 +4,7 @@ import {
   changeInterfaceState,
   validateStatusCheck,
   showOrHidePassword,
-  checkLocalStorageDbValue,
+  checkLocalStorageDbValue, showDance,
 } from '../../../utils/ts/utils';
 
 import '../../../utils/styles/mainPage.scss';
@@ -187,6 +187,7 @@ export function init() {
   addListener('changePasswordButton', 'click', changeUserPassword.bind(null, validatePasswordChange));
 
   // exitModal
+  addListener('easter-egg-button', 'click', showDance);
   addListener('exitUser', 'click', openModal.bind(null, 'exitModal'));
   addListener('closedExitModal', 'click', closedModal.bind(null, 'exitModal'));
   addListener('cancelExit', 'click', closedModal.bind(null, 'exitModal'));
