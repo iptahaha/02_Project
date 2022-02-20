@@ -15,6 +15,3 @@ export interface NoSQLCRUD {
   update(obj: Person, id: number): any;
   create(obj: Person, query: string): any;
 }
-
-// updateColumn?: Record<string, unknown> | string, query?: string
-// query: string, column: Record<string, unknown> | string

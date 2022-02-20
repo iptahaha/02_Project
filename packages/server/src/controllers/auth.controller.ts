@@ -71,7 +71,6 @@ export class AuthenticationController implements Controller {
     const loginInQuery = `SELECT * from user_table WHERE login = '${login}'`;
 
     if (!login || !password) {
-      console.log('aaaaaaa');
       res.status(403).send({ message: 'EMPTY_LOGIN_PASSWORD' });
     }
 
