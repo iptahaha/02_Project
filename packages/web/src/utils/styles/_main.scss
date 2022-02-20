@@ -10,6 +10,9 @@
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+
   &__drop {
     display: flex;
   }
@@ -19,13 +22,6 @@
       padding: 0 10px;
       cursor: pointer;
     }
-  }
-
-  &__container {
-    min-width: 1100px;
-    display: flex;
-    justify-content: space-between;
-    margin: auto;
   }
 }
 
@@ -235,13 +231,13 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.6);
 
   &-container {
     width: 600px;
-    height: 100%;
+    height: max-content;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -390,6 +386,9 @@
 @media only screen and (min-width: 0px) and (max-width: 1120px) {
   .header {
     position: relative;
+    flex-direction: row;
+    justify-content: center;
+    padding: 7px 0 0;
 
     &__drop {
       flex-direction: column;
@@ -397,13 +396,6 @@
       &-down {
         margin: 0 0 10px 10px;
       }
-    }
-
-    &__container {
-      min-width: 100%;
-      flex-direction: row;
-      justify-content: center;
-      padding: 7px 0 0;
     }
 
     &__change span {
@@ -435,7 +427,7 @@
     .control-panel {
       flex-wrap: wrap;
       flex-direction: row;
-      padding: 12px 0 5px;
+      padding: 10px 0;
 
       &__buttons-holder {
         flex-direction: row;
@@ -455,7 +447,7 @@
         margin: auto;
 
         &-holder {
-          padding: 20px 0 10px;
+          padding: 10px 0 10px;
           margin: auto;
         }
       }
@@ -463,15 +455,27 @@
   }
 
   .modal {
-    height: 100%;
     justify-content: center;
+    align-items: center;
   }
 
   .modal-container {
     width: 100%;
     padding: 0 15px;
-    height: auto;
+    height: max-content;
   }
+
+  #modalUser .modal-form__button-hide {
+    left: 92%;
+  }
+
+
+
+
+
+
+
+
 }
 
 @media only screen and (min-width: 580px) and (max-width: 1120px) {
@@ -507,7 +511,7 @@
   .main {
     .control-panel {
       &__button {
-        margin: 10px 10px 0 0;
+        margin: 10px 10px 10px 0;
       }
 
       &__search {
@@ -540,6 +544,7 @@
         margin-right: 3px;
 
         &-holder {
+          padding: 0;
           margin: auto;
         }
       }
