@@ -203,6 +203,10 @@ input {
     }
   }
 
+  .form-inputs__button:hover:before {
+    color: $shade-border;
+  }
+
   .form {
     &-holder {
       box-shadow: none;
