@@ -5,6 +5,14 @@
 1. SQL (PostgreSQL, H2, MySQL)
 2. NoSQL (MongoDB, Redis, Cassandra, GraphDB)
 
+## Start the project
+- Для страрта пропишите в терминале следущие команды:
+```
+yarn install
+yarn build
+yarn start
+```
+
 ## Pages
 - Main page:
 1. Дропдаун выбора базы данных, по умолчанию - MySQL;
@@ -34,3 +42,4 @@
 
 ### Students of DevEducation, Kharkiv.
 Demo of the project you could find here [https://frogers-db.herokuapp.com/login]
+

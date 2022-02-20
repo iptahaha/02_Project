@@ -1,7 +1,8 @@
-import { Person } from '../interfaces/person.interface';
+import { updateContent } from './localization';
 import { closedModal } from '../../pages/Main/ts/modal';
 import { generateNewRowContent, updateObjInState } from '../../pages/Main/ts/updatePersonLogic';
-import { updateContent } from './localization';
+import { Person } from '../interfaces/person.interface';
+import {getData} from "../../pages/Main/ts/getPersonDataLogic";
 
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
@@ -187,6 +188,18 @@ export function checkLocalStorageThemeValue(value) {
   return false;
 }
 
+export function checkLocalStorageDbValue(value, state) {
+  const storageElement = localStorage.getItem(`${value}`);
+  const selectElement = document.getElementById('data-base-select') as HTMLSelectElement;
+
+  if (storageElement && selectElement.value !== storageElement) {
+    state.currentDB = storageElement;
+    selectElement.value = storageElement;
+    return true;
+  }
+  return false;
+}
+
 export function changeInterfaceState() {
   const page = getSelector('.page');
   const target = <HTMLSelectElement>event.target;
@@ -313,10 +326,7 @@ export function slice(value): any | boolean {
 }
 
 export function trimToLowerCase(value: string): any {
-  if (value) {
-    return value.trim().toLowerCase();
-  }
-  return false;
+  return value.trim().toLowerCase();
 }
 
 export function includes(id, value) {
@@ -324,10 +334,7 @@ export function includes(id, value) {
 }
 
 export function valueLength(value): number | boolean {
-  if (value) {
-    return value.length;
-  }
-  return false;
+  return value.length;
 }
 
 export function targetValueClosest(event, value): any {
@@ -438,7 +445,7 @@ export function getFetchLogic(state, data, globalErrorId) {
       }
 
       if (value.message === 'CONNECTION_ERROR') {
-        setAttribute(globalErrorId, 'data-i18n', 'error.login/pass-wrong');
+        setAttribute(globalErrorId, 'data-i18n', 'error.try-later');
       }
 
       updateContent();
@@ -473,6 +480,11 @@ export function changeUserPasswordRequest(data) {
       if (value.message === 'CONFIRM_PASSWORD_ERROR') {
         setTextValue('change-new-password-message', '*Password and confirm password does not match');
         setTextValue('change-confirm-password-message', '*Password and confirm password does not match');
+      }
+
+      if (value.message === 'PASSWORD_ALREADY_USE') {
+        setTextValue('change-new-password-message', '*You already use this password');
+        setTextValue('change-password-message', '*You already use this password');
       }
 
       if (value.message === 'CONNECTION_ERROR') {

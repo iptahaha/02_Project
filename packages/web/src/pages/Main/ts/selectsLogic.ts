@@ -30,8 +30,9 @@ export function changeCurrentDB(state) {
   state.currentSelectedObj = null;
   setDisabledAttributeByID('buttonDelete');
   setDisabledAttributeByID('buttonUpdate');
+  setDisabledAttributeByID('data-base-select')
   removeChild('tableBody');
   setInputValue('search', '');
   getData(state);
-  // TODO пусть возвращает все state yopta
+  localStorage.setItem('changeDb', state.currentDB);
 }

@@ -32,12 +32,12 @@ export function deleteRow(state): boolean {
         state.currentSelectedNode = null;
         state.currentSelectedId = null;
         state.currentSelectedObj = null;
-        setDisabledAttributeByID('buttonDelete');
-        setDisabledAttributeByID('buttonUpdate');
-        removeDisabledAttributeByID('saveDelete');
-        closedModal('deleteModal');
-        return true;
       }
+      setDisabledAttributeByID('buttonDelete');
+      setDisabledAttributeByID('buttonUpdate');
+      removeDisabledAttributeByID('saveDelete');
+      closedModal('deleteModal');
+      return true;
     })
     .catch(() => {
       removeDisabledAttributeByID('saveDelete');

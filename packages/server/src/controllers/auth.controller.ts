@@ -3,9 +3,10 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import Controller from '../interfaces/controller.interface';
 import { generateJWT } from '../middleware/jwtGenerate.middleware';
-import authMiddleware from '../middleware/auth.middleware';
 import { RejectError } from '../interfaces/rejectError.interface';
 import { MySQL } from '../database/mySQL.database';
+import { AuthMiddleware } from '../middleware/auth.middleware';
+import { ValidationMiddleware } from '../middleware/validation.middleware';
 
 dotenv.config();
 
@@ -19,11 +20,21 @@ export class AuthenticationController implements Controller {
   }
 
   checkRoutes() {
-    this.router.post('/register', AuthenticationController.register);
-    this.router.post('/login', AuthenticationController.login);
-    this.router.post('/change-login', authMiddleware, AuthenticationController.changeLogin);
-    this.router.post('/change-password', authMiddleware, AuthenticationController.changePassword);
-    this.router.delete('/logout', authMiddleware, AuthenticationController.logout);
+    this.router.post('/register', ValidationMiddleware.user, AuthenticationController.register);
+    this.router.post('/login', ValidationMiddleware.user, AuthenticationController.login);
+    this.router.post(
+      '/change-login',
+      ValidationMiddleware.user,
+      AuthMiddleware.mainAuth,
+      AuthenticationController.changeLogin,
+    );
+    this.router.post(
+      '/change-password',
+      ValidationMiddleware.user,
+      AuthMiddleware.mainAuth,
+      AuthenticationController.changePassword,
+    );
+    this.router.delete('/logout', AuthMiddleware.mainAuth, AuthenticationController.logout);
   }
 
   static async register(req: Request, res: Response) {
@@ -43,7 +54,7 @@ export class AuthenticationController implements Controller {
         }
         const hashedPassword = await bcrypt.hash(password, 8);
         const query = 'INSERT INTO user_table SET ?';
-        const column = { login, hashedPassword };
+        const column = { login, password: hashedPassword };
         return dbRequest.create(query, column);
       })
       .then(() => {
@@ -137,8 +148,8 @@ export class AuthenticationController implements Controller {
             if (newPassword === password) {
               return Promise.reject({ code: 401, message: 'PASSWORD_ALREADY_USE' });
             }
-
-            return dbRequest.update(query, newPassword);
+            const hashedPassword = await bcrypt.hash(newPassword, 8);
+            return dbRequest.update(query, hashedPassword);
           }
         }
         return Promise.reject({ code: 401, message: 'WRONG_LOGIN_PASSWORD' });

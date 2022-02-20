@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import path from 'node:path';
 import Controller from '../interfaces/controller.interface';
-import authMiddleware from '../middleware/auth.middleware';
+import { AuthMiddleware } from '../middleware/auth.middleware';
 
 class PagesController implements Controller {
   path = '/';
@@ -13,14 +13,10 @@ class PagesController implements Controller {
   }
 
   private checkRoutes() {
-    this.router.get('/', PagesController.redirect);
-    this.router.get('/login', PagesController.login);
-    this.router.get('/register', PagesController.register);
-    this.router.get('/main', authMiddleware, PagesController.main);
-  }
-
-  static redirect(req: Request, res: Response) {
-    res.redirect('/main');
+    this.router.get('/', AuthMiddleware.mainAuth, PagesController.main);
+    this.router.get('/login', AuthMiddleware.subAuth, PagesController.login);
+    this.router.get('/register', AuthMiddleware.subAuth, PagesController.register);
+    this.router.get('/main', AuthMiddleware.mainAuth, PagesController.main);
   }
 
   static main(req: Request, res: Response) {

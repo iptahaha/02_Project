@@ -1,8 +1,8 @@
 import { MongoClient, MongoError } from 'mongodb';
-import { ObjDatabase } from '../interfaces/database.interface';
+import { NoSQLCRUD } from '../interfaces/database.interface';
 import { Person } from '../interfaces/person.interface';
 
-export class MongoDB implements ObjDatabase {
+export class MongoDB implements NoSQLCRUD {
   private static instance: MongoDB | null;
 
   private db: any;
@@ -23,7 +23,7 @@ export class MongoDB implements ObjDatabase {
     this.db = new MongoClient(url);
   }
 
-  get(): any {
+  read(): any {
     return new Promise((resolve, reject) => {
       this.db.connect(async (err: MongoError) => {
         if (err) {

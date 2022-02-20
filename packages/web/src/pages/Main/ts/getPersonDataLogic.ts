@@ -1,4 +1,11 @@
-import { addClass, appendChild, createRowCollection, getInputValue, removeClassById } from '../../../utils/ts/utils';
+import {
+  addClass,
+  appendChild,
+  createRowCollection,
+  getInputValue,
+  removeClassById,
+  removeDisabledAttributeByID,
+} from '../../../utils/ts/utils';
 import { Person } from '../../../utils/interfaces/person.interface';
 
 export function getData(state) {
@@ -15,6 +22,7 @@ export function getData(state) {
       const sortValue = <string>getInputValue('sort-by-select');
       appendChild('tableBody', createRowCollection(state.currentData, sortValue));
       removeClassById('loader', 'page__loader--active');
+      removeDisabledAttributeByID('data-base-select');
       return true;
     })
     .catch(() => false);

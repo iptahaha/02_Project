@@ -1,12 +1,12 @@
 import { Request, Response, Router } from 'express';
 import { DatabaseController } from '../interfaces/databaseContrroler';
 import { AuthMiddleware } from '../middleware/auth.middleware';
-import { MongoDB } from '../database/mongoDB.database';
-import { Person } from '../interfaces/person.interface';
+import { GraphDB } from '../database/neo4j.database';
+import { RejectError } from '../interfaces/rejectError.interface';
 import { ValidationMiddleware } from '../middleware/validation.middleware';
 
-export class MongoController implements DatabaseController {
-  path = '/mongo';
+export class GraphController implements DatabaseController {
+  path = '/graph';
 
   router = Router();
 
@@ -14,8 +14,9 @@ export class MongoController implements DatabaseController {
     this.checkRoutes();
   }
 
+  // AuthMiddleware.mainAuth,
   checkRoutes() {
-    this.router.get('/data', AuthMiddleware.mainAuth, this.readData);
+    this.router.get('/data', this.readData);
     this.router.post('/create', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.createData);
     this.router.post('/update:*', ValidationMiddleware.person, AuthMiddleware.mainAuth, this.updateData);
     this.router.delete('/delete:*', AuthMiddleware.mainAuth, this.deleteData);
@@ -23,73 +24,64 @@ export class MongoController implements DatabaseController {
   }
 
   clearData(req: Request, res: Response): void {
-    const dbRequest = MongoDB.getInstance();
+    const dbRequest = GraphDB.getInstance();
     dbRequest
       .clear()
       .then((code: number) => {
         res.status(code).end();
       })
-      .catch((code: number) => {
-        res.status(code).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 
   createData(req: Request, res: Response): void {
-    const dbRequest = MongoDB.getInstance();
+    const dbRequest = GraphDB.getInstance();
     dbRequest
       .create(req.body)
       .then((code: number) => {
         res.status(code).end();
       })
-      .catch((code: number) => {
-        res.status(code).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 
   deleteData(req: Request, res: Response) {
     const deleteId = req.url.split(':')[1];
-
-    if (deleteId === 'null') {
-      return res.status(409).end();
-    }
-
-    const dbRequest = MongoDB.getInstance();
+    const dbRequest = GraphDB.getInstance();
     dbRequest
       .delete(deleteId)
       .then((code: number) => {
         res.status(code).end();
       })
-      .catch((code: number) => {
-        res.status(code).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 
-  readData(req: Request, res: Response): void {
-    const dbRequest = MongoDB.getInstance();
+  readData(req: Request, res: Response) {
+    const dbRequest = GraphDB.getInstance();
     dbRequest
       .read()
-      .then((data: Person[]) => {
-        res.status(200).send(data);
+      .then((result: any) => {
+        res.send(result);
       })
-      .catch((code: number) => {
-        res.status(code).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 
   updateData(req: Request, res: Response) {
-    const updateId = req.url.split(':')[1];
-
-    if (updateId === 'null') {
-      return res.status(409).end();
-    }
-    const dbRequest = MongoDB.getInstance();
+    const updatedId = req.url.split(':')[1];
+    const dbRequest = GraphDB.getInstance();
     dbRequest
-      .update(req.body, Number(updateId))
-      .then((code: number) => {
-        res.status(code).end();
+      .update(req.body, Number(updatedId))
+      .then((result: any) => {
+        res.send(result);
       })
-      .catch((code: number) => {
-        res.status(code).end();
+      .catch((value: RejectError) => {
+        res.status(value.code).send({ message: value.message });
       });
   }
 }
