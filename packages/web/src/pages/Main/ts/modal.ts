@@ -22,10 +22,15 @@ export function fillUpdateModal(state): boolean {
 
 export function cleanForm() {
   const input = getQuerySelectorAll('input');
+  const errMessage = getQuerySelectorAll('.modal-error');
   input.forEach((el) => {
     if (el.id !== 'search') {
       el.value = '';
     }
+  });
+
+  errMessage.forEach((el) => {
+    el.innerText = '';
   });
 }
 
