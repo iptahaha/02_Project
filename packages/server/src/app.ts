@@ -1,4 +1,4 @@
-import express from 'express'; // const express = require('express');
+import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -9,7 +9,7 @@ class Application {
   app: express.Application;
 
   constructor(controllers: any) {
-    this.app = express(); // const app = express();
+    this.app = express();
     this.settings();
     this.middlewares();
     this.routes();

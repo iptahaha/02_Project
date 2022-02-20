@@ -1,5 +1,5 @@
-$main-color-light: #F1F1F1; //background only
-$main-color-dark: #0D1117; //background only
+$main-color-light: #F1F1F1;
+$main-color-dark: #0D1117;
 $popup-bg-light: #FFFFFF;
 $popup-bg-dark: #161B22;
 $dark_table-accent: #000000;
@@ -7,10 +7,12 @@ $placeholder-text: #565656;
 $shade-border: #B4B4B4;
 
 $green-header: #B8CCAE;
-$light-accent: #CDEBBF; //header, buttons
-$dark-accent: #7B9C6B; //header, buttons
-$error-accent: #EBBFBF; //button
+$light-accent: #CDEBBF;
+$dark-accent: #7B9C6B;
+$error-accent: #EBBFBF;
 $error-color: #D40B0B;
 
 $header-color-light: #94C6AB;
 $green-light: #C1EACF;
+$disabled:  #A1A1A1;
+$lightgray: #D3D3D3FF;
