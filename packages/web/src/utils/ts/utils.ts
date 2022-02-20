@@ -2,7 +2,6 @@ import { updateContent } from './localization';
 import { closedModal } from '../../pages/Main/ts/modal';
 import { generateNewRowContent, updateObjInState } from '../../pages/Main/ts/updatePersonLogic';
 import { Person } from '../interfaces/person.interface';
-import {getData} from "../../pages/Main/ts/getPersonDataLogic";
 
 export function addListener(id, eventType, callback) {
   const node = document.getElementById(id);
@@ -12,15 +11,6 @@ export function addListener(id, eventType, callback) {
   }
   return false;
 }
-
-// export function removeListener(id, eventType, callback) {
-//   const node = document.getElementById(id);
-//   if (node) {
-//     node.removeEventListener(eventType, callback);
-//     return true;
-//   }
-//   return false;
-// }
 
 export function getElement(id): HTMLElement | boolean {
   const node = document.getElementById(id);

@@ -21,7 +21,7 @@ export function fillUpdateModal(state): boolean {
 }
 
 export function cleanForm() {
-  const input = getQuerySelectorAll('input'); // document.querySelectorAll('input');
+  const input = getQuerySelectorAll('input');
   input.forEach((el) => {
     if (el.id !== 'search') {
       el.value = '';

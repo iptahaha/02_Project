@@ -1,14 +1,16 @@
 import {
-  collectData, getElement,
+  collectData,
+  getElement,
   removeChild,
   removeDisabledAttributeByID,
   setDisabledAttributeByID,
-  addHTMLValue, setHTMLValue, valueLength,
-
+  addHTMLValue,
+  setHTMLValue,
+  valueLength,
 } from '../../../utils/ts/utils';
 import { validatePersonForm } from './validation';
 import { closedModal } from './modal';
-import { updateContent } from "../../../utils/ts/localization";
+import { updateContent } from '../../../utils/ts/localization';
 import { getData } from './getPersonDataLogic';
 
 export function addNewPersonRequest(state, personData) {
@@ -44,17 +46,15 @@ export function addNewPerson(state): boolean {
   setHTMLValue(formError, '');
 
   if (valueLength(validateResult) > 0) {
-
     addHTMLValue(formError, '<span data-i18n="error.modal.message"></span>');
     validateResult.forEach((span, idx) => {
-
       addHTMLValue(formError, span);
       if (idx !== validateResult.length - 1) {
         addHTMLValue(formError, ', ');
       } else {
         addHTMLValue(formError, '.');
       }
-    })
+    });
     updateContent();
     return false;
   }
