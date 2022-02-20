@@ -17,28 +17,30 @@
     <img src='/photo/loader.gif' alt='Loader'>
   </div>
   <header class='header'>
-    <div class="header__drop">
-      <div id='dropdownTheme' class='header__drop-down'>
-        <label for='changeTheme' data-i18n='header.change-theme'></label>
-        <select id='changeTheme' class='header__select'>
-          <option value='light-theme' data-i18n="header.theme-light"></option>
-          <option value='night-theme' data-i18n="header.theme-dark"></option>
-        </select>
-      </div>
-      <div id='dropdownLanguage' class='header__drop-down'>
-        <label for='changeLanguage' data-i18n='header.change-language'></label>
-        <select id='changeLanguage' class='header__select'>
-          <option value='en'>ENG</option>
-          <option value='ru'>РУС</option>
-          <option value='ua'>УКР</option>
-          <option value='ch'>中国人</option>
-        </select>
-      </div>
-    </div>
-    <div class="header__change">
-      <span title="settings" id="changeUser" class='icon-user'></span>
-      <span title="log out" id="exitUser" class="icon-exit"></span>
-    </div>
+   <div class='header__container'>
+     <div class="header__drop">
+       <div id='dropdownTheme' class='header__drop-down'>
+         <label for='changeTheme' data-i18n='header.change-theme'></label>
+         <select id='changeTheme' class='header__select'>
+           <option value='light-theme' data-i18n="header.theme-light"></option>
+           <option value='night-theme' data-i18n="header.theme-dark"></option>
+         </select>
+       </div>
+       <div id='dropdownLanguage' class='header__drop-down'>
+         <label for='changeLanguage' data-i18n='header.change-language'></label>
+         <select id='changeLanguage' class='header__select'>
+           <option value='en'>ENG</option>
+           <option value='ru'>РУС</option>
+           <option value='ua'>УКР</option>
+           <option value='ch'>中国人</option>
+         </select>
+       </div>
+     </div>
+     <div class="header__change">
+       <span title="settings" id="changeUser" class='icon-user'></span>
+       <span title="log out" id="exitUser" class="icon-exit"></span>
+     </div>
+   </div>
   </header>
   <section class='container'>
     <aside class='aside'>
