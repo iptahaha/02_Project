@@ -464,21 +464,21 @@ export function changeUserPasswordRequest(data) {
     })
     .then((value) => {
       if (value.message === 'WRONG_LOGIN_PASSWORD') {
-        setTextValue('change-password-message', '*Wrong password');
+        setAttribute('change-password-message', 'data-i18n', 'pass-wrong');
       }
 
       if (value.message === 'CONFIRM_PASSWORD_ERROR') {
-        setTextValue('change-new-password-message', '*Password and confirm password does not match');
-        setTextValue('change-confirm-password-message', '*Password and confirm password does not match');
+        setAttribute('change-new-password-message', 'data-i18n', 'pass-not_match');
+        setAttribute('change-confirm-password-message', 'data-i18n', 'pass-not_match');
       }
 
       if (value.message === 'PASSWORD_ALREADY_USE') {
-        setTextValue('change-new-password-message', '*You already use this password');
-        setTextValue('change-password-message', '*You already use this password');
+        setAttribute('change-new-password-message', 'data-i18n', 'pass-in_use');
+        setAttribute('change-password-message', 'data-i18n', 'pass-in_use');
       }
 
       if (value.message === 'CONNECTION_ERROR') {
-        setTextValue('change-confirm-password-message', '*Try again later');
+        setAttribute('change-confirm-password-message', 'data-i18n', 'try-later');
       }
 
       removeDisabledAttributeByID('changePasswordButton');
@@ -487,7 +487,7 @@ export function changeUserPasswordRequest(data) {
     })
     .catch(() => {
       removeDisabledAttributeByID('changePasswordButton');
-      setTextValue('change-confirm-password-message', '*Try again later');
+      setAttribute('change-confirm-password-message', 'data-i18n', 'try-later');
       updateContent();
     });
 }
@@ -508,15 +508,15 @@ export function changeUserLoginRequest(data) {
     })
     .then((value) => {
       if (value.message === 'LOGIN_NOT_UNIQUE') {
-        setTextValue('change-login-message', '*Login already in use');
+        setAttribute('change-login-message', 'data-i18n', 'login-in_use');
       }
 
       if (value.message === 'WRONG_LOGIN_PASSWORD') {
-        setTextValue('change-login-password-message', '*Wrong password');
+        setAttribute('change-login-password-message', 'data-i18n', 'pass-wrong');
       }
 
       if (value.message === 'CONNECTION_ERROR') {
-        setTextValue('change-login-password-message', '*Try again later');
+        setAttribute('change-login-password-message', 'data-i18n', 'try-later');
       }
 
       updateContent();
@@ -525,7 +525,7 @@ export function changeUserLoginRequest(data) {
     })
     .catch(() => {
       removeDisabledAttributeByID('changeLoginButton');
-      setTextValue('change-login-password-message', '*Try again later');
+      setAttribute('change-login-password-message', 'data-i18n', 'try-later');
       updateContent();
     });
 }

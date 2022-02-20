@@ -50,6 +50,8 @@
     "pass-empty": "*You need password",
     "pass-short": "*Password at least 8 characters",
     "pass-contains": "*Password must contain letters latin, numbers, and special symbols",
+    "pass-wrong": "*Wrong password",
+    "pass-in_use": "*You already use this password",
     "try-later": "Try again later",
     "login/pass-empty": "You need login and password",
     "login/pass-wrong": "Wrong login or password",
