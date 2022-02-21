@@ -208,13 +208,6 @@ export function setDisplay(id: string, display: string): boolean {
   return false;
 }
 
-export function getClassList(node: HTMLElement): boolean | string[] {
-  if (node) {
-    return [...node.classList];
-  }
-  return false;
-}
-
 export function removeClass(node: HTMLElement, className: string): boolean {
   if (node) {
     node.classList.remove(className);
@@ -251,15 +244,6 @@ export function removeClassById(id, className: string): boolean {
   if (node) {
     node.classList.remove(className);
     return true;
-  }
-  return false;
-}
-
-export function getNodeList(className): NodeList | boolean {
-  const NodeList = document.querySelectorAll(className);
-
-  if (NodeList.length > 0) {
-    return NodeList;
   }
   return false;
 }
@@ -352,6 +336,16 @@ export function addMatch(elem, value) {
 
 export function getQuerySelectorAll(tag) {
   return document.querySelectorAll(tag);
+}
+
+export function showDance() {
+  const db = getInputValue('data-base-select');
+  const sort = getInputValue('sort-by-select');
+  const search = getInputValue('search');
+
+  if (db === '/mongo' && sort === 'phoneNumber' && search === 'Евгений Свирида') {
+    addClass('easter-egg-img', 'active');
+  }
 }
 
 export function updatePersonResponse(state, response, personObj): boolean {
