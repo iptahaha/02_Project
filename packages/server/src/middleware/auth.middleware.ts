@@ -25,9 +25,16 @@ export class AuthMiddleware {
       if (jwtCookie) {
         const decoded: user = <user>jwt.verify(jwtCookie, <string>process.env.JWT_SECRET);
         const loginInQuery = `SELECT * from user_table WHERE login = '${decoded.login}'`;
+        const jwtQuery = `SELECT * FROM jwt_table WHERE jwt = '${jwtCookie}'`;
         const accessUser = MySQL.getInstance();
         accessUser
-          .read(loginInQuery)
+          .read(jwtQuery)
+          .then((jwtResult: string) => {
+            if (jwtResult.length > 0) {
+              return Promise.reject({ message: 'JWT_ERROR' });
+            }
+            return accessUser.read(loginInQuery);
+          })
           .then((result: any) => {
             if (result.length > 0) {
               req.user = decoded;
