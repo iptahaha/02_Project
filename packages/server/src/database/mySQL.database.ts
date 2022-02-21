@@ -59,6 +59,7 @@ export class MySQL implements SQLCRUD {
     return new Promise((resolve, reject) => {
       this.db.query(query, column, (err: Error) => {
         if (err) {
+          console.log(err)
           reject({ code: 409, message: 'CONNECTION_ERROR' });
         } else {
           resolve(302);

@@ -99,31 +99,43 @@ export class AuthenticationController implements Controller {
     const loginInQuery = `SELECT * from user_table WHERE login = '${login}'`;
     const dbRequest = MySQL.getInstance();
 
-    dbRequest
-      .read(loginInQuery)
-      .then(async (result: any) => {
-        if (result.length > 0) {
-          const checkPassword = await bcrypt.compare(password, result[0].password);
-          const newLoginInQuery = `SELECT * from user_table WHERE login = '${newLogin}'`;
-          if (checkPassword) {
-            return dbRequest.read(newLoginInQuery);
-          }
-        }
-        return Promise.reject({ code: 401, message: 'WRONG_LOGIN_PASSWORD' });
-      })
-      .then((value: any) => {
-        if (value.length > 0) {
-          return Promise.reject({ code: 401, message: 'LOGIN_NOT_UNIQUE' });
-        }
-        const query = `UPDATE user_table SET login=? WHERE user_id='${id}'`;
-        return dbRequest.update(query, newLogin);
-      })
-      .then(() => {
-        res.clearCookie('jwt').redirect(302, '/login');
-      })
-      .catch((value: RejectError) => {
-        res.status(value.code).send({ message: value.message });
-      });
+    try {
+      const { jwt } = req.cookies;
+
+      if (jwt) {
+        const jwtQuery = `INSERT INTO jwt_table SET ?`;
+        const column = { jwt };
+
+        dbRequest
+          .create(jwtQuery, column)
+          .then(() => dbRequest.read(loginInQuery))
+          .then(async (result: any) => {
+            if (result.length > 0) {
+              const checkPassword = await bcrypt.compare(password, result[0].password);
+              const newLoginInQuery = `SELECT * from user_table WHERE login = '${newLogin}'`;
+              if (checkPassword) {
+                return dbRequest.read(newLoginInQuery);
+              }
+            }
+            return Promise.reject({ code: 401, message: 'WRONG_LOGIN_PASSWORD' });
+          })
+          .then((value: any) => {
+            if (value.length > 0) {
+              return Promise.reject({ code: 401, message: 'LOGIN_NOT_UNIQUE' });
+            }
+            const query = `UPDATE user_table SET login=? WHERE user_id='${id}'`;
+            return dbRequest.update(query, newLogin);
+          })
+          .then(() => {
+            res.clearCookie('jwt').redirect(302, '/login');
+          })
+          .catch((value: RejectError) => {
+            res.status(value.code).send({ message: value.message });
+          });
+      }
+    } catch {
+      res.status(401).send('LOGOUT_ERROR');
+    }
   }
 
   static async changePassword(req: Request, res: Response) {
@@ -136,33 +148,66 @@ export class AuthenticationController implements Controller {
       return res.status(403).send({ message: 'CONFIRM_PASSWORD_ERROR' });
     }
 
-    dbRequest
-      .read(loginInQuery)
-      .then(async (result: any) => {
-        if (result.length > 0) {
-          const checkPassword = await bcrypt.compare(password, result[0].password);
-          const query = `UPDATE user_table SET password=? WHERE user_id='${id}'`;
+    try {
+      const { jwt } = req.cookies;
 
-          if (checkPassword) {
-            if (newPassword === password) {
-              return Promise.reject({ code: 401, message: 'PASSWORD_ALREADY_USE' });
+      if (jwt) {
+        const jwtQuery = `INSERT INTO jwt_table SET ?`;
+        const column = { jwt };
+        dbRequest
+          .create(jwtQuery, column)
+          .then((result: any) => {
+            if (result.length > 0) {
+              return Promise.reject({ code: 401, message: 'JWT_ERROR' });
             }
-            const hashedPassword = await bcrypt.hash(newPassword, 8);
-            return dbRequest.update(query, hashedPassword);
-          }
-        }
-        return Promise.reject({ code: 401, message: 'WRONG_LOGIN_PASSWORD' });
-      })
-      .then(() => {
-        res.clearCookie('jwt').redirect(302, '/login');
-      })
-      .catch((value: RejectError) => {
-        res.status(value.code).send({ message: value.message });
-      });
+            return dbRequest.read(loginInQuery);
+          })
+          .then(async (result: any) => {
+            if (result.length > 0) {
+              const checkPassword = await bcrypt.compare(password, result[0].password);
+              const query = `UPDATE user_table SET password=? WHERE user_id='${id}'`;
+
+              if (checkPassword) {
+                if (newPassword === password) {
+                  return Promise.reject({ code: 401, message: 'PASSWORD_ALREADY_USE' });
+                }
+                const hashedPassword = await bcrypt.hash(newPassword, 8);
+                return dbRequest.update(query, hashedPassword);
+              }
+            }
+            return Promise.reject({ code: 401, message: 'WRONG_LOGIN_PASSWORD' });
+          })
+          .then(() => {
+            res.clearCookie('jwt').redirect(302, '/login');
+          })
+          .catch((value: RejectError) => {
+            res.status(value.code).send({ message: value.message });
+          });
+      }
+    } catch {
+      res.status(403).send({ message: 'JWT_ERROR' });
+    }
   }
 
   static async logout(req: Request, res: Response) {
-    req.user = null;
-    res.clearCookie('jwt').redirect(302, '/login');
+    const dbRequest = MySQL.getInstance();
+    try {
+      const { jwt } = req.cookies;
+      if (jwt) {
+        const query = `INSERT INTO jwt_table SET ?`;
+        const column = { jwt };
+        dbRequest
+          .create(query, column)
+          .then(() => {
+            req.user = null;
+            res.clearCookie('jwt').redirect(302, '/login');
+          })
+          .catch(() => {
+            res.status(403).send({ message: 'CONNECTION_ERROR' });
+          });
+      }
+    } catch {
+      res.status(401).send('LOGOUT_ERROR');
+    }
   }
 }
